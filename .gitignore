@@ -1,0 +1,19 @@
+# Environment variables and secrets
+.env
+*.env.local
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# System / IDE files
+.vscode/
+.idea/
+*.log
+.system_generated/

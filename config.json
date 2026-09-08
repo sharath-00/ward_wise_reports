@@ -1,0 +1,36 @@
+{
+  "project_name": "BBMP Shanthi Nagar (W167) & Shivaji Nagar (W118) Panel Monitor",
+  "customer_id": "e2119df0-45c3-11f0-94dc-77130b2f47e9",
+  "wards": {
+    "167": {
+      "code": "SNTR-W167",
+      "name": "Shanthi Nagar (Ward 167)",
+      "zone": "Shanthi Nagar",
+      "display_name": "BBMP Shanthi Nagar - Ward 167"
+    },
+    "118": {
+      "code": "SVJR-W118",
+      "name": "Shivaji Nagar (Ward 118)",
+      "zone": "Shivaji Nagar",
+      "display_name": "BBMP Shivaji Nagar - Ward 118"
+    }
+  },
+  "alert_thresholds": {
+    "min_voltage_v": 180.0,
+    "max_voltage_v": 265.0,
+    "inactivity_threshold_mins": 77.0
+  },
+  "telemetry_keys": {
+    "voltage_r": "rv",
+    "voltage_y": "yv",
+    "voltage_b": "bv",
+    "current_r": "ri",
+    "current_y": "yi",
+    "current_b": "bi",
+    "relay_status": "rly",
+    "fault": "fault",
+    "fault_code": "faultCode",
+    "power_fail_count": "powerFailCount",
+    "frequency": "freq"
+  }
+}

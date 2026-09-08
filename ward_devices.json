@@ -1,0 +1,1887 @@
+{
+  "SNTR-W167": [
+    {
+      "id": "01d5b3a0-712f-11f1-934d-e50c5007eae6",
+      "name": "SALSS002788",
+      "label": "SSC107SM02960",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "122,1st main road,opposite to FUNWORLD,Shanthala Nagar,J.c nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "03c7fcd0-7126-11f1-934d-e50c5007eae6",
+      "name": "SALSS002670",
+      "label": "SSC107SM02865",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJH4+83P,Cubbon Rd,Tasker Town,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "051fc130-1ebf-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002497",
+      "label": "SSC107SM00944",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Wellington Pool,46,Wellington St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "071ece10-76ba-11f1-9f95-73515bb81f31",
+      "name": "SALSS004861",
+      "label": "SSC107SM03708",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1st floor,26,Leonard Ln,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "07a002b0-712d-11f1-934d-e50c5007eae6",
+      "name": "SALSS002626",
+      "label": "SSC107SM02956",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1/2,Masjid St,Richard Xavier's colony,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "09048890-76bb-11f1-9f95-73515bb81f31",
+      "name": "SALSS004868",
+      "label": "SSC107SM03728",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "12,Wood St,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "0ac96600-753a-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003812",
+      "label": "SSC107SM04218",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XHFW+MRJ,Kasturba Cross Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "0b502d50-1dc6-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000796",
+      "label": "SSC107SM00697",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "59,A N Street,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "0d078a90-7126-11f1-934d-e50c5007eae6",
+      "name": "SALSS002658",
+      "label": "SSC107SM02804",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJF6+JG8 BBMP Park,Mahatma Gandhi Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "0ddc5800-712c-11f1-934d-e50c5007eae6",
+      "name": "SALSS002694",
+      "label": "SSC107SM02870",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "57,Lavelle Road,Sampangi Rama Nagara,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "0e5f87f0-76a1-11f1-9f95-73515bb81f31",
+      "name": "SALSS004175",
+      "label": "SSC107SM03726",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "7c,off Saint Mark's Road,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "1269b700-71ea-11f1-934d-e50c5007eae6",
+      "name": "SALSS003432",
+      "label": "SSC107SM03517",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1/1,Brigade Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "12ef9000-76a4-11f1-9f95-73515bb81f31",
+      "name": "SALSS004246",
+      "label": "SSC107SM03792",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "60,Residency Rd,Srinivas Nagar,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "090b6300-1eae-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002266",
+      "label": "SSC107SM00974",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Raj Bhavan,Curley St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "091e8500-7130-11f1-934d-e50c5007eae6",
+      "name": "SALSS002803",
+      "label": "SSC107SM02497",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "10,Double Rd,near CANARA BANK - BENGALURU SHANTINAGAR,Shanti Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "14cee890-754a-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004024",
+      "label": "SSC107SM04114",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "6,Albert St,Shanthala Nagar,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "18589df0-714c-11f1-934d-e50c5007eae6",
+      "name": "SALSS003066",
+      "label": "SSC107SM03412",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "090,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "19dcf060-76a4-11f1-9f95-73515bb81f31",
+      "name": "SALSS004285",
+      "label": "SSC107SM04115",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "322,Haridevpur,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "1a914fc0-7545-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003944",
+      "label": "SSC107SM04139",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "8,Bazaar St,Richard Xavier's colony,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "1ac4b1f0-769c-11f1-9f95-73515bb81f31",
+      "name": "SALSS004109",
+      "label": "SSC107SM03785",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "16,Wood St,near Karnataka Bank,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "1d66fea0-753d-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003866",
+      "label": "SSC107SM04143",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "5th Floor,190,Brigade Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "1e46a5a0-711e-11f1-934d-e50c5007eae6",
+      "name": "SALSS002553",
+      "label": "SSC107SM02886",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Raheja Point,17/2,Magrath Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "1ee18d30-769c-11f1-9f95-73515bb81f31",
+      "name": "SALSS004118",
+      "label": "SSC107SM03769",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Bengaluru - Richmond Circle (S),Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "215c23f0-71d7-11f1-934d-e50c5007eae6",
+      "name": "SALSS003269",
+      "label": "SSC107SM03395",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "22-24,Brunton Rd,Craig Park Layout,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "21e1ed30-76a2-11f1-9f95-73515bb81f31",
+      "name": "SALSS004244",
+      "label": "SSC107SM04112",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "TJN Construction company,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "22b76280-7369-11f1-934d-e50c5007eae6",
+      "name": "SALSS003662",
+      "label": "SSC107SM03393",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "3a,Walker Ln,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "231593c0-71d7-11f1-934d-e50c5007eae6",
+      "name": "SALSS003266",
+      "label": "SSC107SM03455",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Km Cariyappa Building,1B,Residency Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "24688a50-769d-11f1-9f95-73515bb81f31",
+      "name": "SALSS004177",
+      "label": "SSC107SM03772",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Janardhana Towers,133/2,Residency Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "246c5ae0-769d-11f1-9f95-73515bb81f31",
+      "name": "SALSS004151",
+      "label": "SSC107SM04118",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "10,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "14d37c70-754a-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004025",
+      "label": "SSC107SM03955",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJC3+WMH,Museum Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "2c0fa490-7149-11f1-934d-e50c5007eae6",
+      "name": "SALSS003099",
+      "label": "SSC107SM03350",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "46,Richmond Rd,Victoria Layout,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "2cf25970-7699-11f1-9f95-73515bb81f31",
+      "name": "SALSS004117",
+      "label": "SSC107SM04119",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Old Eastern Cottage,25,Rest House Cres Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "30d73a60-712b-11f1-934d-e50c5007eae6",
+      "name": "SALSS002717",
+      "label": "SSC107SM02765",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJF6+GPW,Residency Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "34e3e1a0-712e-11f1-934d-e50c5007eae6",
+      "name": "SALSS002787",
+      "label": "SSC107SM02954",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "5/1,Sampangi Rama Nagara,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "35724840-71d9-11f1-934d-e50c5007eae6",
+      "name": "SALSS003296",
+      "label": "SSC107SM03432",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "10,Walton Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "35a11e10-1ea3-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002061",
+      "label": "SSC107SM00997",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "18,Myrtle Ln,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "370b4250-76bc-11f1-9f95-73515bb81f31",
+      "name": "SALSS004731",
+      "label": "SSC107SM04241",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Austin Town Neelasandra,F Kittel Nagar,Austin Town,Neelasandra,Bengaluru,Karnataka 560030,India"
+    },
+    {
+      "id": "426a9010-720c-11f1-934d-e50c5007eae6",
+      "name": "SALSS003644",
+      "label": "SSC107SM03490",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Ground Floor,1,West Rd,F Kittel Nagar,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "42b9bd10-1d3f-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000737",
+      "label": "SSC107SM00592",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "3,2nd South Cross Rd,F Kittel Nagar,Richard Xavier's colony,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "447a0d00-7139-11f1-934d-e50c5007eae6",
+      "name": "SALSS002875",
+      "label": "SSC107SM02941",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "23/24/1,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "4683f180-715f-11f1-934d-e50c5007eae6",
+      "name": "SALSS003227",
+      "label": "SSC107SM03276",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "17/1,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "48d835d0-711f-11f1-934d-e50c5007eae6",
+      "name": "SALSS002551",
+      "label": "SSC107SM02959",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "GBS Lavelle Apartments 3rd Cross,Lavelle Road,D' Souza Layout,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "4b425060-76a3-11f1-9f95-73515bb81f31",
+      "name": "SALSS004279",
+      "label": "SSC107SM04019",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "338,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "4b6b7e10-8a3d-11f1-8188-97faf926d60a",
+      "name": "SALSS005130",
+      "label": "SSC107SM05008",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Song Bird Apartment,13/3,1st Main Rd,Langford Gardens,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "4d8295b0-769e-11f1-9f95-73515bb81f31",
+      "name": "SALSS004204",
+      "label": "SSC107SM04078",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "105,Richmond Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "4e14d800-7548-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004008",
+      "label": "SSC107SM04017",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJ46+QW6,Mother Teresa Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "509d70b0-1dfe-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS001450",
+      "label": "SSC107SM04877",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJF3+XHQ,Rest House Cres Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "50a863e0-8b30-11f1-8188-97faf926d60a",
+      "name": "SALSS005706",
+      "label": "SSC107SM05508",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "21/1,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "50cf8480-76a3-11f1-9f95-73515bb81f31",
+      "name": "SALSS004380",
+      "label": "SSC107SM03877",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "99,Khan Bahadur Abdul Rehman Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "544b62d0-76b9-11f1-9f95-73515bb81f31",
+      "name": "SALSS004865",
+      "label": "SSC107SM03716",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "5,Rose Ln,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "56e243b0-1ebc-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002494",
+      "label": "SSC107SM00966",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "17,K no 4 th Street H no 3rd street Cros,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "5af8a9f0-71f8-11f1-934d-e50c5007eae6",
+      "name": "SALSS003467",
+      "label": "SSC107SM03256",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "11/8,Shanthala Nagar,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "5c38c720-7160-11f1-934d-e50c5007eae6",
+      "name": "SALSS003255",
+      "label": "SSC107SM03316",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "64,Richmond Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "5fd5ad40-76a0-11f1-9f95-73515bb81f31",
+      "name": "SALSS004147",
+      "label": "SSC107SM04002",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "19,Church St,Haridevpur,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "60bd85f0-1ea0-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002131",
+      "label": "SSC107SM00971",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJ73+445,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "62640f90-71da-11f1-934d-e50c5007eae6",
+      "name": "SALSS003300",
+      "label": "SSC107SM03454",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "9,O Shaughnessy Rd,Langford Gardens,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "653d3b80-76a1-11f1-9f95-73515bb81f31",
+      "name": "SALSS004152",
+      "label": "SSC107SM04053",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "8/1,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "64e78ed0-754b-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004045",
+      "label": "SSC107SM03710",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "25,Rhenius St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "67bc5270-7155-11f1-934d-e50c5007eae6",
+      "name": "SALSS003144",
+      "label": "SSC107SM03203",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "58-120,1st Cross Rd,Craig Park Layout,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "6b582990-7123-11f1-934d-e50c5007eae6",
+      "name": "SALSS002604",
+      "label": "SSC107SM02864",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Johnson Market,2,Aga Abdullah St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "6d0ea210-7366-11f1-934d-e50c5007eae6",
+      "name": "SALSS003669",
+      "label": "SSC107SM03421",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "24,St Philomena Rd,Xavier Layout,Victoria Layout,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "6de61bf0-754b-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004047",
+      "label": "SSC107SM03697",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Park End,13,Rhenius St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "72b53b70-76a4-11f1-9f95-73515bb81f31",
+      "name": "SALSS004157",
+      "label": "SSC107SM04145",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "36/1,near Octave Castle Suites,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "73560fa0-7541-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003909",
+      "label": "SSC107SM04130",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "42,Curley St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "7464de50-7161-11f1-934d-e50c5007eae6",
+      "name": "SALSS003200",
+      "label": "SSC107SM03473",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "41,Castle St,opp. Narayana Nethralaya,2nd Block,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "762ab190-715e-11f1-934d-e50c5007eae6",
+      "name": "SALSS003223",
+      "label": "SSC107SM03479",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "15,Cornwell Rd,Akkithimana Halli,Langford Gardens,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "729870a0-713e-11f1-934d-e50c5007eae6",
+      "name": "SALSS002973",
+      "label": "SSC107SM03383",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "11,Residency Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "7fa7ce10-711d-11f1-934d-e50c5007eae6",
+      "name": "SALSS002540",
+      "label": "SSC107SM02879",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJG2+V4Q,83rd St,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "85cbeb30-7142-11f1-934d-e50c5007eae6",
+      "name": "SALSS003023",
+      "label": "SSC107SM02763",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "57,Lavelle Road,Sampangi Rama Nagara,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "85a9d940-769d-11f1-9f95-73515bb81f31",
+      "name": "SALSS004162",
+      "label": "SSC107SM03887",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJF6+Q7J,FM Cariappa Colony,Sivanchetti Gardens,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "85d250e0-f68d-11f0-90d8-85ff34606179",
+      "name": "SALSS000210",
+      "label": "SSC107SM00411",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Hamdh Court,13,Mother Teresa Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "86705d90-769d-11f1-9f95-73515bb81f31",
+      "name": "SALSS004172",
+      "label": "SSC107SM03706",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1st Floor,23/1,#3,Alfred St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "897624b0-8a3f-11f1-8188-97faf926d60a",
+      "name": "SALSS005144",
+      "label": "SSC107SM05185",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "No.27,Lavelle Road,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "8a636ae0-8a3f-11f1-8188-97faf926d60a",
+      "name": "SALSS005150",
+      "label": "SSC107SM05211",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJG2+V4Q,83rd St,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "8cde18e0-7538-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003801",
+      "label": "SSC107SM04004",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "46/1,Alfred St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "8d64a0d0-1dbe-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000601",
+      "label": "SSC107SM00897",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "32,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "8e3f8830-7539-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003805",
+      "label": "SSC107SM04144",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1/2,Shanthala Nagar,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "8f0c8d20-1ebe-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002433",
+      "label": "SSC107SM00932",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "37,Serpentine St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "8fed0e40-7161-11f1-934d-e50c5007eae6",
+      "name": "SALSS003257",
+      "label": "SSC107SM03323",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "C 16 BDA Flats,1459,Bda Stage III,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "90cc0c20-712b-11f1-934d-e50c5007eae6",
+      "name": "SALSS002765",
+      "label": "SSC107SM02883",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "No: 82,Hulkul Brigade Centre,Lavelle Road,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "92317e60-76a3-11f1-9f95-73515bb81f31",
+      "name": "SALSS004270",
+      "label": "SSC107SM03778",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "17,Leonard Ln,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "94576fd0-769c-11f1-9f95-73515bb81f31",
+      "name": "SALSS004142",
+      "label": "SSC107SM04149",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "No.13,Museum Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "9553c020-1dc6-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000772",
+      "label": "SSC107SM00909",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJ57+C39,1st Main Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "95eef260-71ff-11f1-934d-e50c5007eae6",
+      "name": "SALSS003402",
+      "label": "SSC107SM03431",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "99,Khan Bahadur Abdul Rehman Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "9619c5b0-f6aa-11f0-90d8-85ff34606179",
+      "name": "SALSS000392",
+      "label": "SSC107SM00451",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "105,Brigade Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "97b19eb0-7699-11f1-9f95-73515bb81f31",
+      "name": "SALSS004135",
+      "label": "SSC107SM04010",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "33,Lavelle Road,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "9b6b2d10-712f-11f1-934d-e50c5007eae6",
+      "name": "SALSS002525",
+      "label": "SSC107SM02863",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Mayo Hall,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "9b74ce50-7211-11f1-934d-e50c5007eae6",
+      "name": "SALSS003586",
+      "label": "SSC107SM03536",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "19,South Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "9be02201-720b-11f1-934d-e50c5007eae6",
+      "name": "SALSS003602",
+      "label": "SSC107SM03506",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "5/13,Brunton Rd,Cross,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "9dd21560-7368-11f1-934d-e50c5007eae6",
+      "name": "SALSS003666",
+      "label": "SSC107SM03406",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "143,Richmond Rd,Craig Park Layout,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "9e743a70-7147-11f1-934d-e50c5007eae6",
+      "name": "SALSS003075",
+      "label": "SSC107SM02724",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Garuda Mall,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "9290d450-7130-11f1-934d-e50c5007eae6",
+      "name": "SALSS002591",
+      "label": "SSC107SM02916",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "544,Langford Rd,Akkithimana Halli,Bheemanna Garden,Langford Gardens,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "9ffec660-754a-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004040",
+      "label": "SSC107SM04001",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJG7+4Q5,Dickenson Rd,Yellappa Garden,Yellappa Chetty Layout,Sivanchetti Gardens,Bengaluru,Karnataka 560042,India"
+    },
+    {
+      "id": "a33d3430-7147-11f1-934d-e50c5007eae6",
+      "name": "SALSS003067",
+      "label": "SSC107SM03433",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "11,Richmond Rd,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "a57af250-720f-11f1-934d-e50c5007eae6",
+      "name": "SALSS003641",
+      "label": "SSC107SM03491",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "22/A,Mahatma Gandhi Rd,Craig Park Layout,Domlur,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "a62edc20-7548-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004014",
+      "label": "SSC107SM04020",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "15,Leonard Ln,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "a8df3b80-76bb-11f1-9f95-73515bb81f31",
+      "name": "SALSS004862",
+      "label": "SSC107SM04150",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1,F Kittel Nagar,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "ac1921c0-1dcf-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000826",
+      "label": "SSC107SM00891",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "3/22,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "ad33be00-71d8-11f1-934d-e50c5007eae6",
+      "name": "SALSS003294",
+      "label": "SSC107SM03359",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "City Mansion Apartments,57,Norris Rd,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "ad578bb0-f5ef-11f0-90d8-85ff34606179",
+      "name": "SALSS000184",
+      "label": "SSC107SM00421",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Police Qtrs,14,Old Grant Ln,F Kittel Nagar,Austin Town,Victoria Layout,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "aec6dff0-76a0-11f1-9f95-73515bb81f31",
+      "name": "SALSS004089",
+      "label": "SSC107SM03702",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "090,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "b13ff770-71d8-11f1-934d-e50c5007eae6",
+      "name": "SALSS003295",
+      "label": "SSC107SM03409",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "136,Field Marshal Cariappa Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "b2c2a670-7141-11f1-934d-e50c5007eae6",
+      "name": "SALSS002977",
+      "label": "SSC107SM03319",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "18,Linden St,opposite to sha medical and general store,Yellagondanpalya,Austin Town,Victoria Layout,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "b329ee60-712e-11f1-934d-e50c5007eae6",
+      "name": "SALSS002624",
+      "label": "SSC107SM02817",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "8,Bazaar St,Richard Xavier's colony,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "b6b3b020-71d8-11f1-934d-e50c5007eae6",
+      "name": "SALSS003283",
+      "label": "SSC107SM03435",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Richmond Town,22/1,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "b7974310-769e-11f1-9f95-73515bb81f31",
+      "name": "SALSS004164",
+      "label": "SSC107SM02858",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "25,Srinivas Nagar,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "bb48dcd0-7121-11f1-934d-e50c5007eae6",
+      "name": "SALSS002600",
+      "label": "SSC107SM02612",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Sargod Imperial,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "bbceb840-754b-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004049",
+      "label": "SSC107SM03713",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Sky Gardens,12/1 Rhenius St,Richmond Town,Bangalore,Alexandria St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "bc585230-713b-11f1-934d-e50c5007eae6",
+      "name": "SALSS002900",
+      "label": "SSC107SM02869",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XH8W+5M4,Lavelle Road,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "c0ee6180-1d3b-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000603",
+      "label": "SSC107SM00898",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "372,East Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "c286d220-769b-11f1-9f95-73515bb81f31",
+      "name": "SALSS004130",
+      "label": "SSC107SM04102",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "C51,Convent Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "c2e49d61-8a82-11f1-8188-97faf926d60a",
+      "name": "SALSS005790",
+      "label": "SSC107SM05770",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XHGX+MMV,Mahatma Gandhi Rd,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "c6064410-7139-11f1-934d-e50c5007eae6",
+      "name": "SALSS002880",
+      "label": "SSC107SM02867",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XH9X+C2M,2nd Cross Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "c8305ac0-715f-11f1-934d-e50c5007eae6",
+      "name": "SALSS003241",
+      "label": "SSC107SM03190",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "35,Mariamma Koil St,Richard Xavier's colony,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "c853e850-715f-11f1-934d-e50c5007eae6",
+      "name": "SALSS003246",
+      "label": "SSC107SM03484",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "129,Brigade Rd,near Next to vellara junction,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "c827cf40-715f-11f1-934d-e50c5007eae6",
+      "name": "SALSS003244",
+      "label": "SSC107SM03424",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "78,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "ca852000-713a-11f1-934d-e50c5007eae6",
+      "name": "SALSS002911",
+      "label": "SSC107SM02742",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "13,Vivek Nagar,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "cb77f4f0-769f-11f1-9f95-73515bb81f31",
+      "name": "SALSS004268",
+      "label": "SSC107SM03790",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "31,Norris Rd,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "cc1e6460-1e8a-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS001735",
+      "label": "SSC107SM00977",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "19,Wellington St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "cca76db0-1e8e-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS001802",
+      "label": "SSC107SM00958",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJ95+W8G,1st Cross Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "cdcc5b80-71d9-11f1-934d-e50c5007eae6",
+      "name": "SALSS003293",
+      "label": "SSC107SM03456",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "125,Brigade Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "d23643e0-f5db-11f0-90d8-85ff34606179",
+      "name": "SALSS000091",
+      "label": "SSC107SM00368",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Chandra Kantha Nilayam,78/3,BDA 3rd Stage,Srigandhakavalu,Pillappanakatte,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "d3128570-71e2-11f1-934d-e50c5007eae6",
+      "name": "SALSS003385",
+      "label": "SSC107SM03520",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Eshwara Nilay,Craig Park Layout,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "d34c1271-7126-11f1-934d-e50c5007eae6",
+      "name": "SALSS002623",
+      "label": "SSC107SM02802",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Raheja Point,17/2,Magrath Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "d4716db0-7128-11f1-934d-e50c5007eae6",
+      "name": "SALSS002689",
+      "label": "SSC107SM02893",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "40 /2,Lavelle Road,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "d4739090-7128-11f1-934d-e50c5007eae6",
+      "name": "SALSS002696",
+      "label": "SSC107SM02876",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Aalaya,4th Cross,Aalaya 4th Cross,Lavelle Road,opposite Avataar Ventures,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "d5752210-7128-11f1-934d-e50c5007eae6",
+      "name": "SALSS002695",
+      "label": "SSC107SM02877",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "72/1,near MINI Navnit Motors,Shanthala Nagar,Sampangi Rama Nagara,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "d59afd80-76a2-11f1-9f95-73515bb81f31",
+      "name": "SALSS004129",
+      "label": "SSC107SM04113",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "102,3rd Main Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "d653ed40-76a2-11f1-9f95-73515bb81f31",
+      "name": "SALSS004282",
+      "label": "SSC107SM04058",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Pushparang Nilayam,Cornwell Rd,Langford Gardens,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "d7abf011-1ea6-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002236",
+      "label": "SSC107SM01077",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "2-24,Anthony Nicholas St,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "dc64beb0-7541-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003936",
+      "label": "SSC107SM04104",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Times Building,M. G. Road,Mahatma Gandhi Rd,Haridevpur,Shanthala Nagar,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "dc7309f0-7138-11f1-934d-e50c5007eae6",
+      "name": "SALSS002867",
+      "label": "SSC107SM02495",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "47,Primrose Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "de0095f1-1dc1-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000602",
+      "label": "SSC107SM00906",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "22,D St,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "de0095f0-1dc1-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000560",
+      "label": "SSC107SM00770",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "50,Markham Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "de180c50-76a7-11f1-9f95-73515bb81f31",
+      "name": "SALSS004426",
+      "label": "SSC107SM04287",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "17/2,Shanthala Nagar,Sampangi Rama Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "e19166a0-1d39-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000685",
+      "label": "SSC107SM00887",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1,Khan Bahadur Abdul Rehman Rd,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "e6f484c0-76a2-11f1-9f95-73515bb81f31",
+      "name": "SALSS004249",
+      "label": "SSC107SM03722",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "10,Kasturba Rd,Nunegundlapalli,Ambedkar Veedhi,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "e9d116d0-76ad-11f1-9f95-73515bb81f31",
+      "name": "SALSS004741",
+      "label": "SSC107SM04328",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "39,St Mark's Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "ec1845e0-7206-11f1-934d-e50c5007eae6",
+      "name": "SALSS003403",
+      "label": "SSC107SM03399",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "1,1/1,Old Race Course Rd,F Kittel Nagar,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "ec784221-1d41-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000600",
+      "label": "SSC107SM00712",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "309 FM:5,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "ed790510-715b-11f1-934d-e50c5007eae6",
+      "name": "SALSS003174",
+      "label": "SSC107SM02861",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "Sadath Court,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "edfbd430-715c-11f1-934d-e50c5007eae6",
+      "name": "SALSS003177",
+      "label": "SSC107SM02964",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "17,Commissariat Rd,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "f2663170-1dd1-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000973",
+      "label": "SSC107SM00507",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "170/2,F Kittel Nagar,Austin Town,Neelasandra,Bengaluru,Karnataka 560047,India"
+    },
+    {
+      "id": "f323c850-76b6-11f1-9f95-73515bb81f31",
+      "name": "SALSS004676",
+      "label": "SSC107SM04258",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "9/2,St Mark's Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "f3f380f0-1ebd-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002434",
+      "label": "SSC107SM01009",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "46,Markham Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "f3f41d31-1ebd-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS002440",
+      "label": "SSC107SM01055",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "10,A St,Shoole Circle,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "f6b5e350-7543-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003948",
+      "label": "SSC107SM04131",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "18,Brigade Rd,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "f977cf20-7135-11f1-934d-e50c5007eae6",
+      "name": "SALSS002810",
+      "label": "SSC107SM02722",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "43,Ashok Nagar,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "fa4b6950-7547-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003998",
+      "label": "SSC107SM03971",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "34,Rest House Rd,off Brigade Road,below pecos pub,Shanthala Nagar,Sampangi Rama Nagara,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "fb070fc0-7137-11f1-934d-e50c5007eae6",
+      "name": "SALSS002863",
+      "label": "SSC107SM02599",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "12/1,Rhenius St,Richmond Town,Bengaluru,Karnataka 560025,India"
+    },
+    {
+      "id": "fcd28d80-7122-11f1-934d-e50c5007eae6",
+      "name": "SALSS002602",
+      "label": "SSC107SM02619",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "XJG2+CJC,No. 40,St Mark's Rd,Srinivas Nagar,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "ff3f4860-1dcb-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS000896",
+      "label": "SSC107SM00596",
+      "ward": "SNTR-W167",
+      "ward_name": "Shanthi Nagar (Ward 167)",
+      "zone": "ShanthiNagar",
+      "location": "288,North Rd,F Kittel Nagar,Austin Town,Neelasandra,Bengaluru,Karnataka 560030,India"
+    }
+  ],
+  "SVJR-W118": [
+    {
+      "id": "02a75a40-76bb-11f1-9f95-73515bb81f31",
+      "name": "SALSS004887",
+      "label": "SSC107SM04249",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "CCR BUILDING,31,Mission Rd,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "0115b430-76af-11f1-9f95-73515bb81f31",
+      "name": "SALSS004593",
+      "label": "SSC107SM04176",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "67,4th Main Rd,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "05d3ff90-76af-11f1-9f95-73515bb81f31",
+      "name": "SALSS004589",
+      "label": "SSC107SM04537",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "Cubbon House,43,Cubbon Rd,Tasker Town,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "08156a70-76b7-11f1-9f95-73515bb81f31",
+      "name": "SALSS004794",
+      "label": "SSC107SM04206",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "36,10th Cross Rd,Ashwath Nagar,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "07ff0930-8a74-11f1-8188-97faf926d60a",
+      "name": "SALSS005577",
+      "label": "SSC107SM05772",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "Sai Suraksha,1/1,Munshi Akbar Hussain Rd,Tasker Town,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "0abd0e00-8a43-11f1-8188-97faf926d60a",
+      "name": "SALSS005222",
+      "label": "SSC107SM05782",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "5/1,13th A Cross Rd,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "17523380-8b00-11f1-8188-97faf926d60a",
+      "name": "SALSS005828",
+      "label": "SSC107SM05734",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "XH8V+FFG,B T Muniyappa Rd,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "1e709060-7211-11f1-934d-e50c5007eae6",
+      "name": "SALSS003660",
+      "label": "SSC107SM04167",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "17/1/2,1st Cross Rd,Ashwath Nagar,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "28895b50-fffb-11f0-90d8-85ff34606179",
+      "name": "SALSS000500",
+      "label": "SSC107SM04876",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "43,Old Cemetery Rd,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "2dbc6920-8a82-11f1-8188-97faf926d60a",
+      "name": "SALSS005712",
+      "label": "SSC107SM05463",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "18,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "2fc0a2b0-753b-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003845",
+      "label": "SSC107SM04193",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "64,5th Main Rd Sampangi Ram Nagar,Ashwath Nagar,Sr Nagar,Sudhama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "3475ea41-8a6c-11f1-8188-97faf926d60a",
+      "name": "SALSS005619",
+      "label": "SSC107SM05760",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "6/1,Ft B St,Ashwath Nagar,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "2a4df0b0-8b0e-11f1-8188-97faf926d60a",
+      "name": "SALSS005853",
+      "label": "SSC107SM05563",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "XH9R+3RH,1st Cross Rd,Ashwath Nagar,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "2a49a5f0-754c-11f1-981f-f16ee136eb5b",
+      "name": "SALSS004056",
+      "label": "SSC107SM03833",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "115,Shivaji Rd,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "366b9e80-8b16-11f1-8188-97faf926d60a",
+      "name": "SALSS005998",
+      "label": "SSC107SM05462",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "5/12,5-12,15th Cross Rd Sampangi Ram Nagar,Sr Nagar,Sudhama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "3d0723b0-8a79-11f1-8188-97faf926d60a",
+      "name": "SALSS005683",
+      "label": "SSC107SM05209",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "19,8th Cross Rd,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "3e0b9e30-76ab-11f1-9f95-73515bb81f31",
+      "name": "SALSS004679",
+      "label": "SSC107SM04177",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "sai venkata nilyam,38/40,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "3ef3b340-8a3e-11f1-8188-97faf926d60a",
+      "name": "SALSS005098",
+      "label": "SSC107SM04934",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "XJJ3+5MC,Infantry Rd,Tasker Town,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "45479410-7548-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003982",
+      "label": "SSC107SM03704",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "44/1,T Nanjundappa Rd,Ashwath Nagar,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "4819c9c0-8a37-11f1-8188-97faf926d60a",
+      "name": "SALSS004920",
+      "label": "SSC107SM04887",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "42,Venkatappa Rd,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "4881c770-8a44-11f1-8188-97faf926d60a",
+      "name": "SALSS005203",
+      "label": "SSC107SM05485",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "XJP2+CGM,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "54f8a5b0-76ac-11f1-9f95-73515bb81f31",
+      "name": "SALSS004632",
+      "label": "SSC107SM04743",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "S No 25/1,SR Plaza,Lady Curzon Rd,opp. Bowring Hospital Road,Tasker Town,Shivaji Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "58e1be50-8b06-11f1-8188-97faf926d60a",
+      "name": "SALSS005811",
+      "label": "SSC107SM05424",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "11,Devanga Hostel Rd,Corporation,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "5b4929d0-8a34-11f1-8188-97faf926d60a",
+      "name": "SALSS005002",
+      "label": "SSC107SM04901",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "Pronab Mohanty,1,1st St,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "4b5b2d90-76b9-11f1-9f95-73515bb81f31",
+      "name": "SALSS004787",
+      "label": "SSC107SM04156",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "31,5th Main Rd,Ashwath Nagar,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "5efe0ab0-8b14-11f1-8188-97faf926d60a",
+      "name": "SALSS006015",
+      "label": "SSC107SM05472",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "4,Shivaji Rd,near St.Mary`s girls school and St.Xavier's boys school,Govinda Chetty Colony,Rajiv Gandhi Colony,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "6147cf50-76aa-11f1-9f95-73515bb81f31",
+      "name": "SALSS004547",
+      "label": "SSC107SM04822",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "67A1,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "6315e210-8b02-11f1-8188-97faf926d60a",
+      "name": "SALSS005849",
+      "label": "SSC107SM05558",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "Chamber No G2,VMC Complex,8th Cross Rd,Cubbonpete,Nagarathpete,Bengaluru,Karnataka 560002,India"
+    },
+    {
+      "id": "6526e7c0-8b02-11f1-8188-97faf926d60a",
+      "name": "SALSS005858",
+      "label": "SSC107SM05546",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "13/2,Queens Rd,Rajiv Gandhi Colony,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "79497d50-8a42-11f1-8188-97faf926d60a",
+      "name": "SALSS005201",
+      "label": "SSC107SM05479",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "No.74 & 75,Millers Rd,opp. ST ANNES PRE UNIVERSITY COLLEGE,Vasanthagar,Vasanth Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "7a9a5890-8a48-11f1-8188-97faf926d60a",
+      "name": "SALSS005285",
+      "label": "SSC107SM04976",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "25,1st Cross Rd,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "940fcc90-76a9-11f1-9f95-73515bb81f31",
+      "name": "SALSS004548",
+      "label": "SSC107SM04865",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "8,Old Cemetery Rd,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "97cb8d40-8afb-11f1-8188-97faf926d60a",
+      "name": "SALSS005839",
+      "label": "SSC107SM05726",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "32,2nd Main Rd,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "97cc0270-8afb-11f1-8188-97faf926d60a",
+      "name": "SALSS005884",
+      "label": "SSC107SM05515",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "14,12th Cross Rd,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "9a03c080-76a3-11f1-9f95-73515bb81f31",
+      "name": "SALSS004166",
+      "label": "SSC107SM03724",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "14/A,Devanga Hostel Rd,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "9cb7d5a0-7211-11f1-934d-e50c5007eae6",
+      "name": "SALSS003568",
+      "label": "SSC107SM03601",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "18,HKP Road,Govinda Chetty Colony,dargah compound,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "9ffb1530-76b0-11f1-9f95-73515bb81f31",
+      "name": "SALSS004754",
+      "label": "SSC107SM04839",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "41,Rajiv Gandhi Colony,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "a0fe2d50-76b0-11f1-9f95-73515bb81f31",
+      "name": "SALSS004824",
+      "label": "SSC107SM04276",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "41,8th Cross Rd,Ashwath Nagar,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "a2bc41f0-8a41-11f1-8188-97faf926d60a",
+      "name": "SALSS005147",
+      "label": "SSC107SM04946",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "14,Curve Rd,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "a38cd860-8a41-11f1-8188-97faf926d60a",
+      "name": "SALSS005101",
+      "label": "SSC107SM04971",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "73,Shivaji Rd,Rajiv Gandhi Colony,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "a61bc630-720f-11f1-934d-e50c5007eae6",
+      "name": "SALSS003653",
+      "label": "SSC107SM04295",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "7,18th Cross Rd,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "a8a1dad0-8a37-11f1-8188-97faf926d60a",
+      "name": "SALSS004915",
+      "label": "SSC107SM04880",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "33/1,Chikka Bazar Rd,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "aaa2f110-76a6-11f1-9f95-73515bb81f31",
+      "name": "SALSS004262",
+      "label": "SSC107SM04006",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "12,3rd Main Rd,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "aae7ccd0-76a7-11f1-9f95-73515bb81f31",
+      "name": "SALSS004423",
+      "label": "SSC107SM04293",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "7th main,8th Cross Rd,near Paradise hotel,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "ae6cc420-8a4b-11f1-8188-97faf926d60a",
+      "name": "SALSS005319",
+      "label": "SSC107SM05769",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "14-2,2nd Main Rd Sampangi Ram Nagar,Sr Nagar,Sudhama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "b4cee650-7514-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003726",
+      "label": "SSC107SM04211",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "240/5,8th Main Rd,Ashwath Nagar,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "ba002460-76ac-11f1-9f95-73515bb81f31",
+      "name": "SALSS004677",
+      "label": "SSC107SM04171",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "13/1,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "bf7894d0-76a8-11f1-9f95-73515bb81f31",
+      "name": "SALSS004428",
+      "label": "SSC107SM04186",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "XH9R+2C4,Ashwath Nagar,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "c5fddd10-1dde-11f1-9039-e39d44b5f1e7",
+      "name": "SALSS001085",
+      "label": "SSC107SM04871",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "22-23,Phase 2,Nandi Durga Road Extension,Jayamahal,Bengaluru,Karnataka 560046,India"
+    },
+    {
+      "id": "d3978b50-8af9-11f1-8188-97faf926d60a",
+      "name": "SALSS005841",
+      "label": "SSC107SM05443",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "53,Govinda Chetty Colony,Rajiv Gandhi Colony,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "d9f0e0b0-750e-11f1-981f-f16ee136eb5b",
+      "name": "SALSS003785",
+      "label": "SSC107SM04209",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "32/1,8th Cross Rd,opp. Jeo Hotel,Ashwath Nagar,Sampangi Rama Nagara,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "e63f6d50-7207-11f1-934d-e50c5007eae6",
+      "name": "SALSS003577",
+      "label": "SSC107SM03018",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "No 28/2,20th Cross Rd,Cubbonpete,Nagarathpete,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "e7c1c470-713f-11f1-934d-e50c5007eae6",
+      "name": "SALSS002989",
+      "label": "SSC107SM02903",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "XJP2+QVF,Rajiv Gandhi Colony,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "e8fe7f60-71dd-11f1-934d-e50c5007eae6",
+      "name": "SALSS003346",
+      "label": "SSC107SM03496",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "XHMX+QPR,Swamy Shivanandapuram,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "f589e730-7366-11f1-934d-e50c5007eae6",
+      "name": "SALSS003656",
+      "label": "SSC107SM04303",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "32,B T Muniyappa Rd,Ashwath Nagar,Sampangi Rama Nagara,Sampangi Rama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "f6510d00-8afa-11f1-8188-97faf926d60a",
+      "name": "SALSS005845",
+      "label": "SSC107SM05445",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "28,Sultan B Cross Rd,Govinda Chetty Colony,Rajiv Gandhi Colony,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
+    },
+    {
+      "id": "ffbfcab0-8a42-11f1-8188-97faf926d60a",
+      "name": "SALSS005195",
+      "label": "SSC107SM05743",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "21,2nd Main Rd Sampangi Ram Nagar,Sr Nagar,Sudhama Nagar,Bengaluru,Karnataka 560027,India"
+    }
+  ]
+}
