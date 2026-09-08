@@ -44,6 +44,47 @@ python main.py --send --schedule "09:00,18:00"
 
 ---
 
+## ⚡ GitHub Actions & API Repository Dispatch
+
+This repository includes an automated workflow [`.github/workflows/report.yml`](.github/workflows/report.yml).
+
+### 1. Configure GitHub Secrets
+In your GitHub repo, go to **Settings** -> **Secrets and variables** -> **Actions** -> **New repository secret**:
+- `THINGSBOARD_BASE_URL`: `https://schnelliot.in`
+- `THINGSBOARD_USERNAME`: `vinoth.joel@schnellenergy.com`
+- `THINGSBOARD_PASSWORD`: `vinoth777`
+- `GOOGLE_CHAT_WEBHOOK_URL`: Your Google Spaces Webhook URL
+
+### 2. Trigger via Repository Dispatch API
+Send an authenticated `POST` request to GitHub API:
+
+```bash
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "send_report", "client_payload": {"ward": "all"}}'
+```
+
+To trigger for a single ward:
+```bash
+# Trigger for Ward 167 only
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "send_report", "client_payload": {"ward": "167"}}'
+
+# Trigger for Ward 118 only
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "send_report", "client_payload": {"ward": "118"}}'
+```
+
+---
+
 ## 📁 File Structure
 
 - [`ward_devices.json`](file:///d:/Schnell/Central_Zone_Chat/ward_devices.json): Dedicated inventory of the 209 panels across W167 & W118.
