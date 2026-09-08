@@ -24,11 +24,12 @@ class ThingsBoardClient:
         username: Optional[str] = None,
         password: Optional[str] = None,
     ):
-        self.base_url = (
-            base_url or os.getenv("THINGSBOARD_BASE_URL", "https://schnelliot.in")
-        ).rstrip("/")
-        self.username = username or os.getenv("THINGSBOARD_USERNAME")
-        self.password = password or os.getenv("THINGSBOARD_PASSWORD")
+        raw_url = base_url or os.getenv("THINGSBOARD_BASE_URL", "https://schnelliot.in")
+        self.base_url = str(raw_url).strip().rstrip("/") if raw_url else "https://schnelliot.in"
+        raw_user = username or os.getenv("THINGSBOARD_USERNAME")
+        self.username = str(raw_user).strip() if raw_user else None
+        raw_pass = password or os.getenv("THINGSBOARD_PASSWORD")
+        self.password = str(raw_pass).strip() if raw_pass else None
         self.token: Optional[str] = None
         self.session = requests.Session()
         adapter = requests.adapters.HTTPAdapter(pool_connections=50, pool_maxsize=50)

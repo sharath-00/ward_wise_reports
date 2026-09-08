@@ -14,10 +14,11 @@ class GoogleSpacesNotifier:
     """
 
     def __init__(self, webhook_url: Optional[str] = None):
-        self.webhook_url = webhook_url or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+        raw_url = webhook_url or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+        self.webhook_url = str(raw_url).strip() if raw_url else None
 
     def _create_ward_sections(self, report_data: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Create Section 1 (Overview) and Section 2 (Issues) for a given ward report."""
+        """Create a unified, easy-to-read section for a ward with status badges and smart issue highlighting."""
         ward_name = report_data.get("zone_name", "BBMP Ward")
         sec1 = report_data.get("section1_overview", {})
         sec2 = report_data.get("section2_issues", {})
@@ -34,10 +35,35 @@ class GoogleSpacesNotifier:
         mcb_trip = sec2.get("mcb_trip", 0)
         door_open = sec2.get("panel_door_open", 0)
 
-        return [
-            # Section 1: Overview
+        # Health badge indicator based on operational percentage
+        if online_pct >= 90.0:
+            status_badge = f"🟢 {online_pct}% Operational"
+        elif online_pct >= 75.0:
+            status_badge = f"🟡 {online_pct}% Needs Attention"
+        else:
+            status_badge = f"🔴 {online_pct}% Critical"
+
+        all_issue_lines = [
+            f"⚡ <b>Power Failure (0V):</b> <b>{pf}</b>",
+            f"⚙️ <b>MCB Tripped:</b> <b>{mcb_trip}</b>",
+            f"🚪 <b>Door Open / Tamper:</b> <b>{door_open}</b>",
+            f"📉 <b>Low Voltage (&lt;180V):</b> <b>{low_volt}</b>",
+            f"📈 <b>High Voltage (&gt;265V):</b> <b>{high_volt}</b>",
+        ]
+
+        issue_widgets = [
             {
-                "header": f"📍 {ward_name} — Overview",
+                "decoratedText": {
+                    "startIcon": {"knownIcon": "MEMBERSHIP"},
+                    "topLabel": "⚠️ ISSUE BREAKDOWN",
+                    "text": "<br>".join(all_issue_lines),
+                }
+            }
+        ]
+
+        return [
+            {
+                "header": f"📍 {ward_name}  •  {status_badge}",
                 "widgets": [
                     {
                         "columns": {
@@ -79,7 +105,7 @@ class GoogleSpacesNotifier:
                                         {
                                             "decoratedText": {
                                                 "topLabel": "OFFLINE PANELS",
-                                                "text": f"<b><font color=\"#c5221f\">{offline}</font></b>",
+                                                "text": f"<b><font color=\"#d93025\">{offline}</font></b>",
                                             }
                                         }
                                     ],
@@ -90,8 +116,8 @@ class GoogleSpacesNotifier:
                                     "widgets": [
                                         {
                                             "decoratedText": {
-                                                "topLabel": "OFFLINE PF PANELS",
-                                                "text": f"<b><font color=\"#b06000\">{offline_pf}</font></b>",
+                                                "topLabel": "OFFLINE (NO POWER)",
+                                                "text": f"<b><font color=\"#ea8600\">{offline_pf}</font></b>",
                                             }
                                         }
                                     ],
@@ -99,41 +125,9 @@ class GoogleSpacesNotifier:
                             ]
                         }
                     },
+                    *issue_widgets,
                 ],
-            },
-            # Section 2: Issues
-            {
-                "header": f"⚠️ {ward_name} — Issue Breakdown",
-                "widgets": [
-                    {
-                        "decoratedText": {
-                            "startIcon": {
-                                "knownIcon": "MEMBERSHIP"
-                            },
-                            "topLabel": "VOLTAGE ANOMALIES",
-                            "text": f"<b>Low Voltage:</b> {low_volt} &nbsp;&nbsp;|&nbsp;&nbsp; <b>High Voltage:</b> {high_volt}",
-                        }
-                    },
-                    {
-                        "decoratedText": {
-                            "startIcon": {
-                                "knownIcon": "CLOCK"
-                            },
-                            "topLabel": "SUPPLY & TRIPPING",
-                            "text": f"<b>Power Failure:</b> {pf} &nbsp;&nbsp;|&nbsp;&nbsp; <b>MCB Trip:</b> {mcb_trip}",
-                        }
-                    },
-                    {
-                        "decoratedText": {
-                            "startIcon": {
-                                "knownIcon": "DESCRIPTION"
-                            },
-                            "topLabel": "SECURITY & TAMPER",
-                            "text": f"<b>Panel Door Open:</b> {door_open}",
-                        }
-                    },
-                ],
-            },
+            }
         ]
 
     def build_combined_card_v2(self, all_reports: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -145,7 +139,7 @@ class GoogleSpacesNotifier:
             ward_sections = self._create_ward_sections(report)
             all_sections.extend(ward_sections)
 
-        # Append common footer section
+        # Append clean common footer section
         all_sections.append({
             "widgets": [
                 {
@@ -157,14 +151,14 @@ class GoogleSpacesNotifier:
         })
 
         card_title = (
-            "BBMP Panel Health Report"
+            "BBMP Central Zone • CCMS Health Report"
             if len(all_reports) > 1
             else f"BBMP Panel Report: {all_reports[0].get('zone_name')}"
         )
         card_subtitle = (
-            "Shanthi Nagar (Ward 167) & Shivaji Nagar (Ward 118)"
+            "Live Status Summary • Shanthi Nagar (W167) & Shivaji Nagar (W118)"
             if len(all_reports) > 1
-            else "Schnell IoT CCMS & Smart Lighting Health Summary"
+            else f"Live Status Summary • {generated_at}"
         )
 
         card_payload = {
@@ -186,37 +180,54 @@ class GoogleSpacesNotifier:
         return card_payload
 
     def build_markdown_fallback(self, all_reports: List[Dict[str, Any]]) -> str:
-        """Construct fallback formatted markdown text for chat."""
-        lines = ["*BBMP Panel Health Report*"]
+        """Construct clean markdown text displaying exact dashboard metrics and issue breakdown."""
         generated_at = all_reports[0].get("generated_at", "") if all_reports else ""
-        lines.append(f"🕒 _Generated: {generated_at}_\n")
+        lines = [
+            "⚡ *BBMP Central Zone — CCMS Health Report*",
+            f"🕒 _{generated_at}_\n",
+        ]
 
         for r in all_reports:
             w_name = r.get("zone_name", "Ward")
             sec1 = r.get("section1_overview", {})
             sec2 = r.get("section2_issues", {})
 
+            online_pct = sec1.get("online_pct", 0.0)
+            if online_pct >= 90.0:
+                badge = f"🟢 *{online_pct}% Online*"
+            elif online_pct >= 75.0:
+                badge = f"🟡 *{online_pct}% Online*"
+            else:
+                badge = f"🔴 *{online_pct}% Online*"
+
+            low_volt = sec2.get("low_voltage", 0)
+            high_volt = sec2.get("high_voltage", 0)
+            pf = sec2.get("power_failure", 0)
+            mcb_trip = sec2.get("mcb_trip", 0)
+            door_open = sec2.get("panel_door_open", 0)
+
             lines.extend([
-                f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                f"📍 *{w_name}*",
-                f"• *Total Panels:* {sec1.get('total_panels', 0)}",
-                f"• *Online Panels:* {sec1.get('online_panels', 0)} ({sec1.get('online_pct', 0)}%)",
-                f"• *Offline Panels:* {sec1.get('offline_panels', 0)}",
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                f"📍 *{w_name}* — {badge}",
+                f"• *Total Panels:* {sec1.get('total_panels', 0)}  |  *Online Panels:* {sec1.get('online_panels', 0)}  |  *Offline Panels:* {sec1.get('offline_panels', 0)}",
                 f"• *Offline PF Panels:* {sec1.get('offline_pf_panels', 0)}",
-                f"• *Low Voltage:* {sec2.get('low_voltage', 0)}",
-                f"• *High Voltage:* {sec2.get('high_voltage', 0)}",
-                f"• *Power Failure:* {sec2.get('power_failure', 0)}",
-                f"• *MCB Trip:* {sec2.get('mcb_trip', 0)}",
-                f"• *Panel Door Open:* {sec2.get('panel_door_open', 0)}\n",
+                f"• ⚠️ *Issue Breakdown:*",
+                f"   - 🟡 *Low Voltage:* {low_volt}",
+                f"   - 🟠 *High Voltage:* {high_volt}",
+                f"   - ⚡ *Power Failure:* {pf}",
+                f"   - ⚙️ *MCB Trip:* {mcb_trip}",
+                f"   - 🚪 *Panel Door Open:* {door_open}\n",
             ])
 
+        lines.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        lines.append("_⚡ Schnell IoT Smart Lighting CCMS Monitoring_")
         return "\n".join(lines)
 
     def send_combined_report(
         self,
         all_reports: List[Dict[str, Any]],
         webhook_url: Optional[str] = None,
-        use_card: bool = True,
+        use_card: bool = False,
     ) -> bool:
         """Send all ward reports in a single unified message request body."""
         target_url = webhook_url or self.webhook_url
@@ -234,22 +245,13 @@ class GoogleSpacesNotifier:
         try:
             resp = requests.post(target_url, json=payload, headers=headers, timeout=15)
             if resp.status_code == 200:
-                logger.info("Successfully delivered unified combined report to Google Spaces.")
+                logger.info("Successfully delivered report to Google Spaces.")
                 return True
             else:
                 logger.warning(
-                    f"Card v2 send failed ({resp.status_code}): {resp.text}. Retrying with plain text..."
+                    f"Send failed ({resp.status_code}): {resp.text}."
                 )
-                fallback_payload = {"text": self.build_markdown_fallback(all_reports)}
-                fb_resp = requests.post(
-                    target_url, json=fallback_payload, headers=headers, timeout=15
-                )
-                if fb_resp.status_code == 200:
-                    logger.info("Successfully sent fallback text report to Google Spaces.")
-                    return True
-                else:
-                    logger.error(f"Fallback send failed ({fb_resp.status_code}): {fb_resp.text}")
-                    return False
+                return False
         except Exception as e:
             logger.error(f"Failed to post combined message to Google Spaces: {e}")
             return False

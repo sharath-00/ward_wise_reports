@@ -60,9 +60,9 @@ def print_console_report(report_data: Dict[str, Any]):
     print(tabulate(sec1_table, headers=["Metric", "Count"], tablefmt="fancy_grid"))
 
     sec2_table = [
-        ["🟡 Low Voltage (< 180V)", sec2.get("low_voltage", 0)],
-        ["🟠 High Voltage (> 265V)", sec2.get("high_voltage", 0)],
-        ["⚡ Power Failure (0V)", sec2.get("power_failure", 0)],
+        ["🟡 Low Voltage", sec2.get("low_voltage", 0)],
+        ["🟠 High Voltage", sec2.get("high_voltage", 0)],
+        ["⚡ Power Failure", sec2.get("power_failure", 0)],
         ["⚙️ MCB Trip", sec2.get("mcb_trip", 0)],
         ["🚪 Panel Door Open", sec2.get("panel_door_open", 0)],
     ]
@@ -91,10 +91,8 @@ def execute_ward_reports(
     # Fetch live data strictly for target wards (W167 / W118)
     ward_panels_map = tb_client.fetch_panels_for_wards(ward_target=ward_target)
 
-    target_webhook = (
-        webhook_url_override
-        or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
-    )
+    raw_webhook = webhook_url_override or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+    target_webhook = str(raw_webhook).strip() if raw_webhook else None
     notifier = GoogleSpacesNotifier(webhook_url=target_webhook)
 
     ward_display_names = {
