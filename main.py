@@ -109,18 +109,18 @@ def execute_ward_reports(
         print_console_report(report_data)
         all_reports.append(report_data)
 
-        if send_to_chat:
-            if not target_webhook:
-                logger.warning(
-                    "No GOOGLE_CHAT_WEBHOOK_URL configured in .env. Skipping send."
-                )
+    if send_to_chat and all_reports:
+        if not target_webhook:
+            logger.warning(
+                "No GOOGLE_CHAT_WEBHOOK_URL configured in .env. Skipping send."
+            )
+        else:
+            logger.info("Dispatching unified combined report to Google Spaces...")
+            success = notifier.send_combined_report(all_reports)
+            if success:
+                logger.info("Unified report successfully delivered to Google Spaces!")
             else:
-                logger.info(f"Dispatching report for {ward_title} to Google Spaces...")
-                success = notifier.send_report(report_data)
-                if success:
-                    logger.info(f"Report for {ward_title} successfully delivered to Google Spaces!")
-                else:
-                    logger.error(f"Failed to deliver report for {ward_title} to Google Spaces.")
+                logger.error("Failed to deliver unified report to Google Spaces.")
 
     return all_reports
 

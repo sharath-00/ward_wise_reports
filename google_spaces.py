@@ -2,7 +2,7 @@ import os
 import json
 import logging
 import requests
-from typing import Dict, Any, Optional
+from typing import Dict, List, Any, Optional
 
 logger = logging.getLogger("GoogleSpacesNotifier")
 
@@ -10,19 +10,17 @@ logger = logging.getLogger("GoogleSpacesNotifier")
 class GoogleSpacesNotifier:
     """
     Constructs and dispatches clean Google Chat Card v2 reports to Google Spaces.
-    Section 1: Ward Overview (Total Panels, Online Panels, Offline Panels, Offline PF Panels)
-    Section 2: Issue Breakdown (Low Voltage, High Voltage, Power Failure, MCB Trip, Panel Door Open)
+    Supports single ward card or combined multi-ward card in a single request body.
     """
 
     def __init__(self, webhook_url: Optional[str] = None):
         self.webhook_url = webhook_url or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
 
-    def build_card_v2(self, report_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Construct a clean, elegant Google Chat Card v2 layout."""
+    def _create_ward_sections(self, report_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Create Section 1 (Overview) and Section 2 (Issues) for a given ward report."""
         ward_name = report_data.get("zone_name", "BBMP Ward")
         sec1 = report_data.get("section1_overview", {})
         sec2 = report_data.get("section2_issues", {})
-        generated_at = report_data.get("generated_at", "")
 
         total = sec1.get("total_panels", 0)
         online = sec1.get("online_panels", 0)
@@ -36,10 +34,10 @@ class GoogleSpacesNotifier:
         mcb_trip = sec2.get("mcb_trip", 0)
         door_open = sec2.get("panel_door_open", 0)
 
-        sections = [
-            # SECTION 1: 4 Metric Cards
+        return [
+            # Section 1: Overview
             {
-                "header": f"📍 {ward_name}",
+                "header": f"📍 {ward_name} — Overview",
                 "widgets": [
                     {
                         "columns": {
@@ -103,9 +101,9 @@ class GoogleSpacesNotifier:
                     },
                 ],
             },
-            # SECTION 2: Issue Breakdown
+            # Section 2: Issues
             {
-                "header": "⚠️ Issue Breakdown",
+                "header": f"⚠️ {ward_name} — Issue Breakdown",
                 "widgets": [
                     {
                         "decoratedText": {
@@ -130,68 +128,97 @@ class GoogleSpacesNotifier:
                             "startIcon": {
                                 "knownIcon": "DESCRIPTION"
                             },
-                            "topLabel": "PHYSICAL TAMPER / SECURITY",
+                            "topLabel": "SECURITY & TAMPER",
                             "text": f"<b>Panel Door Open:</b> {door_open}",
-                        }
-                    },
-                    {
-                        "decoratedText": {
-                            "bottomLabel": f"Report generated at {generated_at}",
                         }
                     },
                 ],
             },
         ]
 
+    def build_combined_card_v2(self, all_reports: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Combine all ward reports into a single unified Google Chat Card v2 request body."""
+        all_sections = []
+        generated_at = all_reports[0].get("generated_at", "") if all_reports else ""
+
+        for report in all_reports:
+            ward_sections = self._create_ward_sections(report)
+            all_sections.extend(ward_sections)
+
+        # Append common footer section
+        all_sections.append({
+            "widgets": [
+                {
+                    "decoratedText": {
+                        "bottomLabel": f"Report generated at {generated_at} • Schnell IoT BBMP CCMS Monitoring",
+                    }
+                }
+            ]
+        })
+
+        card_title = (
+            "BBMP Panel Health Report"
+            if len(all_reports) > 1
+            else f"BBMP Panel Report: {all_reports[0].get('zone_name')}"
+        )
+        card_subtitle = (
+            "Shanthi Nagar (Ward 167) & Shivaji Nagar (Ward 118)"
+            if len(all_reports) > 1
+            else "Schnell IoT CCMS & Smart Lighting Health Summary"
+        )
+
         card_payload = {
             "cardsV2": [
                 {
-                    "cardId": f"bbmp-ward-{int(os.times().elapsed * 1000)}",
+                    "cardId": f"bbmp-combined-{int(os.times().elapsed * 1000)}",
                     "card": {
                         "header": {
-                            "title": f"BBMP Panel Report: {ward_name}",
-                            "subtitle": "Schnell IoT CCMS & Smart Lighting Health Summary",
+                            "title": card_title,
+                            "subtitle": card_subtitle,
                             "imageUrl": "https://img.icons8.com/fluency/96/street-light.png",
                             "imageType": "SQUARE",
                         },
-                        "sections": sections,
+                        "sections": all_sections,
                     },
                 }
             ]
         }
         return card_payload
 
-    def build_markdown_fallback(self, report_data: Dict[str, Any]) -> str:
-        """Construct clean formatted markdown text for fallback."""
-        ward_name = report_data.get("zone_name", "BBMP Ward")
-        sec1 = report_data.get("section1_overview", {})
-        sec2 = report_data.get("section2_issues", {})
-        generated_at = report_data.get("generated_at", "")
+    def build_markdown_fallback(self, all_reports: List[Dict[str, Any]]) -> str:
+        """Construct fallback formatted markdown text for chat."""
+        lines = ["*BBMP Panel Health Report*"]
+        generated_at = all_reports[0].get("generated_at", "") if all_reports else ""
+        lines.append(f"🕒 _Generated: {generated_at}_\n")
 
-        lines = [
-            f"*{ward_name} - Panel Health Report*",
-            f"🕒 _Generated: {generated_at}_\n",
-            f"📊 *Ward Overview:*",
-            f"• *Total Panels:* {sec1.get('total_panels', 0)}",
-            f"• *Online Panels:* {sec1.get('online_panels', 0)} ({sec1.get('online_pct', 0)}%)",
-            f"• *Offline Panels:* {sec1.get('offline_panels', 0)}",
-            f"• *Offline PF Panels:* {sec1.get('offline_pf_panels', 0)}\n",
-            f"⚠️ *Issue Breakdown:*",
-            f"• *Low Voltage:* {sec2.get('low_voltage', 0)}",
-            f"• *High Voltage:* {sec2.get('high_voltage', 0)}",
-            f"• *Power Failure:* {sec2.get('power_failure', 0)}",
-            f"• *MCB Trip:* {sec2.get('mcb_trip', 0)}",
-            f"• *Panel Door Open:* {sec2.get('panel_door_open', 0)}",
-        ]
+        for r in all_reports:
+            w_name = r.get("zone_name", "Ward")
+            sec1 = r.get("section1_overview", {})
+            sec2 = r.get("section2_issues", {})
+
+            lines.extend([
+                f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                f"📍 *{w_name}*",
+                f"• *Total Panels:* {sec1.get('total_panels', 0)}",
+                f"• *Online Panels:* {sec1.get('online_panels', 0)} ({sec1.get('online_pct', 0)}%)",
+                f"• *Offline Panels:* {sec1.get('offline_panels', 0)}",
+                f"• *Offline PF Panels:* {sec1.get('offline_pf_panels', 0)}",
+                f"• *Low Voltage:* {sec2.get('low_voltage', 0)}",
+                f"• *High Voltage:* {sec2.get('high_voltage', 0)}",
+                f"• *Power Failure:* {sec2.get('power_failure', 0)}",
+                f"• *MCB Trip:* {sec2.get('mcb_trip', 0)}",
+                f"• *Panel Door Open:* {sec2.get('panel_door_open', 0)}\n",
+            ])
+
         return "\n".join(lines)
 
-    def send_report(
+    def send_combined_report(
         self,
-        report_data: Dict[str, Any],
+        all_reports: List[Dict[str, Any]],
         webhook_url: Optional[str] = None,
         use_card: bool = True,
     ) -> bool:
-        """Send the panel report to Google Spaces."""
+        """Send all ward reports in a single unified message request body."""
         target_url = webhook_url or self.webhook_url
         if not target_url:
             logger.error("No Google Chat Webhook URL provided. Unable to send notification.")
@@ -200,20 +227,20 @@ class GoogleSpacesNotifier:
         headers = {"Content-Type": "application/json; charset=UTF-8"}
 
         if use_card:
-            payload = self.build_card_v2(report_data)
+            payload = self.build_combined_card_v2(all_reports)
         else:
-            payload = {"text": self.build_markdown_fallback(report_data)}
+            payload = {"text": self.build_markdown_fallback(all_reports)}
 
         try:
             resp = requests.post(target_url, json=payload, headers=headers, timeout=15)
             if resp.status_code == 200:
-                logger.info("Successfully sent panel report to Google Spaces.")
+                logger.info("Successfully delivered unified combined report to Google Spaces.")
                 return True
             else:
                 logger.warning(
                     f"Card v2 send failed ({resp.status_code}): {resp.text}. Retrying with plain text..."
                 )
-                fallback_payload = {"text": self.build_markdown_fallback(report_data)}
+                fallback_payload = {"text": self.build_markdown_fallback(all_reports)}
                 fb_resp = requests.post(
                     target_url, json=fallback_payload, headers=headers, timeout=15
                 )
@@ -221,10 +248,8 @@ class GoogleSpacesNotifier:
                     logger.info("Successfully sent fallback text report to Google Spaces.")
                     return True
                 else:
-                    logger.error(
-                        f"Fallback send also failed ({fb_resp.status_code}): {fb_resp.text}"
-                    )
+                    logger.error(f"Fallback send failed ({fb_resp.status_code}): {fb_resp.text}")
                     return False
         except Exception as e:
-            logger.error(f"Failed to post message to Google Spaces: {e}")
+            logger.error(f"Failed to post combined message to Google Spaces: {e}")
             return False
