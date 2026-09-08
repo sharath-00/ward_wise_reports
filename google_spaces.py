@@ -210,7 +210,7 @@ class GoogleSpacesNotifier:
                 "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
                 f"📍 *{w_name}* — {badge}",
                 f"• *Total Panels:* {sec1.get('total_panels', 0)}  |  *Online Panels:* {sec1.get('online_panels', 0)}  |  *Offline Panels:* {sec1.get('offline_panels', 0)}",
-                f"• *Offline PF Panels:* {sec1.get('offline_pf_panels', 0)}",
+                f"• *Offline PF Panels:* {sec1.get('offline_pf_panels', 0)}  |  *Relay Status:* 🟢 {sec1.get('relay_on', 0)} ON / 🔴 {sec1.get('relay_off', 0)} OFF",
                 f"• ⚠️ *Issue Breakdown:*",
                 f"   - 🟡 *Low Voltage:* {low_volt}",
                 f"   - 🟠 *High Voltage:* {high_volt}",

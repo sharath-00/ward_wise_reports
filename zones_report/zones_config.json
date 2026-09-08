@@ -1,0 +1,44 @@
+{
+  "project_name": "BBMP Central Zone 4-Zone Telemetry Monitor",
+  "customer_id": "e2119df0-45c3-11f0-94dc-77130b2f47e9",
+  "zones": {
+    "cv_raman_nagar": {
+      "key": "CV Raman Nagar",
+      "display_name": "BBMP CV Raman Nagar",
+      "aliases": ["cv raman", "cv_raman_nagar", "cvr", "c.v. raman nagar"]
+    },
+    "sarvagna_nagar": {
+      "key": "Sarvagna Nagar",
+      "display_name": "BBMP Sarvagna Nagar",
+      "aliases": ["sarvagna", "sarvagna_nagar", "srvr", "sarvagnanagar"]
+    },
+    "shanthi_nagar": {
+      "key": "Shanthi Nagar",
+      "display_name": "BBMP Shanthi Nagar",
+      "aliases": ["shanthi", "shanthi_nagar", "sntr", "shanthinagar", "167"]
+    },
+    "shivaji_nagar": {
+      "key": "Shivaji Nagar",
+      "display_name": "BBMP Shivaji Nagar",
+      "aliases": ["shivaji", "shivaji_nagar", "svjr", "shivajinagar", "118"]
+    }
+  },
+  "alert_thresholds": {
+    "min_voltage_v": 180.0,
+    "max_voltage_v": 265.0,
+    "inactivity_threshold_mins": 77.0
+  },
+  "telemetry_keys": {
+    "voltage_r": "rv",
+    "voltage_y": "yv",
+    "voltage_b": "bv",
+    "current_r": "ri",
+    "current_y": "yi",
+    "current_b": "bi",
+    "relay_status": "rly",
+    "fault": "fault",
+    "fault_long": "faultLong",
+    "power_fail_count": "powerFailCount",
+    "frequency": "freq"
+  }
+}

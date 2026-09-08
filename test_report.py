@@ -76,6 +76,7 @@ class TestWardReport(unittest.TestCase):
         self.assertIn("Shanthi Nagar (Ward 167)", md)
         self.assertIn("Shivaji Nagar (Ward 118)", md)
         self.assertIn("Issue Breakdown", md)
+        self.assertIn("Relay Status", md)
         self.assertIn("Power Failure", md)
         self.assertIn("MCB Trip", md)
         self.assertIn("Panel Door Open", md)

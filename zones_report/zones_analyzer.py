@@ -5,11 +5,17 @@ from typing import Dict, List, Any, Optional
 IST = timezone(timedelta(hours=5, minutes=30))
 
 
-class PanelAnalyzer:
+class ZonesAnalyzer:
     """
-    Analyzes panel telemetry and attributes to produce clean aggregated metrics:
-    - Section 1: Total Panels, Online Panels, Offline Panels, Offline PF Panels
-    - Section 2: Low Voltage, High Voltage, Power Failure, MCB Trip, Panel Door Open
+    Evaluates telemetry & attributes for BBMP Panels across 4 Zones:
+    - CV Raman Nagar
+    - Sarvagna Nagar
+    - Shanthi Nagar
+    - Shivaji Nagar
+
+    Generates strictly the exact 2-Section format:
+    - Section 1: Overview (Total Panels, Online, Offline, Offline PF, % Operational)
+    - Section 2: Issue Breakdown (Low Voltage, High Voltage, Power Failure, MCB Trip, Panel Door Open)
     """
 
     def __init__(self, thresholds: Optional[Dict[str, Any]] = None):
@@ -34,8 +40,8 @@ class PanelAnalyzer:
 
         name = panel.get("name", "Unknown")
         label = panel.get("label", name)
-        ward_code = panel.get("ward_code") or attrs.get("wardName", "")
-        ward_name = panel.get("ward_name") or attrs.get("zoneName", "")
+        ward_code = panel.get("ward") or attrs.get("wardName", "")
+        zone = panel.get("zone") or attrs.get("zoneName", "")
 
         # 1. Connectivity Check
         last_activity_ts = attrs.get("lastActivityTime")
@@ -45,7 +51,7 @@ class PanelAnalyzer:
             (now_ts - last_activity_ts) / 1000.0 if last_activity_ts else 999999
         )
 
-        # Panel is Online if it has communicated within inactivity threshold
+        # Panel is Online if it communicated within inactivity threshold
         is_online = elapsed_seconds <= (self.inactivity_mins * 60)
 
         # 2. Voltage & Phase Check
@@ -75,7 +81,7 @@ class PanelAnalyzer:
 
         rly = int(telemetry.get("rly", 0))
         state = str(attrs.get("state", "INSTALLED")).upper()
-        
+
         # Schnell IoT CCMS Door Tamper / Door Open:
         # Bit position 26 in fault bitmask AND device state is 'INSTALLED'
         fault_int = 0
@@ -83,10 +89,10 @@ class PanelAnalyzer:
             fault_int = int(telemetry.get("fault", 0)) | int(telemetry.get("faultLong", 0))
         except (TypeError, ValueError):
             fault_int = 0
-        
+
         is_door_open = bool((fault_int >> 26) & 1) and (state == "INSTALLED")
 
-        # Classify specific health states
+        # Classify health status
         is_power_failure = False
         is_low_voltage = False
         is_high_voltage = False
@@ -110,7 +116,7 @@ class PanelAnalyzer:
                     elif v > self.max_voltage:
                         is_high_voltage = True
 
-        # MCB Trip: Relay is commanded ON (rly == 1), power is available (rv >= self.min_voltage), but current is 0A
+        # MCB Trip: Relay ON (rly == 1), power available (rv >= min_voltage), but 0A current
         if rly == 1 and (rv >= self.min_voltage) and (ri == 0.0 and yi == 0.0 and bi == 0.0):
             is_mcb_tripped = True
 
@@ -121,7 +127,7 @@ class PanelAnalyzer:
             "name": name,
             "label": label,
             "ward_code": ward_code,
-            "ward_name": ward_name,
+            "zone": zone,
             "is_online": is_online,
             "is_power_failure": is_power_failure,
             "is_offline_pf": is_offline_pf,
@@ -135,9 +141,9 @@ class PanelAnalyzer:
         }
 
     def generate_zone_report(
-        self, zone_name: str, panels: List[Dict[str, Any]]
+        self, zone_display_name: str, panels: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
-        """Aggregate panels into clean summary and issue breakdown metrics."""
+        """Aggregate panels for a specific zone into Section 1 & Section 2 metrics."""
         analyzed_panels = [self.analyze_single_panel(p) for p in panels]
 
         total = len(analyzed_panels)
@@ -158,7 +164,7 @@ class PanelAnalyzer:
         generated_at = datetime.now(tz=IST).strftime("%d-%b-%Y %I:%M %p IST")
 
         return {
-            "zone_name": zone_name,
+            "zone_name": zone_display_name,
             "generated_at": generated_at,
             "section1_overview": {
                 "total_panels": total,

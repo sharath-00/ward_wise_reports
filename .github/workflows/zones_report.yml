@@ -1,0 +1,69 @@
+name: BBMP 4-Zone Telemetry Health Report
+
+on:
+  # 1. Trigger via Repository API Dispatch: POST /repos/{owner}/{repo}/dispatches
+  repository_dispatch:
+    types: [send_zones_report, trigger_zones_report, 4zones_report]
+
+  # 2. Trigger manually via GitHub Actions Web UI or REST API
+  workflow_dispatch:
+    inputs:
+      zone:
+        description: "Target Zone ('all', 'cv_raman_nagar', 'sarvagna_nagar', 'shanthi_nagar', 'shivaji_nagar')"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - "all"
+          - "cv_raman_nagar"
+          - "sarvagna_nagar"
+          - "shanthi_nagar"
+          - "shivaji_nagar"
+
+  # 3. Scheduled triggers: Runs hourly in the evening at 6 PM, 7 PM, 8 PM, 9 PM, 10 PM, 11 PM IST
+  # (IST is UTC + 5:30 -> 18:00 to 23:00 IST corresponds to 12:30 to 17:30 UTC)
+  schedule:
+    - cron: "30 12-17 * * *" # Runs at 18:00, 19:00, 20:00, 21:00, 22:00, 23:00 IST
+
+jobs:
+  run-zones-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Determine Target Zone
+        id: zone-selector
+        run: |
+          # Priority: workflow_dispatch input > repository_dispatch payload > default 'all'
+          TARGET_ZONE="${{ github.event.inputs.zone }}"
+          if [ -z "$TARGET_ZONE" ]; then
+            TARGET_ZONE="${{ github.event.client_payload.zone }}"
+          fi
+          if [ -z "$TARGET_ZONE" ]; then
+            TARGET_ZONE="all"
+          fi
+          echo "selected_zone=$TARGET_ZONE" >> $GITHUB_OUTPUT
+          echo "Selected target zone: $TARGET_ZONE"
+
+      - name: Execute and Send 4-Zone Telemetry Report
+        env:
+          THINGSBOARD_BASE_URL: ${{ secrets.THINGSBOARD_BASE_URL || 'https://schnelliot.in' }}
+          THINGSBOARD_USERNAME: ${{ secrets.THINGSBOARD_USERNAME }}
+          THINGSBOARD_PASSWORD: ${{ secrets.THINGSBOARD_PASSWORD }}
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          ZONES_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL || secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+        run: |
+          python zones_report/main_zones.py --zone "${{ steps.zone-selector.outputs.selected_zone }}" --send

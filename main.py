@@ -55,6 +55,7 @@ def print_console_report(report_data: Dict[str, Any]):
         ["🟢 Online Panels", f"{sec1.get('online_panels', 0)} ({sec1.get('online_pct', 0)}%)"],
         ["🔴 Offline Panels", sec1.get("offline_panels", 0)],
         ["⚡ Offline PF Panels", sec1.get("offline_pf_panels", 0)],
+        ["🔌 Relay Status", f"🟢 {sec1.get('relay_on', 0)} ON / 🔴 {sec1.get('relay_off', 0)} OFF"],
     ]
     print("\n📍 SECTION 1: WARD OVERVIEW")
     print(tabulate(sec1_table, headers=["Metric", "Count"], tablefmt="fancy_grid"))
