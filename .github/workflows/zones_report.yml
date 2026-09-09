@@ -3,7 +3,7 @@ name: BBMP 4-Zone Telemetry Health Report
 on:
   # 1. Trigger via Repository API Dispatch: POST /repos/{owner}/{repo}/dispatches
   repository_dispatch:
-    types: [send_zones_report, trigger_zones_report, 4zones_report]
+    types: [send_report, trigger_report, bbmp_report, send_zones_report, trigger_zones_report, 4zones_report]
 
   # 2. Trigger manually via GitHub Actions Web UI or REST API
   workflow_dispatch:
@@ -20,10 +20,10 @@ on:
           - "shanthi_nagar"
           - "shivaji_nagar"
 
-  # 3. Scheduled triggers: Runs hourly in the evening at 6 PM, 7 PM, 8 PM, 9 PM, 10 PM, 11 PM IST
-  # (IST is UTC + 5:30 -> 18:00 to 23:00 IST corresponds to 12:30 to 17:30 UTC)
+  # 3. Scheduled triggers (09:00 AM IST + Evening Hourly 6 PM - 11 PM IST)
   schedule:
-    - cron: "30 12-17 * * *" # Runs at 18:00, 19:00, 20:00, 21:00, 22:00, 23:00 IST
+    - cron: "30 3 * * *"     # 09:00 AM IST
+    - cron: "30 12-17 * * *" # 18:00, 19:00, 20:00, 21:00, 22:00, 23:00 IST
 
 jobs:
   run-zones-report:

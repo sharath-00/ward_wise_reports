@@ -56,7 +56,7 @@ jobs:
           echo "selected_ward=$TARGET_WARD" >> $GITHUB_OUTPUT
           echo "Selected target ward: $TARGET_WARD"
 
-      - name: Execute and Send Panel Health Report
+      - name: Execute and Send Ward Panel Health Report
         env:
           THINGSBOARD_BASE_URL: ${{ secrets.THINGSBOARD_BASE_URL || 'https://schnelliot.in' }}
           THINGSBOARD_USERNAME: ${{ secrets.THINGSBOARD_USERNAME }}
@@ -64,3 +64,13 @@ jobs:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
           python main.py --ward "${{ steps.ward-selector.outputs.selected_ward }}" --send
+
+      - name: Execute and Send 4-Zone Telemetry Report
+        env:
+          THINGSBOARD_BASE_URL: ${{ secrets.THINGSBOARD_BASE_URL || 'https://schnelliot.in' }}
+          THINGSBOARD_USERNAME: ${{ secrets.THINGSBOARD_USERNAME }}
+          THINGSBOARD_PASSWORD: ${{ secrets.THINGSBOARD_PASSWORD }}
+          ZONES_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL }}
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+        run: |
+          python zones_report/main_zones.py --zone all --send
