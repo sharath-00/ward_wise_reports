@@ -4,6 +4,7 @@ on:
   # 1. Trigger via Repository API Dispatch: POST /repos/{owner}/{repo}/dispatches
   repository_dispatch:
     types:
+      - send_all_reports
       - mcb_trip_analysis
       - mcb_analysis
       - track_mcb

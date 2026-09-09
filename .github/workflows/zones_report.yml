@@ -3,7 +3,7 @@ name: BBMP 4-Zone Telemetry Health Report
 on:
   # 1. Trigger via Repository API Dispatch: POST /repos/{owner}/{repo}/dispatches
   repository_dispatch:
-    types: [send_report, trigger_report, bbmp_report, send_zones_report, trigger_zones_report, 4zones_report]
+    types: [send_all_reports, send_zones_report, trigger_zones_report, 4zones_report, zones_report]
 
   # 2. Trigger manually via GitHub Actions Web UI or REST API
   workflow_dispatch:

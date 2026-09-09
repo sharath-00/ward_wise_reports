@@ -51,36 +51,78 @@ This repository includes an automated workflow [`.github/workflows/report.yml`](
 ### 1. Configure GitHub Secrets
 In your GitHub repo, go to **Settings** -> **Secrets and variables** -> **Actions** -> **New repository secret**:
 - `THINGSBOARD_BASE_URL`: `https://schnelliot.in`
-- `THINGSBOARD_USERNAME`: `vinoth.joel@schnellenergy.com`
-- `THINGSBOARD_PASSWORD`: `vinoth777`
-- `GOOGLE_CHAT_WEBHOOK_URL`: Your Google Spaces Webhook URL
+- `THINGSBOARD_USERNAME`: `your_username@domain.com`
+- `THINGSBOARD_PASSWORD`: `your_password`
+- `GOOGLE_CHAT_WEBHOOK_URL`: Webhook URL for **Ward 167 & 118 Health Reports** (Space 1)
+- `ZONES_GOOGLE_CHAT_WEBHOOK_URL`: Webhook URL for **4-Zone Telemetry Reports** (Space 2)
+- `MCB_GOOGLE_CHAT_WEBHOOK_URL`: Webhook URL for **MCB Trip Interval Alerts** (Space 3)
+
+---
 
 ### 2. Trigger via Repository Dispatch API
-Send an authenticated `POST` request to GitHub API:
+
+#### A. Send ALL Reports to Their Respective Spaces Simultaneously
+Triggers all 3 workflows in parallel to deliver to their separate Google Spaces:
 
 ```bash
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
   https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{"event_type": "send_report", "client_payload": {"ward": "all"}}'
+  -d '{
+    "event_type": "send_all_reports",
+    "client_payload": {
+      "ward": "all",
+      "zone": "all"
+    }
+  }'
 ```
 
-To trigger for a single ward:
-```bash
-# Trigger for Ward 167 only
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
-  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{"event_type": "send_report", "client_payload": {"ward": "167"}}'
+---
 
-# Trigger for Ward 118 only
+#### B. Trigger Individual Reports Separately
+
+**1. Ward Panel Health Report (Space 1):**
+```bash
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
   https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{"event_type": "send_report", "client_payload": {"ward": "118"}}'
+  -d '{
+    "event_type": "send_ward_report",
+    "client_payload": {
+      "ward": "all"
+    }
+  }'
+```
+
+**2. 4-Zone Telemetry Health Report (Space 2):**
+```bash
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{
+    "event_type": "send_zones_report",
+    "client_payload": {
+      "zone": "all"
+    }
+  }'
+```
+
+**3. MCB Trip Analysis & Interval Delta Alert (Space 3):**
+```bash
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{
+    "event_type": "mcb_trip_analysis",
+    "client_payload": {
+      "zone": "all",
+      "send_only_on_change": false
+    }
+  }'
 ```
 
 ---

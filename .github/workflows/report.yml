@@ -3,7 +3,7 @@ name: BBMP Ward Panel Health Report
 on:
   # 1. Trigger via Repository API Dispatch: POST /repos/{owner}/{repo}/dispatches
   repository_dispatch:
-    types: [send_report, trigger_report, bbmp_report]
+    types: [send_all_reports, send_ward_report, ward_report, send_report, trigger_report, bbmp_report]
 
   # 2. Trigger manually via GitHub Web UI or GitHub Actions REST API
   workflow_dispatch:
@@ -64,13 +64,3 @@ jobs:
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
           python main.py --ward "${{ steps.ward-selector.outputs.selected_ward }}" --send
-
-      - name: Execute and Send 4-Zone Telemetry Report
-        env:
-          THINGSBOARD_BASE_URL: ${{ secrets.THINGSBOARD_BASE_URL || 'https://schnelliot.in' }}
-          THINGSBOARD_USERNAME: ${{ secrets.THINGSBOARD_USERNAME }}
-          THINGSBOARD_PASSWORD: ${{ secrets.THINGSBOARD_PASSWORD }}
-          ZONES_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL }}
-          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-        run: |
-          python zones_report/main_zones.py --zone all --send
