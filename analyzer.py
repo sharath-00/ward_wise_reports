@@ -110,8 +110,9 @@ class PanelAnalyzer:
                     elif v > self.max_voltage:
                         is_high_voltage = True
 
-        # MCB Trip: Relay is commanded ON (rly == 1), power is available (rv >= self.min_voltage), but current is 0A
-        if rly == 1 and (rv >= self.min_voltage) and (ri == 0.0 and yi == 0.0 and bi == 0.0):
+        # MCB Trip: Bit 23 in fault bitmask (ROC / MCB Trip) OR live contactor ON with 0A load
+        is_mcb_fault_bit = bool((fault_int >> 23) & 1)
+        if (is_mcb_fault_bit or (rly == 1 and (rv >= self.min_voltage) and (ri == 0.0 and yi == 0.0 and bi == 0.0))) and is_online:
             is_mcb_tripped = True
 
         is_offline_pf = (not is_online) and is_power_failure

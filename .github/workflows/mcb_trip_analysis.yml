@@ -1,0 +1,108 @@
+name: BBMP Central Zone MCB Trip Analysis
+
+on:
+  # 1. Trigger via Repository API Dispatch: POST /repos/{owner}/{repo}/dispatches
+  repository_dispatch:
+    types:
+      - mcb_trip_analysis
+      - mcb_analysis
+      - track_mcb
+      - mcb_tracker
+      - mcb_interval_check
+
+  # 2. Trigger manually via GitHub Actions Web UI or REST API
+  workflow_dispatch:
+    inputs:
+      zone:
+        description: "Target Zone ('all', 'cv_raman_nagar', 'sarvagna_nagar', 'shanthi_nagar', 'shivaji_nagar')"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - "all"
+          - "cv_raman_nagar"
+          - "sarvagna_nagar"
+          - "shanthi_nagar"
+          - "shivaji_nagar"
+      send_only_on_change:
+        description: "Send alert only if new trips or recoveries occurred"
+        required: false
+        default: false
+        type: boolean
+      reset_state:
+        description: "Reset previous baseline state before analyzing"
+        required: false
+        default: false
+        type: boolean
+
+  # 3. Scheduled triggers: Hourly during evening lighting operational hours (6 PM - 11 PM IST)
+  # (IST is UTC + 5:30 -> 18:00 to 23:00 IST corresponds to 12:30 to 17:30 UTC)
+  schedule:
+    - cron: "30 3 * * *"      # 09:00 AM IST (Morning Status Check)
+    - cron: "0 13-17 * * *"   # 18:30, 19:30, 20:30, 21:30, 22:30 IST (Evening Interval Tracking)
+
+jobs:
+  run-mcb-trip-analysis:
+    name: Execute MCB Trip Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Restore historical MCB state snapshot across runs to calculate deltas
+      - name: Restore MCB State Cache
+        id: state-cache
+        uses: actions/cache@v4
+        with:
+          path: mcb_interval_tracker/mcb_state.json
+          key: mcb-state-${{ github.run_id }}
+          restore-keys: |
+            mcb-state-
+
+      - name: Determine Run Parameters
+        id: opts
+        run: |
+          TARGET_ZONE="${{ github.event.inputs.zone || github.event.client_payload.zone || 'all' }}"
+          SEND_CHANGE_ONLY="${{ github.event.inputs.send_only_on_change || github.event.client_payload.send_only_on_change || 'false' }}"
+          RESET_STATE="${{ github.event.inputs.reset_state || github.event.client_payload.reset_state || 'false' }}"
+          echo "selected_zone=$TARGET_ZONE" >> $GITHUB_OUTPUT
+          echo "send_change_only=$SEND_CHANGE_ONLY" >> $GITHUB_OUTPUT
+          echo "reset_state=$RESET_STATE" >> $GITHUB_OUTPUT
+
+      - name: Run MCB Trip Analysis & Dispatch Alert
+        env:
+          THINGSBOARD_BASE_URL: ${{ secrets.THINGSBOARD_BASE_URL || 'https://schnelliot.in' }}
+          THINGSBOARD_USERNAME: ${{ secrets.THINGSBOARD_USERNAME }}
+          THINGSBOARD_PASSWORD: ${{ secrets.THINGSBOARD_PASSWORD }}
+          MCB_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.MCB_GOOGLE_CHAT_WEBHOOK_URL || secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL || secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          ZONES_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL }}
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+        run: |
+          EXTRA_ARGS=""
+          if [ "${{ steps.opts.outputs.send_change_only }}" = "true" ]; then
+            EXTRA_ARGS="$EXTRA_ARGS --send-only-on-change"
+          fi
+          if [ "${{ steps.opts.outputs.reset_state }}" = "true" ]; then
+            EXTRA_ARGS="$EXTRA_ARGS --reset-state"
+          fi
+          python mcb_interval_tracker/main_mcb_tracker.py --zone "${{ steps.opts.outputs.selected_zone }}" --send $EXTRA_ARGS
+
+      # Save updated MCB state snapshot for the next interval run
+      - name: Save Updated MCB State Cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: mcb_interval_tracker/mcb_state.json
+          key: mcb-state-${{ github.run_id }}

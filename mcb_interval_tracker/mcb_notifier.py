@@ -1,0 +1,187 @@
+import os
+import json
+import logging
+import requests
+from typing import Dict, List, Any, Optional
+from dotenv import load_dotenv
+
+load_dotenv()
+logger = logging.getLogger("MCBNotifier")
+
+
+class MCBNotifier:
+    """
+    Formats and dispatches MCB Trip Interval Delta Alerts to Google Chat Spaces.
+    Highlights:
+    - 🚨 NEW MCB Trips detected in this specific interval (with exact location & voltages)
+    - 🟢 Recovered / Restored Panels
+    - 🟡 Ongoing Tripped Panels
+    - 📊 Zone Summary Breakdown
+    """
+
+    def __init__(self, webhook_url: Optional[str] = None):
+        raw_url = (
+            webhook_url
+            or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
+            or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
+            or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+        )
+        self.webhook_url = str(raw_url).strip() if raw_url else None
+
+    def build_mcb_delta_report(self, delta_results: Dict[str, Any]) -> str:
+        """Constructs formatted Google Chat message with delta breakdown."""
+        eval_time = delta_results.get("evaluated_at_ist", "")
+        prev_time = delta_results.get("previous_run_ist", "Initial Run")
+        interval_mins = delta_results.get("interval_mins")
+        is_initial = delta_results.get("is_initial_run", False)
+
+        total_new = delta_results.get("total_newly_tripped", 0)
+        total_rec = delta_results.get("total_recovered", 0)
+        total_ongoing = delta_results.get("total_ongoing", 0)
+        total_curr = delta_results.get("total_current_tripped", 0)
+
+        lines = [
+            "⚡ *BBMP Central Zone — MCB Trip Interval Tracker*",
+            f"🕒 *Current Scan:* {eval_time}",
+        ]
+
+        if not is_initial and interval_mins is not None:
+            lines.append(f"⏱️ *Interval:* Past {interval_mins} mins (Since {prev_time})")
+        else:
+            lines.append("📌 *Status:* Baseline Initialized")
+
+        lines.append("")
+
+        # High-level summary badges
+        lines.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        if total_new > 0:
+            lines.append(f"🚨 *NEW MCB Trips:* *{total_new}*  |  🟢 *Recovered:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*")
+        elif total_rec > 0:
+            lines.append(f"✅ *No New Trips*  |  🟢 *Recovered:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*")
+        elif total_curr == 0:
+            lines.append("✨ *ALL CLEAR:* No MCB Trips active across all 4 Central Zones!")
+        else:
+            lines.append(f"ℹ️ *Total Active MCB Trips:* *{total_curr}* (No status changes in this interval)")
+
+        lines.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n")
+
+        # 1. SECTION: NEWLY TRIPPED PANELS (CRITICAL ALERT)
+        all_new_panels = []
+        for z_name, z_data in delta_results.get("zones", {}).items():
+            for p in z_data.get("newly_tripped", []):
+                p["zone_display"] = z_name
+                all_new_panels.append(p)
+
+        if all_new_panels:
+            lines.append("🚨 *NEWLY TRIPPED PANELS IN THIS INTERVAL:*")
+            for idx, p in enumerate(all_new_panels, 1):
+                panel_id = p.get("label") or p.get("uid") or p.get("id") or "Unknown"
+                device_name = p.get("name") or p.get("gateway_uid") or "-"
+                zone = p.get("zone_display") or p.get("zone", "")
+                ward = p.get("ward", "")
+                loc = p.get("location") or "Location not specified"
+                comm_status = p.get("comm_status", "Online")
+                fault_str = p.get("fault_str", "MCB")
+                last_comm = p.get("last_comm_at", "-")
+                volts = p.get("voltages", {})
+                v_str = f"R:{volts.get('r', 0)}V Y:{volts.get('y', 0)}V B:{volts.get('b', 0)}V"
+
+                lat = str(p.get("latitude") or "").strip()
+                lng = str(p.get("longitude") or "").strip()
+                if lat and lng:
+                    maps_link = f"<https://www.google.com/maps?q={lat},{lng}|{lat}, {lng}>"
+                elif lat or lng:
+                    coord = lat or lng
+                    maps_link = f"<https://www.google.com/maps?q={coord}|{coord}>"
+                else:
+                    maps_link = "Not Available"
+
+                lines.append(f"  *{idx}. Panel ID:* `{panel_id}`  |  *Device Name:* `{device_name}`")
+                lines.append(f"     📍 *Zone:* {zone}  |  🏛️ *Ward:* {ward}")
+                lines.append(f"     🗺️ *Lat, Long:* {maps_link}")
+                lines.append(f"     🏠 *Location:* {loc}")
+                lines.append(f"     ⚡ *Voltages:* {v_str}  |  ⚠️ *Fault:* `{fault_str}`")
+                lines.append(f"     📡 *Status:* {comm_status}  |  🕒 *Last Comm:* {last_comm}")
+                lines.append("")
+        elif not is_initial:
+            lines.append("🟢 *New Trips:* 0 new MCB trips occurred in this interval.")
+            lines.append("")
+
+        # 2. SECTION: RECOVERED PANELS
+        all_recovered_panels = []
+        for z_name, z_data in delta_results.get("zones", {}).items():
+            for p in z_data.get("recovered", []):
+                p["zone_display"] = z_name
+                all_recovered_panels.append(p)
+
+        if all_recovered_panels:
+            lines.append("🟢 *RECOVERED / RESTORED PANELS:*")
+            for idx, p in enumerate(all_recovered_panels, 1):
+                panel_id = p.get("label") or p.get("uid") or p.get("id") or "Unknown"
+                device_name = p.get("name") or p.get("gateway_uid") or "-"
+                zone = p.get("zone_display") or p.get("zone", "")
+                ward = p.get("ward", "")
+                loc = p.get("location") or ""
+                dur = p.get("total_trip_duration_mins", 0)
+
+                lat = str(p.get("latitude") or "").strip()
+                lng = str(p.get("longitude") or "").strip()
+                if lat and lng:
+                    maps_link = f"<https://www.google.com/maps?q={lat},{lng}|{lat}, {lng}>"
+                else:
+                    maps_link = ""
+
+                lines.append(f"  *{idx}. Panel ID:* `{panel_id}`  |  *Device Name:* `{device_name}`")
+                lines.append(f"     📍 *Zone:* {zone}  |  🏛️ *Ward:* {ward}")
+                if maps_link:
+                    lines.append(f"     🗺️ *Lat, Long:* {maps_link}")
+                if loc and loc != "Location not specified":
+                    lines.append(f"     🏠 *Location:* {loc}")
+                lines.append(f"     ✅ *Restored to normal operation* (Tripped for ~{dur} mins)")
+                lines.append("")
+
+        # 3. SECTION: ZONE BREAKDOWN SUMMARY
+        lines.append("📊 *Zone Breakdown:*")
+        for z_name, z_data in delta_results.get("zones", {}).items():
+            c_cnt = z_data.get("current_count", 0)
+            n_cnt = len(z_data.get("newly_tripped", []))
+            r_cnt = len(z_data.get("recovered", []))
+            badge = "🔴" if n_cnt > 0 else ("🟡" if c_cnt > 0 else "🟢")
+            lines.append(f"  {badge} *{z_name}:* Active: *{c_cnt}* | New: *{n_cnt}* | Recovered: *{r_cnt}*")
+
+        lines.append("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        lines.append("_⚡ *Schnell IoT BBMP Central Zone MCB Trip Monitoring*_")
+        return "\n".join(lines)
+
+    def send_mcb_report(
+        self,
+        delta_results: Dict[str, Any],
+        webhook_url_override: Optional[str] = None,
+    ) -> bool:
+        """Send the formatted MCB interval alert to Google Chat."""
+        url = (
+            webhook_url_override
+            or self.webhook_url
+            or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
+            or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
+            or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+        )
+        if not url:
+            logger.error("No Google Chat Webhook URL configured for MCB tracker.")
+            return False
+
+        headers = {"Content-Type": "application/json; charset=UTF-8"}
+        text_message = self.build_mcb_delta_report(delta_results)
+        payload = {"text": text_message}
+
+        try:
+            resp = requests.post(url, json=payload, headers=headers, timeout=20)
+            if resp.status_code == 200:
+                logger.info("Successfully dispatched MCB delta report to Google Chat.")
+                return True
+            else:
+                logger.error(f"Failed to send MCB report ({resp.status_code}): {resp.text}")
+                return False
+        except Exception as e:
+            logger.error(f"Failed to post MCB report to Google Chat: {e}")
+            return False

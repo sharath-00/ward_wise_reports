@@ -45,21 +45,21 @@ class ThingsBoardClient:
 
         url = f"{self.base_url}/api/auth/login"
         payload = {"username": self.username, "password": self.password}
-        for attempt in range(1, 4):
+        for attempt in range(1, 6):
             try:
-                resp = self.session.post(url, json=payload, timeout=20)
+                resp = self.session.post(url, json=payload, timeout=25)
                 if resp.status_code == 200:
                     data = resp.json()
                     self.token = data.get("token")
                     logger.info("Successfully authenticated with ThingsBoard API.")
                     return True
                 else:
-                    logger.warning(f"Auth attempt {attempt} failed ({resp.status_code}): {resp.text}")
+                    logger.warning(f"Auth attempt {attempt} failed ({resp.status_code}): {resp.text[:100]}")
             except Exception as e:
                 logger.warning(f"Auth attempt {attempt} error: {e}")
-            time.sleep(1.5 * attempt)
+            time.sleep(2.0 * attempt)
 
-        logger.error("Failed to authenticate with ThingsBoard after 3 attempts.")
+        logger.error("Failed to authenticate with ThingsBoard after 5 attempts.")
         return False
 
     def _get_headers(self) -> Dict[str, str]:
@@ -169,6 +169,14 @@ class ThingsBoardClient:
                 {"type": "SERVER_ATTRIBUTE", "key": "zoneName"},
                 {"type": "SERVER_ATTRIBUTE", "key": "state"},
                 {"type": "SERVER_ATTRIBUTE", "key": "location"},
+                {"type": "SERVER_ATTRIBUTE", "key": "latitude"},
+                {"type": "SERVER_ATTRIBUTE", "key": "longitude"},
+                {"type": "SERVER_ATTRIBUTE", "key": "slatitude"},
+                {"type": "SERVER_ATTRIBUTE", "key": "slongitude"},
+                {"type": "CLIENT_ATTRIBUTE", "key": "latitude"},
+                {"type": "CLIENT_ATTRIBUTE", "key": "longitude"},
+                {"type": "SHARED_ATTRIBUTE", "key": "latitude"},
+                {"type": "SHARED_ATTRIBUTE", "key": "longitude"},
                 {"type": "SERVER_ATTRIBUTE", "key": "lastActivityTime"},
                 {"type": "TIME_SERIES", "key": "rv"},
                 {"type": "TIME_SERIES", "key": "yv"},
@@ -205,12 +213,19 @@ class ThingsBoardClient:
                     latest = item.get("latest", {})
                     fields = latest.get("ENTITY_FIELD", {})
                     server_attrs = latest.get("SERVER_ATTRIBUTE", {})
+                    client_attrs = latest.get("CLIENT_ATTRIBUTE", {})
+                    shared_attrs = latest.get("SHARED_ATTRIBUTE", {})
                     timeseries = latest.get("TIME_SERIES", {})
 
                     dev_name = fields.get("name", {}).get("value", "")
                     dev_label = fields.get("label", {}).get("value", "")
 
-                    attrs = {k: v.get("value") for k, v in server_attrs.items() if v}
+                    attrs = {}
+                    for attr_group in (shared_attrs, server_attrs, client_attrs):
+                        for k, v in attr_group.items():
+                            if v and v.get("value") not in (None, ""):
+                                attrs[k] = v.get("value")
+
                     if "lastActivityTime" in attrs:
                         try:
                             attrs["lastActivityTime"] = int(attrs["lastActivityTime"])
