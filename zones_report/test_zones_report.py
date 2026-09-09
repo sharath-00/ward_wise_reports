@@ -19,6 +19,8 @@ class TestZonesReport(unittest.TestCase):
         self.notifier = ZonesNotifier()
 
     def test_analyzer_single_panel_health_evaluation(self):
+        import time
+        now_ts = int(time.time() * 1000)
         # 1. Normal Online panel
         mock_online_panel = {
             "id": "mock-dev-1",
@@ -27,7 +29,7 @@ class TestZonesReport(unittest.TestCase):
             "ward": "W167",
             "zone": "Shanthi Nagar",
             "attributes": {
-                "lastActivityTime": 1788868000000,
+                "lastActivityTime": now_ts,
                 "phase": 1,
                 "state": "INSTALLED",
             },
@@ -49,7 +51,7 @@ class TestZonesReport(unittest.TestCase):
             "id": "mock-dev-2",
             "name": "PANEL-002",
             "attributes": {
-                "lastActivityTime": 1788868000000,
+                "lastActivityTime": now_ts,
                 "phase": 1,
                 "state": "INSTALLED",
             },

@@ -21542,6 +21542,24 @@
       "ward_no": "",
       "zone": "ShivajiNagar",
       "location": "21,2nd Main Rd Sampangi Ram Nagar,Sr Nagar,Sudhama Nagar,Bengaluru,Karnataka 560027,India"
+    },
+    {
+      "id": "e2578690-8a36-11f1-8188-97faf926d60a",
+      "name": "SALSS004988",
+      "label": "SSC107SM04954",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "26,Cunningham Rd,Vasanth Nagar,Bengaluru,Karnataka 560001,India"
+    },
+    {
+      "id": "60c0f6a0-8a33-11f1-8188-97faf926d60a",
+      "name": "SALSS005014",
+      "label": "SSC107SM04937",
+      "ward": "SVJR-W118",
+      "ward_name": "Shivaji Nagar (Ward 118)",
+      "zone": "ShivajiNagar",
+      "location": "20,Muniswamy Rd,Tasker Town,Shivaji Nagar,Bengaluru,Karnataka 560051,India"
     }
   ]
 }

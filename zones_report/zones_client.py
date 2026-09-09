@@ -48,19 +48,22 @@ class ZonesThingsBoardClient:
 
         url = f"{self.base_url}/api/auth/login"
         payload = {"username": self.username, "password": self.password}
-        try:
-            resp = self.session.post(url, json=payload, timeout=15)
-            if resp.status_code == 200:
-                data = resp.json()
-                self.token = data.get("token")
-                logger.info("Successfully authenticated with ThingsBoard API.")
-                return True
-            else:
-                logger.error(f"Authentication failed ({resp.status_code}): {resp.text}")
-                return False
-        except Exception as e:
-            logger.error(f"Error connecting to ThingsBoard: {e}")
-            return False
+        for attempt in range(1, 4):
+            try:
+                resp = self.session.post(url, json=payload, timeout=20)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    self.token = data.get("token")
+                    logger.info("Successfully authenticated with ThingsBoard API.")
+                    return True
+                else:
+                    logger.warning(f"Auth attempt {attempt} failed ({resp.status_code}): {resp.text}")
+            except Exception as e:
+                logger.warning(f"Auth attempt {attempt} error: {e}")
+            time.sleep(1.5 * attempt)
+
+        logger.error("Failed to authenticate with ThingsBoard after 3 attempts.")
+        return False
 
     def _get_headers(self) -> Dict[str, str]:
         if not self.token:
@@ -143,11 +146,97 @@ class ZonesThingsBoardClient:
             "telemetry": telemetry,
         }
 
+    def fetch_panels_for_zone_realtime(self, zone_display_name: str) -> List[Dict[str, Any]]:
+        """
+        Dynamically query ThingsBoard in real time for all panels in a zone
+        without relying on static inventory files.
+        """
+        # Normalize zone key for query (e.g. CVRamanNagar, SarvagnaNagar, ShanthiNagar, ShivajiNagar)
+        norm_key = zone_display_name.replace(" ", "")
+
+        query_payload = {
+            "entityFilter": {"type": "entityType", "entityType": "DEVICE"},
+            "pageLink": {"pageSize": 1000, "page": 0, "dynamic": True},
+            "entityFields": [
+                {"type": "ENTITY_FIELD", "key": "name"},
+                {"type": "ENTITY_FIELD", "key": "label"}
+            ],
+            "latestValues": [
+                {"type": "SERVER_ATTRIBUTE", "key": "wardName"},
+                {"type": "SERVER_ATTRIBUTE", "key": "zoneName"},
+                {"type": "SERVER_ATTRIBUTE", "key": "state"},
+                {"type": "SERVER_ATTRIBUTE", "key": "location"},
+                {"type": "SERVER_ATTRIBUTE", "key": "lastActivityTime"},
+                {"type": "TIME_SERIES", "key": "rv"},
+                {"type": "TIME_SERIES", "key": "yv"},
+                {"type": "TIME_SERIES", "key": "bv"},
+                {"type": "TIME_SERIES", "key": "ri"},
+                {"type": "TIME_SERIES", "key": "yi"},
+                {"type": "TIME_SERIES", "key": "bi"},
+                {"type": "TIME_SERIES", "key": "rly"},
+                {"type": "TIME_SERIES", "key": "fault"},
+                {"type": "TIME_SERIES", "key": "faultLong"}
+            ],
+            "keyFilters": [
+                {
+                    "key": {"type": "SERVER_ATTRIBUTE", "key": "zoneName"},
+                    "valueType": "STRING",
+                    "predicate": {
+                        "type": "STRING",
+                        "operation": "EQUAL",
+                        "value": {"defaultValue": norm_key},
+                        "ignoreCase": True
+                    }
+                }
+            ]
+        }
+
+        try:
+            resp = self._request("POST", "/api/entitiesQuery/find", json_data=query_payload)
+            if resp.status_code == 200:
+                data = resp.json()
+                items = data.get("data", [])
+                panels = []
+                for item in items:
+                    entity_id = item.get("entityId", {}).get("id")
+                    latest = item.get("latest", {})
+                    fields = latest.get("ENTITY_FIELD", {})
+                    server_attrs = latest.get("SERVER_ATTRIBUTE", {})
+                    timeseries = latest.get("TIME_SERIES", {})
+
+                    dev_name = fields.get("name", {}).get("value", "")
+                    dev_label = fields.get("label", {}).get("value", "")
+
+                    attrs = {k: v.get("value") for k, v in server_attrs.items() if v}
+                    if "lastActivityTime" in attrs:
+                        try:
+                            attrs["lastActivityTime"] = int(attrs["lastActivityTime"])
+                        except (ValueError, TypeError):
+                            pass
+
+                    telemetry = {k: v.get("value") for k, v in timeseries.items() if v}
+
+                    panels.append({
+                        "id": entity_id,
+                        "name": dev_name,
+                        "label": dev_label,
+                        "ward": attrs.get("wardName", ""),
+                        "ward_name": attrs.get("wardName", ""),
+                        "zone": zone_display_name,
+                        "attributes": attrs,
+                        "telemetry": telemetry,
+                    })
+                logger.info(f"Live real-time query discovered {len(panels)} panels for {zone_display_name}.")
+                return panels
+        except Exception as e:
+            logger.error(f"Error querying live panels for zone {zone_display_name}: {e}")
+
+        return []
+
     def load_zones_inventory(
         self, inventory_file: str = "zones_inventory.json"
     ) -> Dict[str, List[Dict[str, Any]]]:
-        """Load pre-indexed panel inventory for the 4 zones."""
-        # Check current directory or package directory
+        """Load fallback inventory if offline."""
         resolved_path = inventory_file
         if not os.path.isabs(resolved_path):
             curr_dir = os.path.dirname(os.path.abspath(__file__))
@@ -159,7 +248,6 @@ class ZonesThingsBoardClient:
                 resolved_path = cand2
 
         if not os.path.exists(resolved_path):
-            logger.error(f"Zones inventory file not found at: {resolved_path}")
             return {
                 "CV Raman Nagar": [],
                 "Sarvagna Nagar": [],
@@ -178,9 +266,14 @@ class ZonesThingsBoardClient:
     ) -> Dict[str, List[Dict[str, Any]]]:
         """
         Fetch live data for panels in specified zone(s) or 'all'.
+        Queries ThingsBoard dynamically in real time to capture newly added devices automatically.
         """
-        inventory = self.load_zones_inventory(inventory_file)
-        selected_zones: Dict[str, List[Dict[str, Any]]] = {}
+        all_zones = [
+            "CV Raman Nagar",
+            "Sarvagna Nagar",
+            "Shanthi Nagar",
+            "Shivaji Nagar",
+        ]
 
         target_str = str(zone_target).strip().lower().replace(" ", "_").replace(".", "")
 
@@ -206,40 +299,38 @@ class ZonesThingsBoardClient:
         }
 
         if target_str in ("all", "*", ""):
-            selected_zones = inventory
+            selected_zone_names = all_zones
         elif target_str in zone_alias_map:
-            key = zone_alias_map[target_str]
-            selected_zones[key] = inventory.get(key, [])
+            selected_zone_names = [zone_alias_map[target_str]]
         else:
-            # Match directly
-            matched = False
-            for k in inventory:
-                if target_str in k.lower().replace(" ", "_"):
-                    selected_zones[k] = inventory[k]
-                    matched = True
-            if not matched:
-                logger.warning(f"Unknown zone target: '{zone_target}'. Defaulting to all zones.")
-                selected_zones = inventory
+            selected_zone_names = [
+                z for z in all_zones if target_str in z.lower().replace(" ", "_")
+            ]
+            if not selected_zone_names:
+                selected_zone_names = all_zones
 
         results: Dict[str, List[Dict[str, Any]]] = {}
 
-        for z_name, devices in selected_zones.items():
-            logger.info(f"Fetching live telemetry for {len(devices)} panels in {z_name}...")
-            panels_data = []
+        for z_name in selected_zone_names:
+            logger.info(f"Fetching real-time live panels for {z_name} from ThingsBoard API...")
+            live_panels = self.fetch_panels_for_zone_realtime(z_name)
 
-            if not devices:
-                results[z_name] = []
-                continue
-
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                future_to_meta = {executor.submit(self.fetch_panel_details, d): d for d in devices}
-                for future in as_completed(future_to_meta):
-                    try:
-                        pdata = future.result()
-                        panels_data.append(pdata)
-                    except Exception as e:
-                        logger.error(f"Error fetching live data for panel: {e}")
-
-            results[z_name] = panels_data
+            if live_panels:
+                results[z_name] = live_panels
+            else:
+                # Fallback to local inventory if dynamic query was empty/failed
+                logger.warning(f"Falling back to {inventory_file} for {z_name}...")
+                inventory = self.load_zones_inventory(inventory_file)
+                devices = inventory.get(z_name, [])
+                panels_data = []
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    future_to_meta = {executor.submit(self.fetch_panel_details, d): d for d in devices}
+                    for future in as_completed(future_to_meta):
+                        try:
+                            pdata = future.result()
+                            panels_data.append(pdata)
+                        except Exception as e:
+                            logger.error(f"Error fetching live data for panel: {e}")
+                results[z_name] = panels_data
 
         return results

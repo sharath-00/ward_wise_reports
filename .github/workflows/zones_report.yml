@@ -63,7 +63,7 @@ jobs:
           THINGSBOARD_BASE_URL: ${{ secrets.THINGSBOARD_BASE_URL || 'https://schnelliot.in' }}
           THINGSBOARD_USERNAME: ${{ secrets.THINGSBOARD_USERNAME }}
           THINGSBOARD_PASSWORD: ${{ secrets.THINGSBOARD_PASSWORD }}
+          ZONES_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL }}
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-          ZONES_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL || secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
           python zones_report/main_zones.py --zone "${{ steps.zone-selector.outputs.selected_zone }}" --send

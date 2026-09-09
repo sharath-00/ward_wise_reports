@@ -17,7 +17,7 @@ class TestWardReport(unittest.TestCase):
         self.assertIn("SNTR-W167", inventory)
         self.assertIn("SVJR-W118", inventory)
         self.assertEqual(len(inventory["SNTR-W167"]), 152)
-        self.assertEqual(len(inventory["SVJR-W118"]), 57)
+        self.assertEqual(len(inventory["SVJR-W118"]), 59)
 
     def test_tb_client_login(self):
         client = ThingsBoardClient()

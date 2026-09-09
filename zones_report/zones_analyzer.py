@@ -143,8 +143,12 @@ class ZonesAnalyzer:
     def generate_zone_report(
         self, zone_display_name: str, panels: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
-        """Aggregate panels for a specific zone into Section 1 & Section 2 metrics."""
-        analyzed_panels = [self.analyze_single_panel(p) for p in panels]
+        # Keep only commissioned panels (INSTALLED / ACTIVATED) to match dashboard counts exactly
+        active_panels = [
+            p for p in panels
+            if str(p.get("attributes", {}).get("state", "INSTALLED")).upper() in {"INSTALLED", "ACTIVATED"}
+        ]
+        analyzed_panels = [self.analyze_single_panel(p) for p in active_panels]
 
         total = len(analyzed_panels)
         online_count = sum(1 for p in analyzed_panels if p["is_online"])
@@ -157,8 +161,9 @@ class ZonesAnalyzer:
         mcb_trip_count = sum(1 for p in analyzed_panels if p["is_mcb_tripped"])
         door_open_count = sum(1 for p in analyzed_panels if p["is_door_open"])
 
-        relay_on_count = sum(1 for p in analyzed_panels if p.get("relay_status") == 1)
-        relay_off_count = sum(1 for p in analyzed_panels if p.get("relay_status") == 0)
+        # Relay ON / OFF is evaluated for active/online panels
+        relay_on_count = sum(1 for p in analyzed_panels if p["is_online"] and p.get("relay_status") == 1)
+        relay_off_count = sum(1 for p in analyzed_panels if p["is_online"] and p.get("relay_status") == 0)
 
         online_pct = round((online_count / total * 100.0), 1) if total > 0 else 0.0
         generated_at = datetime.now(tz=IST).strftime("%d-%b-%Y %I:%M %p IST")
