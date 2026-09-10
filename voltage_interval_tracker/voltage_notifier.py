@@ -6,42 +6,47 @@ from typing import Dict, List, Any, Optional
 from dotenv import load_dotenv
 
 load_dotenv()
-logger = logging.getLogger("MCBNotifier")
+logger = logging.getLogger("VoltageNotifier")
 
 
-class MCBNotifier:
+class VoltageNotifier:
     """
-    Formats and dispatches MCB Trip Interval Delta Alerts to Google Chat Spaces.
+    Formats and dispatches Voltage Anomaly (High / Low Voltage) Interval Delta Alerts to Google Chat Spaces.
     Highlights:
-    - 🚨 NEW MCB Trips detected in this specific interval (with exact location & voltages)
-    - 🟢 Recovered / Restored Panels
-    - 🟡 Ongoing Tripped Panels
+    - 🚨 NEW Voltage Alerts (Low Voltage <180V, High Voltage >265V) detected in this specific interval
+    - 🟢 Normalized / Recovered Panels (Count summary only)
+    - 🟡 Ongoing Voltage Anomaly Panels
     - 📊 Zone Summary Breakdown
     """
 
     def __init__(self, webhook_url: Optional[str] = None):
         raw_url = (
             webhook_url
+            or os.getenv("VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL")
             or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
             or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
             or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
         )
         self.webhook_url = str(raw_url).strip() if raw_url else None
 
-    def build_mcb_delta_report(self, delta_results: Dict[str, Any]) -> str:
-        """Constructs formatted Google Chat message with delta breakdown."""
+    def build_voltage_delta_report(self, delta_results: Dict[str, Any]) -> str:
+        """Constructs formatted Google Chat message with delta breakdown for voltage anomalies."""
         eval_time = delta_results.get("evaluated_at_ist", "")
         prev_time = delta_results.get("previous_run_ist", "Initial Run")
         interval_mins = delta_results.get("interval_mins")
         is_initial = delta_results.get("is_initial_run", False)
 
-        total_new = delta_results.get("total_newly_tripped", 0)
+        total_new = delta_results.get("total_newly_flagged", 0)
+        total_new_low = delta_results.get("total_new_low", 0)
+        total_new_high = delta_results.get("total_new_high", 0)
         total_rec = delta_results.get("total_recovered", 0)
         total_ongoing = delta_results.get("total_ongoing", 0)
-        total_curr = delta_results.get("total_current_tripped", 0)
+        total_curr = delta_results.get("total_current_anomalies", 0)
+        total_curr_low = delta_results.get("total_current_low", 0)
+        total_curr_high = delta_results.get("total_current_high", 0)
 
         lines = [
-            "⚡ *BBMP Central Zone — MCB Trip Interval Tracker*",
+            "⚡ *BBMP Central Zone — Voltage Anomaly (Low/High) Interval Tracker*",
             f"🕒 *Current Scan:* {eval_time}",
         ]
 
@@ -55,25 +60,27 @@ class MCBNotifier:
         # High-level summary badges
         lines.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
         if total_new > 0:
-            lines.append(f"🚨 *NEW MCB Trips:* *{total_new}*  |  🟢 *Recovered:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*")
+            lines.append(
+                f"🚨 *NEW Voltage Alerts:* *{total_new}* (🟡 Low: *{total_new_low}*, 🔴 High: *{total_new_high}*)  |  🟢 *Normalized:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*"
+            )
         elif total_rec > 0:
-            lines.append(f"✅ *No New Trips*  |  🟢 *Recovered:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*")
+            lines.append(f"✅ *No New Voltage Alerts*  |  🟢 *Normalized:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*")
         elif total_curr == 0:
-            lines.append("✨ *ALL CLEAR:* No MCB Trips active across all 4 Central Zones!")
+            lines.append("✨ *ALL CLEAR:* All panels operating within normal voltage range across all 4 Central Zones!")
         else:
-            lines.append(f"ℹ️ *Total Active MCB Trips:* *{total_curr}* (No status changes in this interval)")
+            lines.append(f"ℹ️ *Total Active Voltage Anomalies:* *{total_curr}* (Low: *{total_curr_low}*, High: *{total_curr_high}*) (No changes in this interval)")
 
         lines.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n")
 
-        # 1. SECTION: NEWLY TRIPPED PANELS (CRITICAL ALERT)
+        # 1. SECTION: NEWLY FLAGGED VOLTAGE ANOMALY PANELS (CRITICAL ALERT)
         all_new_panels = []
         for z_name, z_data in delta_results.get("zones", {}).items():
-            for p in z_data.get("newly_tripped", []):
+            for p in z_data.get("newly_flagged", []):
                 p["zone_display"] = z_name
                 all_new_panels.append(p)
 
         if all_new_panels:
-            lines.append("🚨 *NEWLY TRIPPED PANELS IN THIS INTERVAL:*")
+            lines.append("🚨 *NEWLY DETECTED VOLTAGE ANOMALIES IN THIS INTERVAL:*")
             for idx, p in enumerate(all_new_panels, 1):
                 panel_id = p.get("label") or p.get("uid") or p.get("id") or "Unknown"
                 device_name = p.get("name") or p.get("gateway_uid") or "-"
@@ -81,10 +88,20 @@ class MCBNotifier:
                 ward = p.get("ward", "")
                 loc = p.get("location") or "Location not specified"
                 comm_status = p.get("comm_status", "Online")
-                fault_str = p.get("fault_str", "MCB")
                 last_comm = p.get("last_comm_at", "-")
                 volts = p.get("voltages", {})
                 v_str = f"R:{volts.get('r', 0)}V Y:{volts.get('y', 0)}V B:{volts.get('b', 0)}V"
+
+                is_low = p.get("is_low_voltage", False)
+                is_high = p.get("is_high_voltage", False)
+                if is_low and is_high:
+                    type_badge = "⚠️ *MIXED VOLTAGE ANOMALY*"
+                elif is_low:
+                    type_badge = "🟡 *LOW VOLTAGE*"
+                elif is_high:
+                    type_badge = "🔴 *HIGH VOLTAGE*"
+                else:
+                    type_badge = "⚡ *VOLTAGE ALERT*"
 
                 lat = str(p.get("latitude") or "").strip()
                 lng = str(p.get("longitude") or "").strip()
@@ -97,58 +114,55 @@ class MCBNotifier:
                     maps_link = "Not Available"
 
                 lines.append(f"  *{idx}. Panel ID:* `{panel_id}`  |  *Device Name:* `{device_name}`")
+                lines.append(f"     ⚠️ *Anomaly:* {type_badge}")
                 lines.append(f"     📍 *Zone:* {zone}  |  🏛️ *Ward:* {ward}")
                 lines.append(f"     🗺️ *Lat, Long:* {maps_link}")
                 lines.append(f"     🏠 *Location:* {loc}")
-                lines.append(f"     ⚡ *Voltages:* {v_str}  |  ⚠️ *Fault:* `{fault_str}`")
+                lines.append(f"     ⚡ *Voltages:* `{v_str}`")
                 lines.append(f"     📡 *Status:* {comm_status}  |  🕒 *Last Comm:* {last_comm}")
                 lines.append("")
         elif not is_initial:
-            lines.append("🟢 *New Trips:* 0 new MCB trips occurred in this interval.")
+            lines.append("🟢 *New Voltage Alerts:* 0 new voltage anomalies detected in this interval.")
             lines.append("")
 
         # 2. SECTION: ZONE BREAKDOWN SUMMARY
         lines.append("📊 *Zone Breakdown:*")
         for z_name, z_data in delta_results.get("zones", {}).items():
             c_cnt = z_data.get("current_count", 0)
-            n_cnt = len(z_data.get("newly_tripped", []))
+            l_cnt = z_data.get("current_low_count", 0)
+            h_cnt = z_data.get("current_high_count", 0)
+            n_cnt = len(z_data.get("newly_flagged", []))
             r_cnt = len(z_data.get("recovered", []))
-            badge = "🔴" if n_cnt > 0 else ("🟡" if c_cnt > 0 else "🟢")
-            lines.append(f"  {badge} *{z_name}:* Active: *{c_cnt}* | New: *{n_cnt}* | Recovered: *{r_cnt}*")
+            badge = "🔴" if h_cnt > 0 else ("🟡" if l_cnt > 0 else "🟢")
+            lines.append(f"  {badge} *{z_name}:* Active: *{c_cnt}* (Low: *{l_cnt}*, High: *{h_cnt}*) | New: *{n_cnt}* | Normalized: *{r_cnt}*")
 
         lines.append("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-        lines.append("_⚡ *Schnell IoT BBMP Central Zone MCB Trip Monitoring*_")
+        lines.append("_⚡ *Schnell IoT BBMP Central Zone Voltage Monitoring*_")
         return "\n".join(lines)
 
-    def send_mcb_report(
+    def send_voltage_report(
         self,
         delta_results: Dict[str, Any],
         webhook_url_override: Optional[str] = None,
     ) -> bool:
-        """Send the formatted MCB interval alert to Google Chat."""
-        url = (
-            webhook_url_override
-            or self.webhook_url
-            or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
-        )
-        if not url:
-            logger.error("No Google Chat Webhook URL configured for MCB tracker.")
+        """Post the formatted delta report directly to Google Chat."""
+        target_url = webhook_url_override or self.webhook_url
+        if not target_url:
+            logger.error("No Google Chat Webhook URL configured (checked VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL, GOOGLE_CHAT_WEBHOOK_URL).")
             return False
 
-        headers = {"Content-Type": "application/json; charset=UTF-8"}
-        text_message = self.build_mcb_delta_report(delta_results)
-        payload = {"text": text_message}
+        message_text = self.build_voltage_delta_report(delta_results)
+        payload = {"text": message_text}
 
         try:
-            resp = requests.post(url, json=payload, headers=headers, timeout=20)
+            logger.info("Sending Voltage anomaly interval alert to Google Chat...")
+            resp = requests.post(target_url, json=payload, timeout=15)
             if resp.status_code == 200:
-                logger.info("Successfully dispatched MCB delta report to Google Chat.")
+                logger.info("Alert posted successfully to Google Chat.")
                 return True
             else:
-                logger.error(f"Failed to send MCB report ({resp.status_code}): {resp.text}")
+                logger.error(f"Failed to post to Google Chat: {resp.status_code} - {resp.text}")
                 return False
         except Exception as e:
-            logger.error(f"Failed to post MCB report to Google Chat: {e}")
+            logger.error(f"Error posting alert to Google Chat webhook: {e}")
             return False

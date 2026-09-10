@@ -1,0 +1,111 @@
+{
+  "last_run_timestamp": 1789041814203,
+  "last_run_ist": "10-Sep-2026 05:33 PM IST",
+  "zones": {
+    "CV Raman Nagar": {
+      "voltage_anomaly_panels": {
+        "60885f80-1dcc-11f1-9039-e39d44b5f1e7": {
+          "id": "60885f80-1dcc-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS000880",
+          "label": "SSC107SM00639",
+          "uid": "SSC107SM00639",
+          "gateway_uid": "SALSS000880",
+          "ward": "CVRN-W110",
+          "zone": "CV Raman Nagar",
+          "location": "167,B.C Gundappa Layout,Byrasandra,C V Raman Nagar,Bengaluru,Karnataka 560093,India",
+          "latitude": "12.98233",
+          "longitude": "77.66626",
+          "comm_status": "Online",
+          "anomaly_type": "HIGH_VOLTAGE",
+          "is_low_voltage": false,
+          "is_high_voltage": true,
+          "voltages": {
+            "r": 291.8,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "10/09/2026, 05:24:08 PM",
+          "anomaly_detected_ts": 1789041286179,
+          "anomaly_detected_ist": "10-Sep-2026 05:24 PM IST"
+        }
+      },
+      "last_updated_ist": "10-Sep-2026 05:33 PM IST"
+    },
+    "Sarvagna Nagar": {
+      "voltage_anomaly_panels": {
+        "9babc8d1-1e8b-11f1-9039-e39d44b5f1e7": {
+          "id": "9babc8d1-1e8b-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001704",
+          "label": "SSC107SM02200",
+          "uid": "SSC107SM02200",
+          "gateway_uid": "SALSS001704",
+          "ward": "SN-W78",
+          "zone": "Sarvagna Nagar",
+          "location": "2025,Kushal Nagar,Kadugondanahalli,Bengaluru,Karnataka 560045,India",
+          "latitude": "13.0209",
+          "longitude": "77.61682",
+          "comm_status": "Online",
+          "anomaly_type": "LOW_VOLTAGE",
+          "is_low_voltage": true,
+          "is_high_voltage": false,
+          "voltages": {
+            "r": 126.6,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "10/09/2026, 05:29:37 PM",
+          "anomaly_detected_ts": 1789041286179,
+          "anomaly_detected_ist": "10-Sep-2026 05:24 PM IST"
+        },
+        "4d2ef120-1dee-11f1-9039-e39d44b5f1e7": {
+          "id": "4d2ef120-1dee-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001276",
+          "label": "SSC107SM01449",
+          "uid": "SSC107SM01449",
+          "gateway_uid": "SALSS001276",
+          "ward": "SN-W78",
+          "zone": "Sarvagna Nagar",
+          "location": "2JC8+6F8,Dr AMC Rd,Gandhi Nagar,Kadugondanahalli,Bengaluru,Karnataka 560045,India",
+          "latitude": "13.0205",
+          "longitude": "77.61604",
+          "comm_status": "Online",
+          "anomaly_type": "LOW_VOLTAGE",
+          "is_low_voltage": true,
+          "is_high_voltage": false,
+          "voltages": {
+            "r": 119.2,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "10/09/2026, 05:30:12 PM",
+          "anomaly_detected_ts": 1789041286179,
+          "anomaly_detected_ist": "10-Sep-2026 05:24 PM IST"
+        }
+      },
+      "last_updated_ist": "10-Sep-2026 05:33 PM IST"
+    },
+    "Shanthi Nagar": {
+      "voltage_anomaly_panels": {},
+      "last_updated_ist": "10-Sep-2026 05:33 PM IST"
+    },
+    "Shivaji Nagar": {
+      "voltage_anomaly_panels": {},
+      "last_updated_ist": "10-Sep-2026 05:33 PM IST"
+    }
+  }
+}

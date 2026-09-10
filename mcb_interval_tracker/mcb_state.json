@@ -1,9 +1,37 @@
 {
-  "last_run_timestamp": 1788952817701,
-  "last_run_ist": "09-Sep-2026 04:50 PM IST",
+  "last_run_timestamp": 1789035521920,
+  "last_run_ist": "10-Sep-2026 03:48 PM IST",
   "zones": {
     "CV Raman Nagar": {
       "tripped_panels": {
+        "1ea7c590-7549-11f1-981f-f16ee136eb5b": {
+          "id": "1ea7c590-7549-11f1-981f-f16ee136eb5b",
+          "name": "SALSS004009",
+          "label": "SSC107SM03914",
+          "uid": "SSC107SM03914",
+          "gateway_uid": "SALSS004009",
+          "ward": "CVRN-W108",
+          "zone": "CV Raman Nagar",
+          "location": "XJVV+R3Q,Yellamma Temple Rd,Venkatappa layout,Old Baiyyappanahalli,Bennigana Halli,Bengaluru,Karnataka 560033,India",
+          "latitude": "12.99492",
+          "longitude": "77.64291",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 228.8,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "10/09/2026, 03:45:58 PM",
+          "tripped_detected_ts": 1789035446206,
+          "tripped_detected_ist": "10-Sep-2026 03:47 PM IST"
+        },
         "add2f500-7369-11f1-934d-e50c5007eae6": {
           "id": "add2f500-7369-11f1-934d-e50c5007eae6",
           "name": "SALSS003502",
@@ -13,13 +41,13 @@
           "ward": "CVRN-W113",
           "zone": "CV Raman Nagar",
           "location": "2,80 Feet Rd,Opp YES BANK,8th cross,HAL 2nd Stage,Indiranagar,Bengaluru,Karnataka 560008,India",
-          "latitude": "12.97224",
-          "longitude": "77.64694",
+          "latitude": "12.97227",
+          "longitude": "77.64696",
           "comm_status": "Online",
           "fault_str": "ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 237.0,
+            "r": 236.6,
             "y": 0.0,
             "b": 0.0
           },
@@ -28,7 +56,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:01 PM",
+          "last_comm_at": "10/09/2026, 03:45:02 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -41,13 +69,13 @@
           "ward": "CVRN-W113",
           "zone": "CV Raman Nagar",
           "location": "56,Halasuru,Murphy Town,Bengaluru,Karnataka 560008,India",
-          "latitude": "12.98124",
-          "longitude": "77.62648",
+          "latitude": "12.98122",
+          "longitude": "77.62644",
           "comm_status": "Online",
           "fault_str": "ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 250.4,
+            "r": 243.6,
             "y": 0.0,
             "b": 0.0
           },
@@ -56,7 +84,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:03 PM",
+          "last_comm_at": "10/09/2026, 03:45:02 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -89,7 +117,7 @@
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         }
       },
-      "last_updated_ist": "09-Sep-2026 04:50 PM IST"
+      "last_updated_ist": "10-Sep-2026 03:48 PM IST"
     },
     "Sarvagna Nagar": {
       "tripped_panels": {
@@ -102,22 +130,22 @@
           "ward": "SN-W80",
           "zone": "Sarvagna Nagar",
           "location": "1882/1,Hennur Main Rd,opp. Hennur Depo,near Suguna Fresh Chicken,3rd Block,HBR Layout,Bengaluru,Karnataka 560043,India",
-          "latitude": "13.02626",
-          "longitude": "77.63187",
+          "latitude": "13.02579",
+          "longitude": "77.63152",
           "comm_status": "Online",
-          "fault_str": "ROC / MCB",
+          "fault_str": "ROC / TPR / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 237.1,
+            "r": 223.2,
             "y": 0.0,
             "b": 0.0
           },
           "currents": {
-            "r": 0.0,
+            "r": 9.0,
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:02 PM",
+          "last_comm_at": "10/09/2026, 03:45:02 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -130,13 +158,13 @@
           "ward": "SN-W78",
           "zone": "Sarvagna Nagar",
           "location": "5/A,1st Main Rd,HBR Layout 2nd Block,1st Stage,HBR Layout,Bengaluru,Karnataka 560084,India",
-          "latitude": "13.02109",
-          "longitude": "77.62583",
+          "latitude": "13.02111",
+          "longitude": "77.62586",
           "comm_status": "Online",
-          "fault_str": "RCL / ROC / MCB",
+          "fault_str": "RCL / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 236.4,
+            "r": 228.0,
             "y": 0.0,
             "b": 0.0
           },
@@ -145,7 +173,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:43 PM",
+          "last_comm_at": "10/09/2026, 03:45:42 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -164,7 +192,7 @@
           "fault_str": "RCL / ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 239.1,
+            "r": 234.2,
             "y": 0.0,
             "b": 0.0
           },
@@ -173,7 +201,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:50 PM",
+          "last_comm_at": "10/09/2026, 03:45:50 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -214,13 +242,13 @@
           "ward": "SN-W77",
           "zone": "Sarvagna Nagar",
           "location": "Murthy Elegance,7th Main Rd,near DS MAX SAPHIRE,Vyalikaval HBCS Layout,Nagavara,Bengaluru,Karnataka 560045,India",
-          "latitude": "13.03651",
-          "longitude": "77.61683",
+          "latitude": "13.03657",
+          "longitude": "77.61679",
           "comm_status": "Online",
           "fault_str": "RCL / ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 229.2,
+            "r": 229.3,
             "y": 0.0,
             "b": 0.0
           },
@@ -229,7 +257,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:02 PM",
+          "last_comm_at": "10/09/2026, 03:45:02 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -248,7 +276,7 @@
           "fault_str": "RCL / ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 241.7,
+            "r": 235.9,
             "y": 0.0,
             "b": 0.0
           },
@@ -257,7 +285,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:03 PM",
+          "last_comm_at": "10/09/2026, 03:45:03 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -270,13 +298,13 @@
           "ward": "SN-W83",
           "zone": "Sarvagna Nagar",
           "location": "15,Munigowda Rd,Ramaswamipalya,Lingarajapuram,Bengaluru,Karnataka 560033,India",
-          "latitude": "13.00797",
-          "longitude": "77.63424",
+          "latitude": "13.00779",
+          "longitude": "77.63384",
           "comm_status": "Online",
           "fault_str": "RCL / ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 229.1,
+            "r": 224.8,
             "y": 0.0,
             "b": 0.0
           },
@@ -285,7 +313,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:44:54 PM",
+          "last_comm_at": "10/09/2026, 03:44:54 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -298,13 +326,13 @@
           "ward": "SN-W82",
           "zone": "Sarvagna Nagar",
           "location": "OMBR Layout,OMBR Layout,Banaswadi,Bengaluru,Karnataka 560043,India",
-          "latitude": "13.00826",
-          "longitude": "77.65239",
+          "latitude": "13.00827",
+          "longitude": "77.65235",
           "comm_status": "Online",
-          "fault_str": "MCB",
+          "fault_str": "ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 229.3,
+            "r": 224.1,
             "y": 0.0,
             "b": 0.0
           },
@@ -313,7 +341,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:44:40 PM",
+          "last_comm_at": "10/09/2026, 03:44:40 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -354,13 +382,13 @@
           "ward": "SN-W76",
           "zone": "Sarvagna Nagar",
           "location": "735,9th Cross Rd,1st Stage,3rd Block,HBR Layout,Bengaluru,Karnataka 560043,India",
-          "latitude": "13.0275",
-          "longitude": "77.62561",
+          "latitude": "13.02754",
+          "longitude": "77.62581",
           "comm_status": "Online",
           "fault_str": "ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 230.1,
+            "r": 220.6,
             "y": 0.0,
             "b": 0.0
           },
@@ -369,12 +397,12 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:25 PM",
+          "last_comm_at": "10/09/2026, 03:45:25 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         }
       },
-      "last_updated_ist": "09-Sep-2026 04:50 PM IST"
+      "last_updated_ist": "10-Sep-2026 03:48 PM IST"
     },
     "Shanthi Nagar": {
       "tripped_panels": {
@@ -387,13 +415,13 @@
           "ward": "SNTR-W170",
           "zone": "Shanthi Nagar",
           "location": "954,12th Main Rd,HAL 2nd Stage,Appareddipalya,Indiranagar,Bengaluru,Karnataka 560008,India",
-          "latitude": "12.96978",
-          "longitude": "77.63987",
+          "latitude": "12.97016",
+          "longitude": "77.63973",
           "comm_status": "Online",
           "fault_str": "RCL / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 245.6,
+            "r": 245.2,
             "y": 0.0,
             "b": 0.0
           },
@@ -402,35 +430,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:24 PM",
-          "tripped_detected_ts": 1788945504138,
-          "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
-        },
-        "0ebc38d0-769f-11f1-9f95-73515bb81f31": {
-          "id": "0ebc38d0-769f-11f1-9f95-73515bb81f31",
-          "name": "SALSS004171",
-          "label": "SSC107SM03889",
-          "uid": "SSC107SM03889",
-          "gateway_uid": "SALSS004171",
-          "ward": "SNTR-W166",
-          "zone": "Shanthi Nagar",
-          "location": "816,BTS Bus Depot Rd,JK Pura,KSRTC Colony,Shanti Nagar,Bengaluru,Karnataka 560027,India",
-          "latitude": "12.9511",
-          "longitude": "77.59904",
-          "comm_status": "Online",
-          "fault_str": "ROC / MCB",
-          "mode": "AUTO",
-          "voltages": {
-            "r": 253.6,
-            "y": 0.0,
-            "b": 0.0
-          },
-          "currents": {
-            "r": 0.0,
-            "y": 0.0,
-            "b": 0.0
-          },
-          "last_comm_at": "09/09/2026, 04:45:53 PM",
+          "last_comm_at": "10/09/2026, 03:45:25 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -443,13 +443,13 @@
           "ward": "SNTR-W167",
           "zone": "Shanthi Nagar",
           "location": "544,Langford Rd,Akkithimana Halli,Bheemanna Garden,Langford Gardens,Bengaluru,Karnataka 560027,India",
-          "latitude": "12.96142",
-          "longitude": "77.59974",
+          "latitude": "12.96138",
+          "longitude": "77.59987",
           "comm_status": "Online",
           "fault_str": "RCL / ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 245.6,
+            "r": 236.3,
             "y": 0.0,
             "b": 0.0
           },
@@ -458,7 +458,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:44:55 PM",
+          "last_comm_at": "10/09/2026, 03:44:55 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -471,13 +471,13 @@
           "ward": "SNTR-W166",
           "zone": "Shanthi Nagar",
           "location": "7/2,Langford Road,Cross,Nanjappa Rd,Langford Town,Shanti Nagar,Bengaluru,Karnataka 560027,India",
-          "latitude": "12.95953",
-          "longitude": "77.6015",
+          "latitude": "12.95947",
+          "longitude": "77.60116",
           "comm_status": "Online",
           "fault_str": "ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 244.1,
+            "r": 235.8,
             "y": 0.0,
             "b": 0.0
           },
@@ -486,7 +486,7 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:45:00 PM",
+          "last_comm_at": "10/09/2026, 03:45:00 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         },
@@ -500,12 +500,12 @@
           "zone": "Shanthi Nagar",
           "location": "XJ79+X3G,Officers Colony,Victoria Layout,Bengaluru,Karnataka 560007,India",
           "latitude": "12.96471",
-          "longitude": "77.61786",
+          "longitude": "77.61782",
           "comm_status": "Online",
           "fault_str": "RCL / ROC / MCB",
           "mode": "AUTO",
           "voltages": {
-            "r": 254.7,
+            "r": 247.1,
             "y": 0.0,
             "b": 0.0
           },
@@ -514,43 +514,15 @@
             "y": 0.0,
             "b": 0.0
           },
-          "last_comm_at": "09/09/2026, 04:44:54 PM",
+          "last_comm_at": "10/09/2026, 03:44:54 PM",
           "tripped_detected_ts": 1788945504138,
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         }
       },
-      "last_updated_ist": "09-Sep-2026 04:50 PM IST"
+      "last_updated_ist": "10-Sep-2026 03:48 PM IST"
     },
     "Shivaji Nagar": {
       "tripped_panels": {
-        "7e7daf40-76aa-11f1-9f95-73515bb81f31": {
-          "id": "7e7daf40-76aa-11f1-9f95-73515bb81f31",
-          "name": "SALSS004586",
-          "label": "SSC107SM04522",
-          "uid": "SSC107SM04522",
-          "gateway_uid": "SALSS004586",
-          "ward": "SVJR-W119",
-          "zone": "Shivaji Nagar",
-          "location": "Shop No,288,Thimmaiah Rd,next to Jubilee Hall,Sulthangunta,Shivaji Nagar,Bengaluru,Karnataka 560051,India",
-          "latitude": "12.99015",
-          "longitude": "77.60526",
-          "comm_status": "Online",
-          "fault_str": "ROC / MCB",
-          "mode": "AUTO",
-          "voltages": {
-            "r": 231.0,
-            "y": 0.0,
-            "b": 0.0
-          },
-          "currents": {
-            "r": 0.0,
-            "y": 0.0,
-            "b": 0.0
-          },
-          "last_comm_at": "09/09/2026, 04:45:34 PM",
-          "tripped_detected_ts": 1788945504138,
-          "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
-        },
         "92e428b0-7547-11f1-981f-f16ee136eb5b": {
           "id": "92e428b0-7547-11f1-981f-f16ee136eb5b",
           "name": "SALSS003967",
@@ -580,7 +552,7 @@
           "tripped_detected_ist": "09-Sep-2026 02:48 PM IST"
         }
       },
-      "last_updated_ist": "09-Sep-2026 04:50 PM IST"
+      "last_updated_ist": "10-Sep-2026 03:48 PM IST"
     }
   }
 }

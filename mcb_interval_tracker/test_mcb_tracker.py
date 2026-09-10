@@ -233,8 +233,10 @@ class TestMCBIntervalTracker(unittest.TestCase):
         # Verify Google Maps hyperlink with coordinates
         self.assertIn("https://www.google.com/maps?q=12.98177,77.62859|12.98177, 77.62859", text)
         self.assertIn("26, Cunningham Rd, Vasanth Nagar", text)
-        self.assertIn("SALSS002788", text)
-        self.assertIn("Restored to normal operation", text)
+        # Recovered panels detailed info should NOT be present (only counts)
+        self.assertNotIn("SALSS002788", text)
+        self.assertNotIn("Restored to normal operation", text)
+
 
 
 if __name__ == "__main__":
