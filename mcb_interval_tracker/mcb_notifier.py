@@ -141,14 +141,30 @@ class MCBNotifier:
         text_message = self.build_mcb_delta_report(delta_results)
         payload = {"text": text_message}
 
-        try:
-            resp = requests.post(url, json=payload, headers=headers, timeout=20)
-            if resp.status_code == 200:
-                logger.info("Successfully dispatched MCB delta report to Google Chat.")
-                return True
-            else:
-                logger.error(f"Failed to send MCB report ({resp.status_code}): {resp.text}")
-                return False
-        except Exception as e:
-            logger.error(f"Failed to post MCB report to Google Chat: {e}")
-            return False
+        max_retries = 3
+        backoff_delays = [2, 4, 8]
+
+        for attempt in range(max_retries):
+            try:
+                resp = requests.post(url, json=payload, headers=headers, timeout=20)
+                if resp.status_code == 200:
+                    logger.info("Successfully dispatched MCB delta report to Google Chat.")
+                    return True
+                elif resp.status_code in (429, 500, 502, 503, 504):
+                    wait_time = backoff_delays[attempt]
+                    logger.warning(
+                        f"Google Chat returned status {resp.status_code}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})... Response: {resp.text}"
+                    )
+                    import time
+                    time.sleep(wait_time)
+                else:
+                    logger.error(f"Failed to send MCB report ({resp.status_code}): {resp.text}")
+                    return False
+            except Exception as e:
+                wait_time = backoff_delays[attempt]
+                logger.warning(f"Error posting MCB report to Google Chat: {e}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})...")
+                import time
+                time.sleep(wait_time)
+
+        logger.error(f"Failed to dispatch MCB report to Google Chat after {max_retries} attempts.")
+        return False

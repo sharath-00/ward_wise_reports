@@ -154,15 +154,31 @@ class VoltageNotifier:
         message_text = self.build_voltage_delta_report(delta_results)
         payload = {"text": message_text}
 
-        try:
-            logger.info("Sending Voltage anomaly interval alert to Google Chat...")
-            resp = requests.post(target_url, json=payload, timeout=15)
-            if resp.status_code == 200:
-                logger.info("Alert posted successfully to Google Chat.")
-                return True
-            else:
-                logger.error(f"Failed to post to Google Chat: {resp.status_code} - {resp.text}")
-                return False
-        except Exception as e:
-            logger.error(f"Error posting alert to Google Chat webhook: {e}")
-            return False
+        max_retries = 3
+        backoff_delays = [2, 4, 8]
+
+        for attempt in range(max_retries):
+            try:
+                logger.info("Sending Voltage anomaly interval alert to Google Chat...")
+                resp = requests.post(target_url, json=payload, timeout=15)
+                if resp.status_code == 200:
+                    logger.info("Alert posted successfully to Google Chat.")
+                    return True
+                elif resp.status_code in (429, 500, 502, 503, 504):
+                    wait_time = backoff_delays[attempt]
+                    logger.warning(
+                        f"Google Chat returned status {resp.status_code}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})... Response: {resp.text}"
+                    )
+                    import time
+                    time.sleep(wait_time)
+                else:
+                    logger.error(f"Failed to post to Google Chat: {resp.status_code} - {resp.text}")
+                    return False
+            except Exception as e:
+                wait_time = backoff_delays[attempt]
+                logger.warning(f"Error posting alert to Google Chat webhook: {e}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})...")
+                import time
+                time.sleep(wait_time)
+
+        logger.error(f"Failed to dispatch Voltage report to Google Chat after {max_retries} attempts.")
+        return False

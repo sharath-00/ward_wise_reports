@@ -90,7 +90,8 @@ class ZonesAnalyzer:
         except (TypeError, ValueError):
             fault_int = 0
 
-        is_door_open = bool((fault_int >> 26) & 1) and (state == "INSTALLED")
+        # Door Open is active for installed panels active within 15 days
+        is_door_open = bool((fault_int >> 26) & 1) and (state == "INSTALLED") and (elapsed_seconds <= 15 * 86400)
 
         # Classify health status
         is_power_failure = False

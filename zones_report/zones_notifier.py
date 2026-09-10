@@ -95,7 +95,9 @@ class ZonesNotifier:
         all_reports: List[Dict[str, Any]],
         webhook_url_override: Optional[str] = None,
     ) -> bool:
-        """Send the aggregated zone report to Google Chat."""
+        """Send the aggregated zone report to Google Chat with automatic retry on transient errors."""
+        import time
+
         url = (
             webhook_url_override
             or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
@@ -109,14 +111,28 @@ class ZonesNotifier:
         text_message = self.build_text_report(all_reports)
         payload = {"text": text_message}
 
-        try:
-            resp = requests.post(url, json=payload, headers=headers, timeout=20)
-            if resp.status_code == 200:
-                logger.info("Successfully dispatched 4-Zone report to Google Chat.")
-                return True
-            else:
-                logger.error(f"Failed to send to Google Chat ({resp.status_code}): {resp.text}")
-                return False
-        except Exception as e:
-            logger.error(f"Failed to post report to Google Chat: {e}")
-            return False
+        max_retries = 3
+        backoff_delays = [2, 4, 8]
+
+        for attempt in range(max_retries):
+            try:
+                resp = requests.post(url, json=payload, headers=headers, timeout=20)
+                if resp.status_code == 200:
+                    logger.info("Successfully dispatched 4-Zone report to Google Chat.")
+                    return True
+                elif resp.status_code in (429, 500, 502, 503, 504):
+                    wait_time = backoff_delays[attempt]
+                    logger.warning(
+                        f"Google Chat returned status {resp.status_code}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})... Response: {resp.text}"
+                    )
+                    time.sleep(wait_time)
+                else:
+                    logger.error(f"Failed to send to Google Chat ({resp.status_code}): {resp.text}")
+                    return False
+            except Exception as e:
+                wait_time = backoff_delays[attempt]
+                logger.warning(f"Error posting to Google Chat: {e}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})...")
+                time.sleep(wait_time)
+
+        logger.error(f"Failed to dispatch 4-Zone report to Google Chat after {max_retries} attempts.")
+        return False

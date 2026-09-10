@@ -242,16 +242,32 @@ class GoogleSpacesNotifier:
         else:
             payload = {"text": self.build_markdown_fallback(all_reports)}
 
-        try:
-            resp = requests.post(target_url, json=payload, headers=headers, timeout=15)
-            if resp.status_code == 200:
-                logger.info("Successfully delivered report to Google Spaces.")
-                return True
-            else:
-                logger.warning(
-                    f"Send failed ({resp.status_code}): {resp.text}."
-                )
-                return False
-        except Exception as e:
-            logger.error(f"Failed to post combined message to Google Spaces: {e}")
-            return False
+        max_retries = 3
+        backoff_delays = [2, 4, 8]
+
+        for attempt in range(max_retries):
+            try:
+                resp = requests.post(target_url, json=payload, headers=headers, timeout=20)
+                if resp.status_code == 200:
+                    logger.info("Successfully delivered report to Google Spaces.")
+                    return True
+                elif resp.status_code in (429, 500, 502, 503, 504):
+                    wait_time = backoff_delays[attempt]
+                    logger.warning(
+                        f"Google Chat returned status {resp.status_code}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})... Response: {resp.text}"
+                    )
+                    import time
+                    time.sleep(wait_time)
+                else:
+                    logger.warning(
+                        f"Send failed ({resp.status_code}): {resp.text}."
+                    )
+                    return False
+            except Exception as e:
+                wait_time = backoff_delays[attempt]
+                logger.warning(f"Error posting combined message to Google Spaces: {e}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})...")
+                import time
+                time.sleep(wait_time)
+
+        logger.error(f"Failed to dispatch combined report to Google Spaces after {max_retries} attempts.")
+        return False
