@@ -45,14 +45,21 @@ class ZonesAnalyzer:
 
         # 1. Connectivity Check
         last_activity_ts = attrs.get("lastActivityTime")
+        active_attr = attrs.get("active")
+        pkt = str(telemetry.get("pkt", ""))
         now_ts = int(time.time() * 1000)
 
         elapsed_seconds = (
             (now_ts - last_activity_ts) / 1000.0 if last_activity_ts else 999999
         )
 
-        # Panel is Online if it communicated within inactivity threshold
-        is_online = elapsed_seconds <= (self.inactivity_mins * 60)
+        if active_attr is not None:
+            is_active_tb = str(active_attr).lower() == "true"
+        else:
+            is_active_tb = elapsed_seconds <= (self.inactivity_mins * 60)
+
+        is_pf_pkt = (pkt == "8")
+        is_online = is_active_tb and (not is_pf_pkt)
 
         # 2. Voltage & Phase Check
         phase = int(attrs.get("phase", 1))
@@ -122,7 +129,7 @@ class ZonesAnalyzer:
         if (is_mcb_fault_bit or (rly == 1 and (rv >= self.min_voltage) and (ri == 0.0 and yi == 0.0 and bi == 0.0))) and is_online:
             is_mcb_tripped = True
 
-        is_offline_pf = (not is_online) and is_power_failure
+        is_offline_pf = (not is_online) and (is_pf_pkt or is_power_failure)
 
         return {
             "id": panel.get("id"),
