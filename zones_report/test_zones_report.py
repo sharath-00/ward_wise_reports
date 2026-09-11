@@ -65,6 +65,32 @@ class TestZonesReport(unittest.TestCase):
         res_door = self.analyzer.analyze_single_panel(mock_door_open_panel)
         self.assertTrue(res_door["is_door_open"])
 
+        # 3. Offline PF via pkt == 8
+        p_pkt8 = {
+            "id": "mock-dev-3",
+            "name": "PANEL-003",
+            "attributes": {"lastActivityTime": now_ts, "phase": 1, "state": "INSTALLED"},
+            "telemetry": {"rv": 0.0, "ri": 0.0, "rly": 0, "pkt": 8}
+        }
+        res_pkt8 = self.analyzer.analyze_single_panel(p_pkt8)
+        self.assertFalse(res_pkt8["is_online"])
+        self.assertTrue(res_pkt8["is_offline_pf"])
+        self.assertFalse(res_pkt8["is_offline"])
+        self.assertFalse(res_pkt8["is_power_failure"])
+
+        # 4. Offline stale panel (5 hours ago) with 0V: Offline PF = True, Live Power Failure = False
+        p_stale = {
+            "id": "mock-dev-4",
+            "name": "PANEL-004",
+            "attributes": {"lastActivityTime": now_ts - (5 * 3600 * 1000), "phase": 1, "state": "INSTALLED"},
+            "telemetry": {"rv": 0.0, "ri": 0.0, "rly": 0, "pkt": 0}
+        }
+        res_stale = self.analyzer.analyze_single_panel(p_stale)
+        self.assertFalse(res_stale["is_online"])
+        self.assertTrue(res_stale["is_offline_pf"])
+        self.assertFalse(res_stale["is_offline"])
+        self.assertFalse(res_stale["is_power_failure"])
+
     def test_text_report_bold_generation(self):
         mock_reports = [
             {

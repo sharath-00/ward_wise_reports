@@ -104,7 +104,7 @@ class GoogleSpacesNotifier:
                                     "widgets": [
                                         {
                                             "decoratedText": {
-                                                "topLabel": "OFFLINE PANELS",
+                                                "topLabel": "OFFLINE (COMM FAIL)",
                                                 "text": f"<b><font color=\"#d93025\">{offline}</font></b>",
                                             }
                                         }
@@ -116,7 +116,7 @@ class GoogleSpacesNotifier:
                                     "widgets": [
                                         {
                                             "decoratedText": {
-                                                "topLabel": "OFFLINE (NO POWER)",
+                                                "topLabel": "OFFLINE (POWER FAIL)",
                                                 "text": f"<b><font color=\"#ea8600\">{offline_pf}</font></b>",
                                             }
                                         }

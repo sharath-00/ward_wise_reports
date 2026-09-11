@@ -22,7 +22,8 @@ class ZonesAnalyzer:
         thresholds = thresholds or {}
         self.min_voltage = float(thresholds.get("min_voltage_v", 180.0))
         self.max_voltage = float(thresholds.get("max_voltage_v", 265.0))
-        self.inactivity_mins = float(thresholds.get("inactivity_threshold_mins", 77.0))
+        # 4-hour (240 min / 14400s) threshold matching ThingsBoard CCMS dashboard standard
+        self.inactivity_mins = float(thresholds.get("inactivity_threshold_mins", 240.0))
 
     def _format_timestamp(self, ts_ms: Optional[int]) -> str:
         if not ts_ms:
@@ -44,15 +45,33 @@ class ZonesAnalyzer:
         zone = panel.get("zone") or attrs.get("zoneName", "")
 
         # 1. Connectivity Check
+        systime = telemetry.get("systime")
         last_activity_ts = attrs.get("lastActivityTime")
-        now_ts = int(time.time() * 1000)
+        now_sec = time.time()
 
-        elapsed_seconds = (
-            (now_ts - last_activity_ts) / 1000.0 if last_activity_ts else 999999
-        )
+        if systime:
+            try:
+                comm_ts_sec = float(systime)
+            except (TypeError, ValueError):
+                comm_ts_sec = float(last_activity_ts) / 1000.0 if last_activity_ts else 0.0
+        elif last_activity_ts:
+            try:
+                comm_ts_sec = float(last_activity_ts) / 1000.0
+            except (TypeError, ValueError):
+                comm_ts_sec = 0.0
+        else:
+            comm_ts_sec = 0.0
 
-        # Panel is Online if it communicated within inactivity threshold
-        is_online = elapsed_seconds <= (self.inactivity_mins * 60)
+        elapsed_seconds = (now_sec - comm_ts_sec) if comm_ts_sec > 0 else 9999999.0
+
+        pkt_val = str(telemetry.get("pkt", attrs.get("pkt", "0")))
+        is_pkt_8 = (pkt_val == "8")
+
+        # Panel is Online if it communicated within 4-hour threshold and didn't latch Power Failure packet
+        if is_pkt_8:
+            is_online = False
+        else:
+            is_online = elapsed_seconds <= (self.inactivity_mins * 60)
 
         # 2. Voltage & Phase Check
         phase = int(attrs.get("phase", 1))
@@ -83,46 +102,59 @@ class ZonesAnalyzer:
         state = str(attrs.get("state", "INSTALLED")).upper()
 
         # Schnell IoT CCMS Door Tamper / Door Open:
-        # Bit position 26 in fault bitmask AND device state is 'INSTALLED'
+        # Bit position 26 in fault bitmask, device state 'INSTALLED', and active within 15 days
         fault_int = 0
         try:
             fault_int = int(telemetry.get("fault", 0)) | int(telemetry.get("faultLong", 0))
         except (TypeError, ValueError):
             fault_int = 0
 
-        # Door Open is active for installed panels active within 15 days
         is_door_open = bool((fault_int >> 26) & 1) and (state == "INSTALLED") and (elapsed_seconds <= 15 * 86400)
 
-        # Classify health status
+        # Offline PF determination: pkt == 8 or offline with rv < 30V
+        is_offline_pf = False
+        if not is_online:
+            if is_pkt_8:
+                is_offline_pf = True
+            elif phase == 1:
+                if rv < 30.0:
+                    is_offline_pf = True
+            else:
+                active_phases = sum(1 for v in [rv, yv, bv] if v >= 30.0)
+                if active_phases == 0:
+                    is_offline_pf = True
+
+        # Classify Live Health states (Evaluated strictly on ONLINE panels to prevent stale data corruption)
         is_power_failure = False
         is_low_voltage = False
         is_high_voltage = False
         is_mcb_tripped = False
 
-        if phase == 1:
-            if rv < 30.0:
-                is_power_failure = True
-            elif rv < self.min_voltage:
-                is_low_voltage = True
-            elif rv > self.max_voltage:
-                is_high_voltage = True
-        else:  # 3-Phase
-            active_phases = sum(1 for v in [rv, yv, bv] if v >= 30.0)
-            if active_phases == 0:
-                is_power_failure = True
-            else:
-                for v in [rv, yv, bv]:
-                    if 30.0 <= v < self.min_voltage:
-                        is_low_voltage = True
-                    elif v > self.max_voltage:
-                        is_high_voltage = True
+        if is_online:
+            if phase == 1:
+                if rv < 30.0:
+                    is_power_failure = True
+                elif rv < self.min_voltage:
+                    is_low_voltage = True
+                elif rv > self.max_voltage:
+                    is_high_voltage = True
+            else:  # 3-Phase
+                active_phases = sum(1 for v in [rv, yv, bv] if v >= 30.0)
+                if active_phases == 0:
+                    is_power_failure = True
+                else:
+                    for v in [rv, yv, bv]:
+                        if 30.0 <= v < self.min_voltage:
+                            is_low_voltage = True
+                        elif v > self.max_voltage:
+                            is_high_voltage = True
 
-        # MCB Trip: Bit 23 in fault bitmask (ROC / MCB Trip) OR live contactor ON with 0A load
-        is_mcb_fault_bit = bool((fault_int >> 23) & 1)
-        if (is_mcb_fault_bit or (rly == 1 and (rv >= self.min_voltage) and (ri == 0.0 and yi == 0.0 and bi == 0.0))) and is_online:
-            is_mcb_tripped = True
+            # MCB Trip: Bit 23 in fault bitmask (ROC / MCB Trip) OR live contactor ON with 0A load
+            is_mcb_fault_bit = bool((fault_int >> 23) & 1)
+            if is_mcb_fault_bit or (rly == 1 and (rv >= self.min_voltage) and (ri == 0.0 and yi == 0.0 and bi == 0.0)):
+                is_mcb_tripped = True
 
-        is_offline_pf = (not is_online) and is_power_failure
+        is_offline = (not is_online) and (not is_offline_pf)
 
         return {
             "id": panel.get("id"),
@@ -131,8 +163,9 @@ class ZonesAnalyzer:
             "ward_code": ward_code,
             "zone": zone,
             "is_online": is_online,
-            "is_power_failure": is_power_failure,
+            "is_offline": is_offline,
             "is_offline_pf": is_offline_pf,
+            "is_power_failure": is_power_failure,
             "is_low_voltage": is_low_voltage,
             "is_high_voltage": is_high_voltage,
             "is_mcb_tripped": is_mcb_tripped,
@@ -154,8 +187,9 @@ class ZonesAnalyzer:
 
         total = len(analyzed_panels)
         online_count = sum(1 for p in analyzed_panels if p["is_online"])
-        offline_count = total - online_count
         offline_pf_count = sum(1 for p in analyzed_panels if p["is_offline_pf"])
+        # Non-PF Offline panels (Offline due to communication / network inactivity)
+        offline_count = sum(1 for p in analyzed_panels if (not p["is_online"]) and (not p["is_offline_pf"]))
 
         low_voltage_count = sum(1 for p in analyzed_panels if p["is_low_voltage"])
         high_voltage_count = sum(1 for p in analyzed_panels if p["is_high_voltage"])

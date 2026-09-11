@@ -24,6 +24,59 @@ class TestWardReport(unittest.TestCase):
         logged_in = client.login()
         self.assertTrue(logged_in, "ThingsBoard login should succeed with credentials")
 
+    def test_analyzer_connectivity_and_offline_pf(self):
+        import time
+        now_ts = int(time.time() * 1000)
+
+        # 1. Online Normal Panel
+        p_online = {
+            "id": "dev-1",
+            "name": "P-1",
+            "attributes": {"lastActivityTime": now_ts, "phase": 1, "state": "INSTALLED"},
+            "telemetry": {"rv": 230.0, "ri": 10.0, "rly": 1, "pkt": 0}
+        }
+        res_online = self.analyzer.analyze_single_panel(p_online)
+        self.assertTrue(res_online["is_online"])
+        self.assertFalse(res_online["is_offline_pf"])
+        self.assertFalse(res_online["is_power_failure"])
+
+        # 2. Offline PF via pkt == 8
+        p_pkt8 = {
+            "id": "dev-2",
+            "name": "P-2",
+            "attributes": {"lastActivityTime": now_ts, "phase": 1, "state": "INSTALLED"},
+            "telemetry": {"rv": 0.0, "ri": 0.0, "rly": 0, "pkt": 8}
+        }
+        res_pkt8 = self.analyzer.analyze_single_panel(p_pkt8)
+        self.assertFalse(res_pkt8["is_online"])
+        self.assertTrue(res_pkt8["is_offline_pf"])
+        self.assertFalse(res_pkt8["is_power_failure"]) # Section 2 live issue must be False
+
+        # 3. Offline Stale Panel (e.g. 5 hours ago) with 0V: must be Offline PF but NOT Section 2 live PF
+        p_stale = {
+            "id": "dev-3",
+            "name": "P-3",
+            "attributes": {"lastActivityTime": now_ts - (5 * 3600 * 1000), "phase": 1, "state": "INSTALLED"},
+            "telemetry": {"rv": 0.0, "ri": 0.0, "rly": 0, "pkt": 0}
+        }
+        res_stale = self.analyzer.analyze_single_panel(p_stale)
+        self.assertFalse(res_stale["is_online"])
+        self.assertTrue(res_stale["is_offline_pf"])
+        self.assertFalse(res_stale["is_power_failure"])
+
+        # 4. Offline Panel (e.g. 5 hours ago) with 150V: must be Offline but NOT Section 2 Low Voltage
+        p_stale_low_v = {
+            "id": "dev-4",
+            "name": "P-4",
+            "attributes": {"lastActivityTime": now_ts - (5 * 3600 * 1000), "phase": 1, "state": "INSTALLED"},
+            "telemetry": {"rv": 150.0, "ri": 0.0, "rly": 0, "pkt": 0}
+        }
+        res_stale_lv = self.analyzer.analyze_single_panel(p_stale_low_v)
+        self.assertFalse(res_stale_lv["is_online"])
+        self.assertTrue(res_stale_lv["is_offline"]) # Must be strictly non-PF offline
+        self.assertFalse(res_stale_lv["is_offline_pf"]) # Not power fail
+        self.assertFalse(res_stale_lv["is_low_voltage"]) # Section 2 live issue must be False
+
     def test_card_v2_generation(self):
         mock_reports = [
             {

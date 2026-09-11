@@ -18,7 +18,7 @@
   "alert_thresholds": {
     "min_voltage_v": 180.0,
     "max_voltage_v": 265.0,
-    "inactivity_threshold_mins": 77.0
+    "inactivity_threshold_mins": 240.0
   },
   "telemetry_keys": {
     "voltage_r": "rv",
@@ -29,8 +29,11 @@
     "current_b": "bi",
     "relay_status": "rly",
     "fault": "fault",
+    "fault_long": "faultLong",
     "fault_code": "faultCode",
     "power_fail_count": "powerFailCount",
-    "frequency": "freq"
+    "frequency": "freq",
+    "packet_type": "pkt",
+    "system_time": "systime"
   }
 }
