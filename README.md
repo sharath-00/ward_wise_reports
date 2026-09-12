@@ -136,52 +136,38 @@ For the standard **2-Chat Setup** (Central Zone Chat & North Zone Chat), you onl
 
 ### Trigger via Repository Dispatch API
 
-#### A. Central Zone Reports
+#### A. Central Zone Workflows
 ```bash
-# CCMS Health Report
+# 1. Central Zone CCMS Health Report (CV Raman Nagar, Shanthi Nagar, Shivaji Nagar)
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
   https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
   -d '{"event_type": "send_central_zone_report", "client_payload": {"zone": "all"}}'
 
-# Voltage Interval Analysis
+# 2. Central Zone Interval Analysis (Both Voltage & MCB Trip Alerts)
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
   https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{"event_type": "voltage_interval_analysis", "client_payload": {"region": "central", "send_only_on_change": false}}'
-
-# MCB Trip Analysis
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
-  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{"event_type": "mcb_trip_analysis", "client_payload": {"region": "central", "send_only_on_change": false}}'
+  -d '{"event_type": "central_zone_alerts", "client_payload": {"zone": "all", "send_only_on_change": false}}'
 ```
 
-#### B. North Zone Reports
+#### B. North Zone Workflows
 ```bash
-# CCMS Health Report
+# 1. North Zone CCMS Health Report (Sarvagna Nagar, Hebbal, Pulakesi Nagar)
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
   https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
   -d '{"event_type": "send_north_zone_report", "client_payload": {"zone": "all"}}'
 
-# Voltage Interval Analysis
+# 2. North Zone Interval Analysis (Both Voltage & MCB Trip Alerts)
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
   https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{"event_type": "voltage_interval_analysis", "client_payload": {"region": "north", "send_only_on_change": false}}'
-
-# MCB Trip Analysis
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
-  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{"event_type": "mcb_trip_analysis", "client_payload": {"region": "north", "send_only_on_change": false}}'
+  -d '{"event_type": "north_zone_alerts", "client_payload": {"zone": "all", "send_only_on_change": false}}'
 ```
 
 ---
