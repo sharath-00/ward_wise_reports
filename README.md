@@ -105,16 +105,25 @@ python main.py --ward 118 --dry-run
 
 ---
 
-## ⚡ GitHub Secrets & Environment Variables
+## ⚡ Google Chat Spaces Webhook Routing
 
-For the standard **2-Chat Setup** (Central Zone Chat & North Zone Chat), you only need to configure these **2 Webhook Secrets**:
+You can route reports and alerts using either a **2-Chat Setup** or a **4-Chat Setup**:
 
-| Secret Name | Purpose | Chat Space Destination |
+### Option 1: 2-Chat Setup (All Central in Chat 1, All North in Chat 2)
+| Secret Name in GitHub | Purpose | Destination Space |
 |---|---|---|
-| `CENTRAL_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | Receives Central Zone CCMS, Voltage Anomaly & MCB Trip alerts | 🏛️ **Central Zone Chat Space** |
-| `NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | Receives North Zone CCMS, Voltage Anomaly & MCB Trip alerts | 🌲 **North Zone Chat Space** |
+| `CENTRAL_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | Receives Central Zone CCMS Report, Voltage & MCB Alerts | 🏛️ **Central Zone Space** |
+| `NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | Receives North Zone CCMS Report, Voltage & MCB Alerts | 🌲 **North Zone Space** |
 
-### Optional Granular Webhooks (If separate chats are desired per alert type):
+### Option 2: 4-Chat Setup (Separate Telemetry & Alerts Spaces)
+| Secret Name in GitHub | Purpose | Destination Space |
+|---|---|---|
+| `CENTRAL_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | Central Zone CCMS Telemetry Health Reports | 📊 **Central Telemetry Chat** |
+| `NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | North Zone CCMS Telemetry Health Reports | 📊 **North Telemetry Chat** |
+| `CENTRAL_ALERTS_GOOGLE_CHAT_WEBHOOK_URL` | Central Zone Voltage & MCB Trip Alerts | 🚨 **Central Alerts Chat** |
+| `NORTH_ALERTS_GOOGLE_CHAT_WEBHOOK_URL` | North Zone Voltage & MCB Trip Alerts | 🚨 **North Alerts Chat** |
+
+### Optional Granular Alert Webhooks:
 | Secret Name | Description |
 |---|---|
 | `CENTRAL_VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL` | Central Zone Voltage Alerts only |

@@ -25,6 +25,7 @@ class MCBNotifier:
             raw_url = (
                 webhook_url
                 or os.getenv("NORTH_MCB_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("NORTH_ALERTS_GOOGLE_CHAT_WEBHOOK_URL")
                 or os.getenv("NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL")
                 or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
                 or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
@@ -33,6 +34,7 @@ class MCBNotifier:
             raw_url = (
                 webhook_url
                 or os.getenv("CENTRAL_MCB_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("CENTRAL_ALERTS_GOOGLE_CHAT_WEBHOOK_URL")
                 or os.getenv("CENTRAL_ZONE_GOOGLE_CHAT_WEBHOOK_URL")
                 or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
                 or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
