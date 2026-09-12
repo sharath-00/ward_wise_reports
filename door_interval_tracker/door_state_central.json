@@ -1,0 +1,385 @@
+{
+  "last_run_timestamp": 1789203885161,
+  "last_run_ist": "12-Sep-2026 02:34 PM IST",
+  "zones": {
+    "CV Raman Nagar": {
+      "door_open_panels": {
+        "b2286960-8a47-11f1-8188-97faf926d60a": {
+          "id": "b2286960-8a47-11f1-8188-97faf926d60a",
+          "name": "SALSS005301",
+          "label": "SSC107SM05663",
+          "uid": "SSC107SM05663",
+          "gateway_uid": "SALSS005301",
+          "ward": "CVRN-W108",
+          "zone": "CV Raman Nagar",
+          "location": "Bayyappanahalli Gate,Kathalipalya,Sarvagnanagar,Bengaluru,Karnataka 560038,India",
+          "latitude": "12.99132",
+          "longitude": "77.64336",
+          "comm_status": "Online",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 235.9,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 02:30:37 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "75525280-8a42-11f1-8188-97faf926d60a": {
+          "id": "75525280-8a42-11f1-8188-97faf926d60a",
+          "name": "SALSS005228",
+          "label": "SSC107SM05638",
+          "uid": "SSC107SM05638",
+          "gateway_uid": "SALSS005228",
+          "ward": "CVRN-W112",
+          "zone": "CV Raman Nagar",
+          "location": "Ground Floor,No 505,Chinmaya Mission Hospital Rd,Indira Nagar 1st Stage,Stage 1,Indiranagar,Bengaluru,Karnataka 560038,India",
+          "latitude": "12.97827",
+          "longitude": "77.64394",
+          "comm_status": "Offline",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 242.8,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 06:38:23 AM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "167e1230-7368-11f1-934d-e50c5007eae6": {
+          "id": "167e1230-7368-11f1-934d-e50c5007eae6",
+          "name": "SALSS003681",
+          "label": "SSC107SM03576",
+          "uid": "SSC107SM03576",
+          "gateway_uid": "SALSS003681",
+          "ward": "CVRN-W113",
+          "zone": "CV Raman Nagar",
+          "location": "181,Halasuru,Gupta Layout,Bengaluru,Karnataka 560008,India",
+          "latitude": "12.97957",
+          "longitude": "77.62672",
+          "comm_status": "Online",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 234.6,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 02:30:16 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "76727b50-1de0-11f1-9039-e39d44b5f1e7": {
+          "id": "76727b50-1de0-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001082",
+          "label": "SSC107SM01811",
+          "uid": "SSC107SM01811",
+          "gateway_uid": "SALSS001082",
+          "ward": "CVRN-W108",
+          "zone": "CV Raman Nagar",
+          "location": "XJVG+C6F,PSK Naidu Rd,Doddigunta,Cox Town,Bengaluru,Karnataka 560005,India",
+          "latitude": "12.99337",
+          "longitude": "77.62492",
+          "comm_status": "Offline(PF)",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "31/08/2026, 04:26:43 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "97845130-1dc5-11f1-9039-e39d44b5f1e7": {
+          "id": "97845130-1dc5-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS000778",
+          "label": "SSC107SM00858",
+          "uid": "SSC107SM00858",
+          "gateway_uid": "SALSS000778",
+          "ward": "CVRN-W111",
+          "zone": "CV Raman Nagar",
+          "location": "26,5th Main Rd,Malleshpalya,Kaggadasapura,Bengaluru,Karnataka 560075,India",
+          "latitude": "12.97604",
+          "longitude": "77.67378",
+          "comm_status": "Online",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 247.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 02:30:23 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "45a3fc90-1dbf-11f1-9039-e39d44b5f1e7": {
+          "id": "45a3fc90-1dbf-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS000623",
+          "label": "SSC107SM00774",
+          "uid": "SSC107SM00774",
+          "gateway_uid": "SALSS000623",
+          "ward": "CVRN-W112",
+          "zone": "CV Raman Nagar",
+          "location": "5-6,KG Colony,GM Palya,C V Raman Nagar,Bengaluru,Karnataka 560075,India",
+          "latitude": "12.97229",
+          "longitude": "77.66164",
+          "comm_status": "Offline(PF)",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:08:42 AM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "a23b71c0-1d2b-11f1-9039-e39d44b5f1e7": {
+          "id": "a23b71c0-1d2b-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS000552",
+          "label": "SSC107SM00741",
+          "uid": "SSC107SM00741",
+          "gateway_uid": "SALSS000552",
+          "ward": "CVRN-W111",
+          "zone": "CV Raman Nagar",
+          "location": "M S Crystal,12 Malleshpalya Main Road,BEML Main Rd,Malleshpalya,Kaggadasapura,Bengaluru,Karnataka 560075,India",
+          "latitude": "12.97467",
+          "longitude": "77.67058",
+          "comm_status": "Offline",
+          "fault_str": "ROC / TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 255.5,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "11/09/2026, 07:40:35 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 02:34 PM IST"
+    },
+    "Shanthi Nagar": {
+      "door_open_panels": {
+        "dce943c0-8a44-11f1-8188-97faf926d60a": {
+          "id": "dce943c0-8a44-11f1-8188-97faf926d60a",
+          "name": "SALSS005177",
+          "label": "SSC107SM05113",
+          "uid": "SSC107SM05113",
+          "gateway_uid": "SALSS005177",
+          "ward": "SNTR-W171",
+          "zone": "Shanthi Nagar",
+          "location": "XJ6Q+FQP Dommaluru SAARC Park,Domlur I Stage,Stage 2,Domlur,Bengaluru,Karnataka 560071,India",
+          "latitude": "12.96135",
+          "longitude": "77.63901",
+          "comm_status": "Offline(PF)",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 06:21:09 AM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "c286d220-769b-11f1-9f95-73515bb81f31": {
+          "id": "c286d220-769b-11f1-9f95-73515bb81f31",
+          "name": "SALSS004130",
+          "label": "SSC107SM04102",
+          "uid": "SSC107SM04102",
+          "gateway_uid": "SALSS004130",
+          "ward": "SNTR-W167",
+          "zone": "Shanthi Nagar",
+          "location": "C51,Convent Rd,Shanthala Nagar,Ashok Nagar,Bengaluru,Karnataka 560025,India",
+          "latitude": "12.96808",
+          "longitude": "77.60292",
+          "comm_status": "Online",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 238.6,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 02:31:32 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "bbceb840-754b-11f1-981f-f16ee136eb5b": {
+          "id": "bbceb840-754b-11f1-981f-f16ee136eb5b",
+          "name": "SALSS004049",
+          "label": "SSC107SM03713",
+          "uid": "SSC107SM03713",
+          "gateway_uid": "SALSS004049",
+          "ward": "SNTR-W167",
+          "zone": "Shanthi Nagar",
+          "location": "Sky Gardens,12/1 Rhenius St,Richmond Town,Bangalore,Alexandria St,Richmond Town,Bengaluru,Karnataka 560025,India",
+          "latitude": "12.96302",
+          "longitude": "77.60109",
+          "comm_status": "Offline(PF)",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "10/09/2026, 09:10:35 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "fa4b6950-7547-11f1-981f-f16ee136eb5b": {
+          "id": "fa4b6950-7547-11f1-981f-f16ee136eb5b",
+          "name": "SALSS003998",
+          "label": "SSC107SM03971",
+          "uid": "SSC107SM03971",
+          "gateway_uid": "SALSS003998",
+          "ward": "SNTR-W167",
+          "zone": "Shanthi Nagar",
+          "location": "34,Rest House Rd,off Brigade Road,below pecos pub,Shanthala Nagar,Sampangi Rama Nagara,Bengaluru,Karnataka 560001,India",
+          "latitude": "12.97344",
+          "longitude": "77.60745",
+          "comm_status": "Online",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 238.5,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 02:30:27 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        },
+        "8a711100-1e87-11f1-9039-e39d44b5f1e7": {
+          "id": "8a711100-1e87-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001630",
+          "label": "SSC107SM02026",
+          "uid": "SSC107SM02026",
+          "gateway_uid": "SALSS001630",
+          "ward": "SNTR-W170",
+          "zone": "Shanthi Nagar",
+          "location": "203,Halasuru,Someshvarapura Layout,Jogupalya,Bengaluru,Karnataka 560008,India",
+          "latitude": "12.96944",
+          "longitude": "77.63202",
+          "comm_status": "Online",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 235.5,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 02:30:37 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 02:34 PM IST"
+    },
+    "Shivaji Nagar": {
+      "door_open_panels": {
+        "366b9e80-8b16-11f1-8188-97faf926d60a": {
+          "id": "366b9e80-8b16-11f1-8188-97faf926d60a",
+          "name": "SALSS005998",
+          "label": "SSC107SM05462",
+          "uid": "SSC107SM05462",
+          "gateway_uid": "SALSS005998",
+          "ward": "SVJR-W118",
+          "zone": "Shivaji Nagar",
+          "location": "5/12,5-12,15th Cross Rd Sampangi Ram Nagar,Sr Nagar,Sudhama Nagar,Bengaluru,Karnataka 560027,India",
+          "latitude": "12.96353",
+          "longitude": "77.59292",
+          "comm_status": "Offline",
+          "fault_str": "TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 234.3,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "07/09/2026, 03:24:08 PM",
+          "opened_detected_ts": 1789203885161,
+          "opened_detected_ist": "12-Sep-2026 02:34 PM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 02:34 PM IST"
+    }
+  }
+}

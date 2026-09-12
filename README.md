@@ -92,7 +92,24 @@ python mcb_interval_tracker/main_mcb_tracker.py --zone sarvagna_nagar
 
 ---
 
-### 4. Ward Specific Monitor (Ward 167 & 118)
+### 4. Panel Door Open (Tamper) Interval Tracker
+
+```bash
+# Central Zone Door Tracker
+python door_interval_tracker/main_door_tracker.py --region central
+python door_interval_tracker/main_door_tracker.py --region central --send --send-only-on-change
+
+# North Zone Door Tracker
+python door_interval_tracker/main_door_tracker.py --region north
+python door_interval_tracker/main_door_tracker.py --region north --send --send-only-on-change
+
+# Target specific zone
+python door_interval_tracker/main_door_tracker.py --zone cv_raman_nagar
+```
+
+---
+
+### 5. Ward Specific Monitor (Ward 167 & 118)
 ```bash
 # Send both ward reports
 python main.py --send

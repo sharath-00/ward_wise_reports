@@ -1,4 +1,4 @@
-name: BBMP Central Zone Interval Analysis (Voltage & MCB)
+name: BBMP Central Zone Interval Analysis (Voltage, MCB & Door)
 
 on:
   # 1. Trigger via Repository API Dispatch: POST /repos/{owner}/{repo}/dispatches
@@ -41,7 +41,7 @@ on:
 
 jobs:
   run-central-zone-interval-analysis:
-    name: Central Zone Voltage & MCB Analysis
+    name: Central Zone Voltage, MCB & Door Analysis
     runs-on: ubuntu-latest
 
     steps:
@@ -67,6 +67,7 @@ jobs:
           path: |
             voltage_interval_tracker/voltage_state_central.json
             mcb_interval_tracker/mcb_state_central.json
+            door_interval_tracker/door_state_central.json
           key: central-state-${{ github.run_id }}
           restore-keys: |
             central-state-
@@ -81,7 +82,7 @@ jobs:
           echo "send_change_only=$SEND_CHANGE_ONLY" >> $GITHUB_OUTPUT
           echo "reset_state=$RESET_STATE" >> $GITHUB_OUTPUT
 
-      - name: Execute Central Zone Voltage & MCB Interval Analysis
+      - name: Execute Central Zone Voltage, MCB & Door Interval Analysis
         env:
           THINGSBOARD_BASE_URL: ${{ secrets.THINGSBOARD_BASE_URL || 'https://schnelliot.in' }}
           THINGSBOARD_USERNAME: ${{ secrets.THINGSBOARD_USERNAME }}
@@ -92,8 +93,10 @@ jobs:
           CENTRAL_ALERTS_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.CENTRAL_ALERTS_GOOGLE_CHAT_WEBHOOK_URL }}
           CENTRAL_VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.CENTRAL_VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL }}
           CENTRAL_MCB_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.CENTRAL_MCB_GOOGLE_CHAT_WEBHOOK_URL }}
+          CENTRAL_DOOR_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.CENTRAL_DOOR_GOOGLE_CHAT_WEBHOOK_URL }}
           VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL || secrets.GOOGLE_CHAT_WEBHOOK_URL }}
           MCB_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.MCB_GOOGLE_CHAT_WEBHOOK_URL || secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          DOOR_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.DOOR_GOOGLE_CHAT_WEBHOOK_URL || secrets.GOOGLE_CHAT_WEBHOOK_URL }}
           ZONES_GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.ZONES_GOOGLE_CHAT_WEBHOOK_URL }}
           GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         run: |
@@ -115,6 +118,11 @@ jobs:
           echo "========================================================"
           python mcb_interval_tracker/main_mcb_tracker.py --region central --zone "${{ steps.opts.outputs.selected_zone }}" --send $EXTRA_ARGS
 
+          echo "========================================================"
+          echo "🚪 STEP 3: Running Central Zone Door Open Interval Analysis"
+          echo "========================================================"
+          python door_interval_tracker/main_door_tracker.py --region central --zone "${{ steps.opts.outputs.selected_zone }}" --send $EXTRA_ARGS
+
       # Save updated Central Zone state snapshots for the next interval run
       - name: Save Updated Central State Cache
         if: always()
@@ -123,4 +131,5 @@ jobs:
           path: |
             voltage_interval_tracker/voltage_state_central.json
             mcb_interval_tracker/mcb_state_central.json
+            door_interval_tracker/door_state_central.json
           key: central-state-${{ github.run_id }}
