@@ -9,16 +9,16 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
 
 load_dotenv()
-logger = logging.getLogger("ZonesThingsBoardClient")
+logger = logging.getLogger("NorthZonesThingsBoardClient")
 
 
-class ZonesThingsBoardClient:
+class NorthZonesThingsBoardClient:
     """
     ThingsBoard REST API Client dedicated to fetching live panel telemetry
-    and attributes for the 3 BBMP Central zones:
-    - CV Raman Nagar
-    - Shanthi Nagar
-    - Shivaji Nagar
+    and attributes for the 3 BBMP North zones:
+    - Sarvagna Nagar
+    - Hebbal
+    - Pulakesi Nagar (Pulakeshi Nagar)
     """
 
     def __init__(
@@ -148,11 +148,20 @@ class ZonesThingsBoardClient:
 
     def fetch_panels_for_zone_realtime(self, zone_display_name: str) -> List[Dict[str, Any]]:
         """
-        Dynamically query ThingsBoard in real time for all panels in a zone
+        Dynamically query ThingsBoard in real time for all panels in a North zone
         without relying on static inventory files.
         """
-        # Normalize zone key for query (e.g. CVRamanNagar, SarvagnaNagar, ShanthiNagar, ShivajiNagar)
-        norm_key = zone_display_name.replace(" ", "")
+        # Normalize zone key for query
+        # Handle Pulakesi / Pulakeshi Nagar normalization to ThingsBoard attribute
+        cleaned = zone_display_name.replace(" ", "").replace("_", "").lower()
+        if "pulak" in cleaned or "pulik" in cleaned:
+            norm_key = "PulakeshiNagar"
+        elif "sarvagna" in cleaned:
+            norm_key = "SarvagnaNagar"
+        elif "hebbal" in cleaned:
+            norm_key = "Hebbal"
+        else:
+            norm_key = zone_display_name.replace(" ", "")
 
         query_payload = {
             "entityFilter": {"type": "entityType", "entityType": "DEVICE"},
@@ -253,8 +262,8 @@ class ZonesThingsBoardClient:
 
         return []
 
-    def load_zones_inventory(
-        self, inventory_file: str = "zones_inventory.json"
+    def load_north_inventory(
+        self, inventory_file: str = "north_inventory.json"
     ) -> Dict[str, List[Dict[str, Any]]]:
         """Load fallback inventory if offline."""
         resolved_path = inventory_file
@@ -269,9 +278,9 @@ class ZonesThingsBoardClient:
 
         if not os.path.exists(resolved_path):
             return {
-                "CV Raman Nagar": [],
-                "Shanthi Nagar": [],
-                "Shivaji Nagar": [],
+                "Sarvagna Nagar": [],
+                "Hebbal": [],
+                "Pulakesi Nagar": [],
             }
 
         with open(resolved_path, "r", encoding="utf-8") as f:
@@ -280,36 +289,38 @@ class ZonesThingsBoardClient:
     def fetch_panels_for_zones(
         self,
         zone_target: str = "all",
-        inventory_file: str = "zones_inventory.json",
+        inventory_file: str = "north_inventory.json",
         max_workers: int = 35,
     ) -> Dict[str, List[Dict[str, Any]]]:
         """
-        Fetch live data for panels in specified zone(s) or 'all'.
-        Queries ThingsBoard dynamically in real time to capture newly added devices automatically.
+        Fetch live data for panels in specified North zone(s) or 'all'.
+        Queries ThingsBoard dynamically in real time.
         """
         all_zones = [
-            "CV Raman Nagar",
-            "Shanthi Nagar",
-            "Shivaji Nagar",
+            "Sarvagna Nagar",
+            "Hebbal",
+            "Pulakesi Nagar",
         ]
 
         target_str = str(zone_target).strip().lower().replace(" ", "_").replace(".", "")
 
         zone_alias_map = {
-            "cv_raman_nagar": "CV Raman Nagar",
-            "cv_raman": "CV Raman Nagar",
-            "cvr": "CV Raman Nagar",
-            "c_v_raman_nagar": "CV Raman Nagar",
-            "shanthi_nagar": "Shanthi Nagar",
-            "shanthi": "Shanthi Nagar",
-            "sntr": "Shanthi Nagar",
-            "shanthinagar": "Shanthi Nagar",
-            "167": "Shanthi Nagar",
-            "shivaji_nagar": "Shivaji Nagar",
-            "shivaji": "Shivaji Nagar",
-            "svjr": "Shivaji Nagar",
-            "shivajinagar": "Shivaji Nagar",
-            "118": "Shivaji Nagar",
+            "sarvagna_nagar": "Sarvagna Nagar",
+            "sarvagna": "Sarvagna Nagar",
+            "srvr": "Sarvagna Nagar",
+            "sarvagnanagar": "Sarvagna Nagar",
+            "hebbal": "Hebbal",
+            "hbl": "Hebbal",
+            "hebbal_zone": "Hebbal",
+            "hebbala": "Hebbal",
+            "pulakesi_nagar": "Pulakesi Nagar",
+            "pulakesi": "Pulakesi Nagar",
+            "pulakeshi_nagar": "Pulakesi Nagar",
+            "pulakeshi": "Pulakesi Nagar",
+            "pulikeshi": "Pulakesi Nagar",
+            "plkr": "Pulakesi Nagar",
+            "pulakeshinagar": "Pulakesi Nagar",
+            "pulakesinagar": "Pulakesi Nagar",
         }
 
         if target_str in ("all", "*", ""):
@@ -334,7 +345,7 @@ class ZonesThingsBoardClient:
             else:
                 # Fallback to local inventory if dynamic query was empty/failed
                 logger.warning(f"Falling back to {inventory_file} for {z_name}...")
-                inventory = self.load_zones_inventory(inventory_file)
+                inventory = self.load_north_inventory(inventory_file)
                 devices = inventory.get(z_name, [])
                 panels_data = []
                 with ThreadPoolExecutor(max_workers=max_workers) as executor:

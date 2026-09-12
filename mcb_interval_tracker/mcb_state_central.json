@@ -1,0 +1,245 @@
+{
+  "last_run_timestamp": 1789194207339,
+  "last_run_ist": "12-Sep-2026 11:53 AM IST",
+  "zones": {
+    "CV Raman Nagar": {
+      "tripped_panels": {
+        "49468ac0-1e9b-11f1-9039-e39d44b5f1e7": {
+          "id": "49468ac0-1e9b-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS002181",
+          "label": "SSC107SM01545",
+          "uid": "SSC107SM01545",
+          "gateway_uid": "SALSS002181",
+          "ward": "CVRN-W114",
+          "zone": "CV Raman Nagar",
+          "location": "3374,13th A Main Rd,HAL 2nd Stage,Indiranagar,Bengaluru,Karnataka 560008,India",
+          "latitude": "12.96823",
+          "longitude": "77.64502",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 228.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:44:36 AM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "60885f80-1dcc-11f1-9039-e39d44b5f1e7": {
+          "id": "60885f80-1dcc-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS000880",
+          "label": "SSC107SM00639",
+          "uid": "SSC107SM00639",
+          "gateway_uid": "SALSS000880",
+          "ward": "CVRN-W110",
+          "zone": "CV Raman Nagar",
+          "location": "167,B.C Gundappa Layout,Byrasandra,C V Raman Nagar,Bengaluru,Karnataka 560093,India",
+          "latitude": "12.98233",
+          "longitude": "77.66626",
+          "comm_status": "Offline",
+          "fault_str": "RVH / ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 291.8,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "02/08/2026, 01:09:35 PM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "a23b71c0-1d2b-11f1-9039-e39d44b5f1e7": {
+          "id": "a23b71c0-1d2b-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS000552",
+          "label": "SSC107SM00741",
+          "uid": "SSC107SM00741",
+          "gateway_uid": "SALSS000552",
+          "ward": "CVRN-W111",
+          "zone": "CV Raman Nagar",
+          "location": "M S Crystal,12 Malleshpalya Main Road,BEML Main Rd,Malleshpalya,Kaggadasapura,Bengaluru,Karnataka 560075,India",
+          "latitude": "12.97467",
+          "longitude": "77.67058",
+          "comm_status": "Offline",
+          "fault_str": "ROC / TPR",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 255.5,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "11/09/2026, 07:40:35 PM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 11:53 AM IST"
+    },
+    "Shanthi Nagar": {
+      "tripped_panels": {
+        "9290d450-7130-11f1-934d-e50c5007eae6": {
+          "id": "9290d450-7130-11f1-934d-e50c5007eae6",
+          "name": "SALSS002591",
+          "label": "SSC107SM02916",
+          "uid": "SSC107SM02916",
+          "gateway_uid": "SALSS002591",
+          "ward": "SNTR-W167",
+          "zone": "Shanthi Nagar",
+          "location": "544,Langford Rd,Akkithimana Halli,Bheemanna Garden,Langford Gardens,Bengaluru,Karnataka 560027,India",
+          "latitude": "12.96131",
+          "longitude": "77.59956",
+          "comm_status": "Online",
+          "fault_str": "RCL / ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 240.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:44:55 AM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "f2038180-1ea1-11f1-9039-e39d44b5f1e7": {
+          "id": "f2038180-1ea1-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS002017",
+          "label": "SSC107SM01259",
+          "uid": "SSC107SM01259",
+          "gateway_uid": "SALSS002017",
+          "ward": "SNTR-W166",
+          "zone": "Shanthi Nagar",
+          "location": "7/2,Langford Road,Cross,Nanjappa Rd,Langford Town,Shanti Nagar,Bengaluru,Karnataka 560027,India",
+          "latitude": "12.95948",
+          "longitude": "77.60124",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 234.2,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:45:05 AM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "fb8f74e0-1dcd-11f1-9039-e39d44b5f1e7": {
+          "id": "fb8f74e0-1dcd-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS000834",
+          "label": "SSC107SM00672",
+          "uid": "SSC107SM00672",
+          "gateway_uid": "SALSS000834",
+          "ward": "SNTR-W169",
+          "zone": "Shanthi Nagar",
+          "location": "XJ79+X3G,Officers Colony,Victoria Layout,Bengaluru,Karnataka 560007,India",
+          "latitude": "12.96473",
+          "longitude": "77.61782",
+          "comm_status": "Online",
+          "fault_str": "RCL / ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 247.7,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:44:55 AM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 11:53 AM IST"
+    },
+    "Shivaji Nagar": {
+      "tripped_panels": {
+        "3603de10-8a3c-11f1-8188-97faf926d60a": {
+          "id": "3603de10-8a3c-11f1-8188-97faf926d60a",
+          "name": "SALSS005085",
+          "label": "SSC107SM05265",
+          "uid": "SSC107SM05265",
+          "gateway_uid": "SALSS005085",
+          "ward": "SVJR-W117",
+          "zone": "Shivaji Nagar",
+          "location": "112,Loop Rd,Kumarapark West,Kumara Park West,Seshadripuram,Bengaluru,Karnataka 560020,India",
+          "latitude": "12.99391",
+          "longitude": "77.58157",
+          "comm_status": "Online",
+          "fault_str": "RCL / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 233.6,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:44:54 AM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "92e428b0-7547-11f1-981f-f16ee136eb5b": {
+          "id": "92e428b0-7547-11f1-981f-f16ee136eb5b",
+          "name": "SALSS003967",
+          "label": "SSC107SM03776",
+          "uid": "SSC107SM03776",
+          "gateway_uid": "SALSS003967",
+          "ward": "SVJR-W121",
+          "zone": "Shivaji Nagar",
+          "location": "XJGG+54W,Someshwara Temple Rd,Halasuru,Gupta Layout,Bengaluru,Karnataka 560008,India",
+          "latitude": "12.97547",
+          "longitude": "77.62533",
+          "comm_status": "Offline",
+          "fault_str": "RCL / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 240.2,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "01/09/2026, 03:14:41 PM",
+          "tripped_detected_ts": 1789190623564,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 11:53 AM IST"
+    }
+  }
+}

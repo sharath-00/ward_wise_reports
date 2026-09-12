@@ -1,0 +1,328 @@
+{
+  "last_run_timestamp": 1789192418251,
+  "last_run_ist": "12-Sep-2026 11:23 AM IST",
+  "zones": {
+    "Hebbal": {
+      "tripped_panels": {},
+      "last_updated_ist": "12-Sep-2026 11:23 AM IST"
+    },
+    "Pulakesi Nagar": {
+      "tripped_panels": {
+        "a396bbf0-1def-11f1-9039-e39d44b5f1e7": {
+          "id": "a396bbf0-1def-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001201",
+          "label": "SSC107SM01557",
+          "uid": "SSC107SM01557",
+          "gateway_uid": "SALSS001201",
+          "ward": "PN-W69",
+          "zone": "Pulakesi Nagar",
+          "location": "29,1st Cross St,Shampura,Kaval Bairasandra,Bengaluru,Karnataka 560032,India",
+          "latitude": "13.03062",
+          "longitude": "77.60852",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 228.9,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:15:47 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "fce0bcf0-1de1-11f1-9039-e39d44b5f1e7": {
+          "id": "fce0bcf0-1de1-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001043",
+          "label": "SSC107SM01564",
+          "uid": "SSC107SM01564",
+          "gateway_uid": "SALSS001043",
+          "ward": "PN-W69",
+          "zone": "Pulakesi Nagar",
+          "location": "2J94+RVW,1st Main Rd,Sujana Nagar,Kaval Bairasandra,Bengaluru,Karnataka 560032,India",
+          "latitude": "13.01975",
+          "longitude": "77.60731",
+          "comm_status": "Offline(PF)",
+          "fault_str": "RCL / ROC / TPR / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "10/09/2026, 12:02:33 PM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 11:23 AM IST"
+    },
+    "Sarvagna Nagar": {
+      "tripped_panels": {
+        "5cbfd630-76aa-11f1-9f95-73515bb81f31": {
+          "id": "5cbfd630-76aa-11f1-9f95-73515bb81f31",
+          "name": "SALSS004538",
+          "label": "SSC107SM04357",
+          "uid": "SSC107SM04357",
+          "gateway_uid": "SALSS004538",
+          "ward": "SN-W78",
+          "zone": "Sarvagna Nagar",
+          "location": "5/A,1st Main Rd,HBR Layout 2nd Block,1st Stage,HBR Layout,Bengaluru,Karnataka 560084,India",
+          "latitude": "13.02103",
+          "longitude": "77.62582",
+          "comm_status": "Online",
+          "fault_str": "RCL / ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 225.8,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:16:20 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "fcc0dd30-76a7-11f1-9f95-73515bb81f31": {
+          "id": "fcc0dd30-76a7-11f1-9f95-73515bb81f31",
+          "name": "SALSS004531",
+          "label": "SSC107SM04376",
+          "uid": "SSC107SM04376",
+          "gateway_uid": "SALSS004531",
+          "ward": "SN-W85",
+          "zone": "Sarvagna Nagar",
+          "location": "41/9,8th Cross Rd,Raghavappa Garden,ITC Colony,Maruthi Sevanagar,Bengaluru,Karnataka 560005,India",
+          "latitude": "12.9978",
+          "longitude": "77.63122",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 212.1,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:16:14 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "616139d0-76a1-11f1-9f95-73515bb81f31": {
+          "id": "616139d0-76a1-11f1-9f95-73515bb81f31",
+          "name": "SALSS004217",
+          "label": "SSC107SM03826",
+          "uid": "SSC107SM03826",
+          "gateway_uid": "SALSS004217",
+          "ward": "SN-W79",
+          "zone": "Sarvagna Nagar",
+          "location": "24,1st Main Rd,Doddanna Layout,Kadugondanahalli,Bengaluru,Karnataka 560045,India",
+          "latitude": "13.01317",
+          "longitude": "77.61674",
+          "comm_status": "Online",
+          "fault_str": "RCL / ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 231.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:16:39 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "e4ce0440-715d-11f1-934d-e50c5007eae6": {
+          "id": "e4ce0440-715d-11f1-934d-e50c5007eae6",
+          "name": "SALSS003199",
+          "label": "SSC107SM03400",
+          "uid": "SSC107SM03400",
+          "gateway_uid": "SALSS003199",
+          "ward": "SN-W77",
+          "zone": "Sarvagna Nagar",
+          "location": "Murthy Elegance,7th Main Rd,near DS MAX SAPHIRE,Vyalikaval HBCS Layout,Nagavara,Bengaluru,Karnataka 560045,India",
+          "latitude": "13.0365",
+          "longitude": "77.61683",
+          "comm_status": "Online",
+          "fault_str": "RCL / ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 221.7,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:15:17 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "f4d3a400-714c-11f1-934d-e50c5007eae6": {
+          "id": "f4d3a400-714c-11f1-934d-e50c5007eae6",
+          "name": "SALSS003123",
+          "label": "SSC107SM03317",
+          "uid": "SSC107SM03317",
+          "gateway_uid": "SALSS003123",
+          "ward": "SN-W84",
+          "zone": "Sarvagna Nagar",
+          "location": "13,Davis Rd,Balaji Layout,Cooke Town,Bengaluru,Karnataka 560005,India",
+          "latitude": "13.00301",
+          "longitude": "77.62195",
+          "comm_status": "Online",
+          "fault_str": "RCL / ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 232.8,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:15:15 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "71892380-713e-11f1-934d-e50c5007eae6": {
+          "id": "71892380-713e-11f1-934d-e50c5007eae6",
+          "name": "SALSS002955",
+          "label": "SSC107SM03152",
+          "uid": "SSC107SM03152",
+          "gateway_uid": "SALSS002955",
+          "ward": "SN-W83",
+          "zone": "Sarvagna Nagar",
+          "location": "15,Munigowda Rd,Ramaswamipalya,Lingarajapuram,Bengaluru,Karnataka 560033,India",
+          "latitude": "13.00794",
+          "longitude": "77.63381",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 215.1,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:14:54 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "f227eaf0-1e08-11f1-9039-e39d44b5f1e7": {
+          "id": "f227eaf0-1e08-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001675",
+          "label": "SSC107SM01744",
+          "uid": "SSC107SM01744",
+          "gateway_uid": "SALSS001675",
+          "ward": "SN-W82",
+          "zone": "Sarvagna Nagar",
+          "location": "OMBR Layout,OMBR Layout,Banaswadi,Bengaluru,Karnataka 560043,India",
+          "latitude": "13.00828",
+          "longitude": "77.65235",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 216.6,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:14:42 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "50392d70-1dfa-11f1-9039-e39d44b5f1e7": {
+          "id": "50392d70-1dfa-11f1-9039-e39d44b5f1e7",
+          "name": "SALSS001416",
+          "label": "SSC107SM01679",
+          "uid": "SSC107SM01679",
+          "gateway_uid": "SALSS001416",
+          "ward": "SN-W82",
+          "zone": "Sarvagna Nagar",
+          "location": "530,4th A Cross Rd,Ex-Servicemen Colony,Banaswadi,Bengaluru,Karnataka 560043,India",
+          "latitude": "13.0115",
+          "longitude": "77.6519",
+          "comm_status": "Offline",
+          "fault_str": "RCL / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "08/07/2026, 06:02:02 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "b441c240-f6b4-11f0-90d8-85ff34606179": {
+          "id": "b441c240-f6b4-11f0-90d8-85ff34606179",
+          "name": "SALSS000429",
+          "label": "SSC107SM00137",
+          "uid": "SSC107SM00137",
+          "gateway_uid": "SALSS000429",
+          "ward": "SN-W76",
+          "zone": "Sarvagna Nagar",
+          "location": "735,9th Cross Rd,1st Stage,3rd Block,HBR Layout,Bengaluru,Karnataka 560043,India",
+          "latitude": "13.02747",
+          "longitude": "77.62585",
+          "comm_status": "Online",
+          "fault_str": "ROC / MCB",
+          "mode": "AUTO",
+          "voltages": {
+            "r": 223.6,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 11:15:54 AM",
+          "tripped_detected_ts": 1789190632750,
+          "tripped_detected_ist": "12-Sep-2026 10:53 AM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 11:23 AM IST"
+    }
+  }
+}

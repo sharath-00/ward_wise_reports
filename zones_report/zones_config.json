@@ -1,16 +1,11 @@
 {
-  "project_name": "BBMP Central Zone 4-Zone Telemetry Monitor",
+  "project_name": "BBMP Central Zone Telemetry Monitor",
   "customer_id": "e2119df0-45c3-11f0-94dc-77130b2f47e9",
   "zones": {
     "cv_raman_nagar": {
       "key": "CV Raman Nagar",
       "display_name": "BBMP CV Raman Nagar",
       "aliases": ["cv raman", "cv_raman_nagar", "cvr", "c.v. raman nagar"]
-    },
-    "sarvagna_nagar": {
-      "key": "Sarvagna Nagar",
-      "display_name": "BBMP Sarvagna Nagar",
-      "aliases": ["sarvagna", "sarvagna_nagar", "srvr", "sarvagnanagar"]
     },
     "shanthi_nagar": {
       "key": "Shanthi Nagar",

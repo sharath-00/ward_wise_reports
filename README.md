@@ -1,137 +1,197 @@
-# BBMP Shanthi Nagar (W167) & Shivaji Nagar (W118) Panel Monitor
+# BBMP Street Lighting Telemetry & Health Monitoring System
 
-A dedicated ThingsBoard (Schnell IoT) reporting pipeline that monitors smart street lighting panels strictly for **Shanthi Nagar (Ward 167)** and **Shivaji Nagar (Ward 118)**, generating automated health analytics and delivering rich **Google Chat Card v2** reports into **Google Spaces**.
-
----
-
-## 🎯 Target Scope
-
-| Ward Name | Ward Code | Total Monitored Panels |
-|---|---|---|
-| **Shanthi Nagar (Ward 167)** | `SNTR-W167` | **152 Panels** |
-| **Shivaji Nagar (Ward 118)** | `SVJR-W118` | **57 Panels** |
+Automated ThingsBoard (Schnell IoT) reporting pipelines for BBMP CCMS panels, delivering real-time health analytics, issue breakdowns, and formatted alerts to Google Chat Spaces.
 
 ---
 
-## 🚀 Commands
+## 🎯 Target Monitoring Scopes
 
-### 1. Send Both Ward Reports to Google Spaces
+### 1. BBMP Central Zone
+Monitors the 3 BBMP Central Zone regions:
+- **CV Raman Nagar**
+- **Shanthi Nagar**
+- **Shivaji Nagar**
+
+### 2. BBMP North Zone
+Monitors the 3 BBMP North Zone regions:
+- **Sarvagna Nagar**
+- **Hebbal**
+- **Pulakesi Nagar** (ThingsBoard: `PulakeshiNagar`)
+
+### 3. Ward Level Reports (Ward 167 & Ward 118)
+- **Shanthi Nagar (Ward 167)**: `SNTR-W167`
+- **Shivaji Nagar (Ward 118)**: `SVJR-W118`
+
+---
+
+## 🚀 Execution Commands
+
+### 1. Health Status Reports (CCMS 2-Section Report)
+
+#### BBMP Central Zone (3 Zones)
 ```bash
+# Dry run preview in console (CV Raman Nagar, Shanthi Nagar, Shivaji Nagar)
+python zones_report/main_zones.py
+
+# Send Central Zone report to Google Chat Space
+python zones_report/main_zones.py --send
+
+# Target specific Central zone only
+python zones_report/main_zones.py --zone cv_raman_nagar --send
+python zones_report/main_zones.py --zone shanthi_nagar --send
+python zones_report/main_zones.py --zone shivaji_nagar --send
+```
+
+#### BBMP North Zone (3 Zones)
+```bash
+# Dry run preview in console (Sarvagna Nagar, Hebbal, Pulakesi Nagar)
+python north_zone_report/main_north_zone.py
+
+# Send North Zone report to Google Chat Space
+python north_zone_report/main_north_zone.py --send
+
+# Target specific North zone only
+python north_zone_report/main_north_zone.py --zone sarvagna_nagar --send
+python north_zone_report/main_north_zone.py --zone hebbal --send
+python north_zone_report/main_north_zone.py --zone pulakesi_nagar --send
+```
+
+---
+
+### 2. Voltage Anomaly Interval Tracker (Low & High Voltage Alerts)
+
+```bash
+# Central Zone Voltage Tracker
+python voltage_interval_tracker/main_voltage_tracker.py --region central
+python voltage_interval_tracker/main_voltage_tracker.py --region central --send --send-only-on-change
+
+# North Zone Voltage Tracker
+python voltage_interval_tracker/main_voltage_tracker.py --region north
+python voltage_interval_tracker/main_voltage_tracker.py --region north --send --send-only-on-change
+
+# Target specific zone
+python voltage_interval_tracker/main_voltage_tracker.py --zone hebbal
+```
+
+---
+
+### 3. MCB Trip Interval Tracker
+
+```bash
+# Central Zone MCB Tracker
+python mcb_interval_tracker/main_mcb_tracker.py --region central
+python mcb_interval_tracker/main_mcb_tracker.py --region central --send --send-only-on-change
+
+# North Zone MCB Tracker
+python mcb_interval_tracker/main_mcb_tracker.py --region north
+python mcb_interval_tracker/main_mcb_tracker.py --region north --send --send-only-on-change
+
+# Target specific zone
+python mcb_interval_tracker/main_mcb_tracker.py --zone sarvagna_nagar
+```
+
+---
+
+### 4. Ward Specific Monitor (Ward 167 & 118)
+```bash
+# Send both ward reports
 python main.py --send
-```
 
-### 2. Send Specific Ward Only
-```bash
-# Shanthi Nagar (Ward 167)
-python main.py --ward 167 --send
-
-# Shivaji Nagar (Ward 118)
-python main.py --ward 118 --send
-```
-
-### 3. Dry-Run (Local Console View Without Sending)
-```bash
+# Dry-run
 python main.py --dry-run
 python main.py --ward 167 --dry-run
 python main.py --ward 118 --dry-run
 ```
 
-### 4. Schedule Automated Daily Reports
-Broadcast reports daily at 9:00 AM and 6:00 PM:
-```bash
-python main.py --send --schedule "09:00,18:00"
-```
+---
+
+## ⚡ GitHub Secrets & Environment Variables
+
+For the standard **2-Chat Setup** (Central Zone Chat & North Zone Chat), you only need to configure these **2 Webhook Secrets**:
+
+| Secret Name | Purpose | Chat Space Destination |
+|---|---|---|
+| `CENTRAL_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | Receives Central Zone CCMS, Voltage Anomaly & MCB Trip alerts | 🏛️ **Central Zone Chat Space** |
+| `NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL` | Receives North Zone CCMS, Voltage Anomaly & MCB Trip alerts | 🌲 **North Zone Chat Space** |
+
+### Optional Granular Webhooks (If separate chats are desired per alert type):
+| Secret Name | Description |
+|---|---|
+| `CENTRAL_VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL` | Central Zone Voltage Alerts only |
+| `NORTH_VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL` | North Zone Voltage Alerts only |
+| `CENTRAL_MCB_GOOGLE_CHAT_WEBHOOK_URL` | Central Zone MCB Trip Alerts only |
+| `NORTH_MCB_GOOGLE_CHAT_WEBHOOK_URL` | North Zone MCB Trip Alerts only |
+| `GOOGLE_CHAT_WEBHOOK_URL` | General Fallback Webhook |
+
+### Authentication Secrets:
+| Secret Name | Description |
+|---|---|
+| `THINGSBOARD_BASE_URL` | ThingsBoard Base URL (`https://schnelliot.in`) |
+| `THINGSBOARD_USERNAME` | ThingsBoard User Account Email |
+| `THINGSBOARD_PASSWORD` | ThingsBoard Password |
 
 ---
 
 ## ⚡ GitHub Actions & API Repository Dispatch
 
-This repository includes an automated workflow [`.github/workflows/report.yml`](.github/workflows/report.yml).
+### Trigger via Repository Dispatch API
 
-### 1. Configure GitHub Secrets
-In your GitHub repo, go to **Settings** -> **Secrets and variables** -> **Actions** -> **New repository secret**:
-- `THINGSBOARD_BASE_URL`: `https://schnelliot.in`
-- `THINGSBOARD_USERNAME`: `your_username@domain.com`
-- `THINGSBOARD_PASSWORD`: `your_password`
-- `GOOGLE_CHAT_WEBHOOK_URL`: Webhook URL for **Ward 167 & 118 Health Reports** (Space 1)
-- `ZONES_GOOGLE_CHAT_WEBHOOK_URL`: Webhook URL for **4-Zone Telemetry Reports** (Space 2)
-- `MCB_GOOGLE_CHAT_WEBHOOK_URL`: Webhook URL for **MCB Trip Interval Alerts** (Space 3)
-
----
-
-### 2. Trigger via Repository Dispatch API
-
-#### A. Send ALL Reports to Their Respective Spaces Simultaneously
-Triggers all 3 workflows in parallel to deliver to their separate Google Spaces:
-
+#### A. Central Zone Reports
 ```bash
+# CCMS Health Report
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
   https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{
-    "event_type": "send_all_reports",
-    "client_payload": {
-      "ward": "all",
-      "zone": "all"
-    }
-  }'
+  -d '{"event_type": "send_central_zone_report", "client_payload": {"zone": "all"}}'
+
+# Voltage Interval Analysis
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "voltage_interval_analysis", "client_payload": {"region": "central", "send_only_on_change": false}}'
+
+# MCB Trip Analysis
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "mcb_trip_analysis", "client_payload": {"region": "central", "send_only_on_change": false}}'
+```
+
+#### B. North Zone Reports
+```bash
+# CCMS Health Report
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "send_north_zone_report", "client_payload": {"zone": "all"}}'
+
+# Voltage Interval Analysis
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "voltage_interval_analysis", "client_payload": {"region": "north", "send_only_on_change": false}}'
+
+# MCB Trip Analysis
+curl -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
+  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
+  -d '{"event_type": "mcb_trip_analysis", "client_payload": {"region": "north", "send_only_on_change": false}}'
 ```
 
 ---
 
-#### B. Trigger Individual Reports Separately
+## 📁 Repository Structure
 
-**1. Ward Panel Health Report (Space 1):**
-```bash
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
-  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{
-    "event_type": "send_ward_report",
-    "client_payload": {
-      "ward": "all"
-    }
-  }'
-```
-
-**2. 4-Zone Telemetry Health Report (Space 2):**
-```bash
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
-  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{
-    "event_type": "send_zones_report",
-    "client_payload": {
-      "zone": "all"
-    }
-  }'
-```
-
-**3. MCB Trip Analysis & Interval Delta Alert (Space 3):**
-```bash
-curl -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer YOUR_GITHUB_PAT_TOKEN" \
-  https://api.github.com/repos/sharath-00/ward_wise_reports/dispatches \
-  -d '{
-    "event_type": "mcb_trip_analysis",
-    "client_payload": {
-      "zone": "all",
-      "send_only_on_change": false
-    }
-  }'
-```
-
----
-
-## 📁 File Structure
-
-- [`ward_devices.json`](file:///d:/Schnell/Central_Zone_Chat/ward_devices.json): Dedicated inventory of the 209 panels across W167 & W118.
-- [`tb_client.py`](file:///d:/Schnell/Central_Zone_Chat/tb_client.py): Multi-threaded client that queries live attributes and telemetry for target panels.
-- [`analyzer.py`](file:///d:/Schnell/Central_Zone_Chat/analyzer.py): Classifies Online/Offline, 0V Power supply failures, MCB tripping, and voltage faults.
-- [`google_spaces.py`](file:///d:/Schnell/Central_Zone_Chat/google_spaces.py): Formats Google Chat Card v2 widgets and dispatches to Google Spaces webhook.
-- [`main.py`](file:///d:/Schnell/Central_Zone_Chat/main.py): CLI runner and scheduler.
-- [`.env`](file:///d:/Schnell/Central_Zone_Chat/.env): Credentials and Webhook configuration.
+- [`zones_report/`](file:///d:/Schnell/Central_Zone_Chat/zones_report): Central Zone report module (CV Raman Nagar, Shanthi Nagar, Shivaji Nagar).
+- [`north_zone_report/`](file:///d:/Schnell/Central_Zone_Chat/north_zone_report): North Zone report module (Sarvagna Nagar, Hebbal, Pulakesi Nagar).
+- [`voltage_interval_tracker/`](file:///d:/Schnell/Central_Zone_Chat/voltage_interval_tracker): Voltage fluctuation interval tracker.
+- [`mcb_interval_tracker/`](file:///d:/Schnell/Central_Zone_Chat/mcb_interval_tracker): MCB Trip interval tracker.
+- [`door_interval_tracker/`](file:///d:/Schnell/Central_Zone_Chat/door_interval_tracker): Door Tamper interval tracker.
+- [`ward_devices.json`](file:///d:/Schnell/Central_Zone_Chat/ward_devices.json): Inventory of panels for W167 & W118.
+- [`main.py`](file:///d:/Schnell/Central_Zone_Chat/main.py): Ward 167 & 118 CLI runner.

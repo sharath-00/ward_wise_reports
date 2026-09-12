@@ -19,14 +19,25 @@ class VoltageNotifier:
     - 📊 Zone Summary Breakdown
     """
 
-    def __init__(self, webhook_url: Optional[str] = None):
-        raw_url = (
-            webhook_url
-            or os.getenv("VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
-        )
+    def __init__(self, webhook_url: Optional[str] = None, region: str = "central"):
+        self.region = region.lower()
+        if self.region == "north":
+            raw_url = (
+                webhook_url
+                or os.getenv("NORTH_VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+            )
+        else:
+            raw_url = (
+                webhook_url
+                or os.getenv("CENTRAL_VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("CENTRAL_ZONE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+            )
         self.webhook_url = str(raw_url).strip() if raw_url else None
 
     def build_voltage_delta_report(self, delta_results: Dict[str, Any]) -> str:
@@ -35,6 +46,7 @@ class VoltageNotifier:
         prev_time = delta_results.get("previous_run_ist", "Initial Run")
         interval_mins = delta_results.get("interval_mins")
         is_initial = delta_results.get("is_initial_run", False)
+        region_title = delta_results.get("region_name", "North Zone" if self.region == "north" else "Central Zone")
 
         total_new = delta_results.get("total_newly_flagged", 0)
         total_new_low = delta_results.get("total_new_low", 0)
@@ -46,7 +58,7 @@ class VoltageNotifier:
         total_curr_high = delta_results.get("total_current_high", 0)
 
         lines = [
-            "⚡ *BBMP Central Zone — Voltage Anomaly (Low/High) Interval Tracker*",
+            f"⚡ *BBMP {region_title} — Voltage Anomaly (Low/High) Interval Tracker*",
             f"🕒 *Current Scan:* {eval_time}",
         ]
 
@@ -66,7 +78,7 @@ class VoltageNotifier:
         elif total_rec > 0:
             lines.append(f"✅ *No New Voltage Alerts*  |  🟢 *Normalized:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*")
         elif total_curr == 0:
-            lines.append("✨ *ALL CLEAR:* All panels operating within normal voltage range across all 4 Central Zones!")
+            lines.append(f"✨ *ALL CLEAR:* All panels operating within normal voltage range across all {region_title} zones!")
         else:
             lines.append(f"ℹ️ *Total Active Voltage Anomalies:* *{total_curr}* (Low: *{total_curr_low}*, High: *{total_curr_high}*) (No changes in this interval)")
 
@@ -133,11 +145,11 @@ class VoltageNotifier:
             h_cnt = z_data.get("current_high_count", 0)
             n_cnt = len(z_data.get("newly_flagged", []))
             r_cnt = len(z_data.get("recovered", []))
-            badge = "🔴" if h_cnt > 0 else ("🟡" if l_cnt > 0 else "🟢")
+            badge = "🔴" if n_cnt > 0 else ("🟡" if c_cnt > 0 else "🟢")
             lines.append(f"  {badge} *{z_name}:* Active: *{c_cnt}* (Low: *{l_cnt}*, High: *{h_cnt}*) | New: *{n_cnt}* | Normalized: *{r_cnt}*")
 
         lines.append("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-        lines.append("_⚡ *Schnell IoT BBMP Central Zone Voltage Monitoring*_")
+        lines.append(f"_⚡ *Schnell IoT BBMP {region_title} Voltage Monitoring*_")
         return "\n".join(lines)
 
     def send_voltage_report(
@@ -148,7 +160,7 @@ class VoltageNotifier:
         """Post the formatted delta report directly to Google Chat."""
         target_url = webhook_url_override or self.webhook_url
         if not target_url:
-            logger.error("No Google Chat Webhook URL configured (checked VOLTAGE_GOOGLE_CHAT_WEBHOOK_URL, GOOGLE_CHAT_WEBHOOK_URL).")
+            logger.error("No Google Chat Webhook URL configured.")
             return False
 
         message_text = self.build_voltage_delta_report(delta_results)

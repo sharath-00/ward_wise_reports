@@ -5,13 +5,12 @@ from typing import Dict, List, Any, Optional
 IST = timezone(timedelta(hours=5, minutes=30))
 
 
-class ZonesAnalyzer:
+class NorthZonesAnalyzer:
     """
-    Evaluates telemetry & attributes for BBMP Panels across 4 Zones:
-    - CV Raman Nagar
+    Evaluates telemetry & attributes for BBMP Panels across North Zone:
     - Sarvagna Nagar
-    - Shanthi Nagar
-    - Shivaji Nagar
+    - Hebbal
+    - Pulakesi Nagar
 
     Generates strictly the exact 2-Section format:
     - Section 1: Overview (Total Panels, Online, Offline, Offline PF, % Operational)

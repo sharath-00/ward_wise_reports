@@ -1,0 +1,107 @@
+{
+  "last_run_timestamp": 1789191745321,
+  "last_run_ist": "12-Sep-2026 11:12 AM IST",
+  "zones": {
+    "CV Raman Nagar": {
+      "voltage_anomaly_panels": {
+        "a4128b80-76ab-11f1-9f95-73515bb81f31": {
+          "id": "a4128b80-76ab-11f1-9f95-73515bb81f31",
+          "name": "SALSS004703",
+          "label": "SSC107SM04009",
+          "uid": "SSC107SM04009",
+          "gateway_uid": "SALSS004703",
+          "ward": "CVRN-W112",
+          "zone": "CV Raman Nagar",
+          "location": "30/1,A/30/1,Road No.1,KPWD Quarters,HAL 3rd Stage,Sector 12,New Thippasandra,Bengaluru,Karnataka 560075,India",
+          "latitude": "12.96784",
+          "longitude": "77.65753",
+          "comm_status": "Online",
+          "anomaly_type": "HIGH_VOLTAGE",
+          "is_low_voltage": false,
+          "is_high_voltage": true,
+          "voltages": {
+            "r": 334.1,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 10:57:07 AM",
+          "anomaly_detected_ts": 1789190603724,
+          "anomaly_detected_ist": "12-Sep-2026 10:53 AM IST"
+        },
+        "d98251d0-f756-11f0-90d8-85ff34606179": {
+          "id": "d98251d0-f756-11f0-90d8-85ff34606179",
+          "name": "SALSS000471",
+          "label": "SSC107SM00090",
+          "uid": "SSC107SM00090",
+          "gateway_uid": "SALSS000471",
+          "ward": "CVRN-W112",
+          "zone": "CV Raman Nagar",
+          "location": "G K Pearl Apartment,HAL 3rd Stage,Puttappa layout,New Tippasandra,Bengaluru,Karnataka 560075,India",
+          "latitude": "12.97024",
+          "longitude": "77.65393",
+          "comm_status": "Online",
+          "anomaly_type": "LOW_VOLTAGE",
+          "is_low_voltage": true,
+          "is_high_voltage": false,
+          "voltages": {
+            "r": 126.2,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "12/09/2026, 10:45:50 AM",
+          "anomaly_detected_ts": 1789190603724,
+          "anomaly_detected_ist": "12-Sep-2026 10:53 AM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 11:12 AM IST"
+    },
+    "Shanthi Nagar": {
+      "voltage_anomaly_panels": {
+        "c4b68060-8a44-11f1-8188-97faf926d60a": {
+          "id": "c4b68060-8a44-11f1-8188-97faf926d60a",
+          "name": "SALSS005221",
+          "label": "SSC107SM05586",
+          "uid": "SSC107SM05586",
+          "gateway_uid": "SALSS005221",
+          "ward": "SNTR-W171",
+          "zone": "Shanthi Nagar",
+          "location": "108,ISRO Colony,Domlur,Bengaluru,Karnataka 560071,India",
+          "latitude": "12.9572",
+          "longitude": "77.64264",
+          "comm_status": "Offline",
+          "anomaly_type": "LOW_VOLTAGE",
+          "is_low_voltage": true,
+          "is_high_voltage": false,
+          "voltages": {
+            "r": 136.1,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "11/09/2026, 11:15:41 PM",
+          "anomaly_detected_ts": 1789190603724,
+          "anomaly_detected_ist": "12-Sep-2026 10:53 AM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 11:12 AM IST"
+    },
+    "Shivaji Nagar": {
+      "voltage_anomaly_panels": {},
+      "last_updated_ist": "12-Sep-2026 11:12 AM IST"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "last_run_timestamp": 1789194807320,
+  "last_run_ist": "12-Sep-2026 12:03 PM IST",
+  "zones": {
+    "Hebbal": {
+      "voltage_anomaly_panels": {},
+      "last_updated_ist": "12-Sep-2026 12:03 PM IST"
+    },
+    "Pulakesi Nagar": {
+      "voltage_anomaly_panels": {
+        "070a2f40-76a7-11f1-9f95-73515bb81f31": {
+          "id": "070a2f40-76a7-11f1-9f95-73515bb81f31",
+          "name": "SALSS004265",
+          "label": "SSC107SM03672",
+          "uid": "SSC107SM03672",
+          "gateway_uid": "SALSS004265",
+          "ward": "PN-W69",
+          "zone": "Pulakesi Nagar",
+          "location": "37,2nd Cross Rd,Appajappa Layout,Shampura,Kaval Bairasandra,Bengaluru,Karnataka 560032,India",
+          "latitude": "13.02842",
+          "longitude": "77.61295",
+          "comm_status": "Offline",
+          "anomaly_type": "HIGH_VOLTAGE",
+          "is_low_voltage": false,
+          "is_high_voltage": true,
+          "voltages": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "currents": {
+            "r": 0.0,
+            "y": 0.0,
+            "b": 0.0
+          },
+          "last_comm_at": "28/07/2026, 12:35:35 PM",
+          "anomaly_detected_ts": 1789194807320,
+          "anomaly_detected_ist": "12-Sep-2026 12:03 PM IST"
+        }
+      },
+      "last_updated_ist": "12-Sep-2026 12:03 PM IST"
+    },
+    "Sarvagna Nagar": {
+      "voltage_anomaly_panels": {},
+      "last_updated_ist": "12-Sep-2026 12:03 PM IST"
+    }
+  }
+}

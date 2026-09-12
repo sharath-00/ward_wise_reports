@@ -23,9 +23,9 @@ if curr_dir not in sys.path:
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from zones_analyzer import ZonesAnalyzer
-from zones_client import ZonesThingsBoardClient
-from zones_notifier import ZonesNotifier
+from north_analyzer import NorthZonesAnalyzer
+from north_client import NorthZonesThingsBoardClient
+from north_notifier import NorthZonesNotifier
 
 load_dotenv()
 load_dotenv(os.path.join(parent_dir, ".env"))
@@ -35,10 +35,10 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
-logger = logging.getLogger("BBMP_4Zones_Report")
+logger = logging.getLogger("BBMP_NorthZone_Report")
 
 
-def load_config(config_path: str = "zones_config.json") -> Dict[str, Any]:
+def load_config(config_path: str = "north_config.json") -> Dict[str, Any]:
     resolved = config_path
     if not os.path.isabs(resolved):
         c1 = os.path.join(curr_dir, config_path)
@@ -62,7 +62,7 @@ def print_console_summary(zone_report: Dict[str, Any]):
     sec2 = zone_report["section2_issues"]
 
     print("\n" + "=" * 70)
-    print(f"🏙️  ZONE: {z_name.upper()} | Operational: {sec1['online_pct']}%")
+    print(f"🏙️  NORTH ZONE: {z_name.upper()} | Operational: {sec1['online_pct']}%")
     print(f"🕒 Generated: {zone_report['generated_at']}")
     print("=" * 70)
 
@@ -88,25 +88,25 @@ def print_console_summary(zone_report: Dict[str, Any]):
     print("=" * 70 + "\n")
 
 
-def execute_zones_report(
+def execute_north_zone_report(
     zone_target: str = "all",
     send_to_chat: bool = False,
     webhook_url_override: Optional[str] = None,
-    config_path: str = "zones_config.json",
-    inventory_path: str = "zones_inventory.json",
+    config_path: str = "north_config.json",
+    inventory_path: str = "north_inventory.json",
 ) -> List[Dict[str, Any]]:
-    """Fetch live panel telemetry for the 4 zones, compute metrics, print, and optionally send to Google Chat."""
+    """Fetch live panel telemetry for North Zone, compute metrics, print, and optionally send to Google Chat."""
     config = load_config(config_path)
     thresholds = config.get("alert_thresholds", {})
-    analyzer = ZonesAnalyzer(thresholds=thresholds)
+    analyzer = NorthZonesAnalyzer(thresholds=thresholds)
 
-    logger.info("Connecting to ThingsBoard API...")
-    tb_client = ZonesThingsBoardClient()
+    logger.info("Connecting to ThingsBoard API for North Zone...")
+    tb_client = NorthZonesThingsBoardClient()
     if not tb_client.login():
         logger.error("Failed to authenticate with ThingsBoard API.")
         return []
 
-    logger.info(f"Fetching live panel telemetry for zone target: '{zone_target}'...")
+    logger.info(f"Fetching live panel telemetry for North Zone target: '{zone_target}'...")
     zones_panels = tb_client.fetch_panels_for_zones(
         zone_target=zone_target, inventory_file=inventory_path
     )
@@ -118,31 +118,31 @@ def execute_zones_report(
         print_console_summary(report)
 
     if send_to_chat and zone_reports:
-        logger.info("Dispatching reports to Google Spaces...")
-        notifier = ZonesNotifier(webhook_url=webhook_url_override)
+        logger.info("Dispatching North Zone reports to Google Spaces...")
+        notifier = NorthZonesNotifier(webhook_url=webhook_url_override)
         success = notifier.send_report(zone_reports)
         if success:
-            logger.info("Report dispatched to Google Chat successfully.")
+            logger.info("North Zone report dispatched to Google Chat successfully.")
         else:
-            logger.error("Failed to dispatch report to Google Chat.")
+            logger.error("Failed to dispatch North Zone report to Google Chat.")
 
     return zone_reports
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="BBMP Central Zone Telemetry Report (CV Raman Nagar, Shanthi Nagar, Shivaji Nagar)"
+        description="BBMP North Zone Telemetry Report (Sarvagna Nagar, Hebbal, Pulakesi Nagar)"
     )
     parser.add_argument(
         "--zone",
         choices=[
             "all",
-            "cv_raman_nagar",
-            "shanthi_nagar",
-            "shivaji_nagar",
+            "sarvagna_nagar",
+            "hebbal",
+            "pulakesi_nagar",
         ],
         default="all",
-        help="Target Zone ('all', 'cv_raman_nagar', 'shanthi_nagar', 'shivaji_nagar')",
+        help="Target Zone ('all', 'sarvagna_nagar', 'hebbal', 'pulakesi_nagar')",
     )
     parser.add_argument(
         "--send",
@@ -158,19 +158,19 @@ def main():
     parser.add_argument(
         "--config",
         type=str,
-        default="zones_config.json",
-        help="Path to zones configuration JSON",
+        default="north_config.json",
+        help="Path to North Zone configuration JSON",
     )
     parser.add_argument(
         "--inventory",
         type=str,
-        default="zones_inventory.json",
-        help="Path to zones inventory JSON",
+        default="north_inventory.json",
+        help="Path to North Zone inventory JSON",
     )
 
     args = parser.parse_args()
 
-    execute_zones_report(
+    execute_north_zone_report(
         zone_target=args.zone,
         send_to_chat=args.send,
         webhook_url_override=args.webhook,

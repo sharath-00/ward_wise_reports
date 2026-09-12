@@ -26,6 +26,7 @@ if parent_dir not in sys.path:
 from voltage_analyzer import VoltageAnalyzer
 from voltage_state_manager import VoltageStateManager
 from voltage_notifier import VoltageNotifier
+from north_zone_report.north_client import NorthZonesThingsBoardClient
 from zones_report.zones_client import ZonesThingsBoardClient
 
 load_dotenv()
@@ -40,13 +41,18 @@ logger = logging.getLogger("Voltage_Interval_Tracker")
 
 CENTRAL_ZONES = [
     "CV Raman Nagar",
-    "Sarvagna Nagar",
     "Shanthi Nagar",
     "Shivaji Nagar",
 ]
 
+NORTH_ZONES = [
+    "Sarvagna Nagar",
+    "Hebbal",
+    "Pulakesi Nagar",
+]
 
-def print_console_summary(delta_results: Dict[str, Any]):
+
+def print_console_summary(delta_results: Dict[str, Any], region_name: str = "Central Zone"):
     """Print formatted console tables showing interval delta changes for voltage anomalies."""
     eval_time = delta_results.get("evaluated_at_ist", "")
     prev_time = delta_results.get("previous_run_ist", "Initial Baseline")
@@ -54,7 +60,7 @@ def print_console_summary(delta_results: Dict[str, Any]):
     is_initial = delta_results.get("is_initial_run", False)
 
     print("\n" + "=" * 78)
-    print(f"⚡  BBMP CENTRAL ZONES — VOLTAGE ANOMALY (LOW/HIGH) INTERVAL TRACKER")
+    print(f"⚡  BBMP {region_name.upper()} — VOLTAGE ANOMALY (LOW/HIGH) INTERVAL TRACKER")
     print(f"🕒 Current Scan: {eval_time}")
     if not is_initial and interval:
         print(f"⏱️  Interval: Last {interval} minutes (Since {prev_time})")
@@ -124,7 +130,7 @@ def print_console_summary(delta_results: Dict[str, Any]):
                 p.get("ward") or "-",
                 map_url,
                 v_str,
-                p.get("location")[:30] + "..." if len(p.get("location", "")) > 30 else p.get("location"),
+                (p.get("location") or "")[:30] + "..." if len(p.get("location") or "") > 30 else (p.get("location") or "-"),
             ])
 
     if all_new:
@@ -141,6 +147,7 @@ def print_console_summary(delta_results: Dict[str, Any]):
 
 
 def execute_voltage_tracker(
+    region: str = "central",
     zone_target: str = "all",
     send_to_chat: bool = False,
     send_only_on_change: bool = False,
@@ -149,9 +156,26 @@ def execute_voltage_tracker(
     reset_state: bool = False,
 ) -> Dict[str, Any]:
     """
-    Execute real-time Low & High Voltage anomaly discovery and interval delta tracking for Central Zones.
+    Execute real-time Low & High Voltage anomaly discovery and interval delta tracking for Central / North Zones.
     """
-    state_mgr = VoltageStateManager(state_file_path=state_file)
+    reg_clean = region.strip().lower()
+    
+    # Determine zones pool based on region
+    if reg_clean == "north":
+        region_title = "North Zone"
+        base_zones = NORTH_ZONES
+        default_state_file = os.path.join(curr_dir, "voltage_state_north.json")
+    elif reg_clean in ("all", "both"):
+        region_title = "Central & North Zones"
+        base_zones = CENTRAL_ZONES + NORTH_ZONES
+        default_state_file = os.path.join(curr_dir, "voltage_state_all.json")
+    else:
+        region_title = "Central Zone"
+        base_zones = CENTRAL_ZONES
+        default_state_file = os.path.join(curr_dir, "voltage_state_central.json")
+
+    actual_state_file = state_file or default_state_file
+    state_mgr = VoltageStateManager(state_file_path=actual_state_file)
 
     if reset_state:
         logger.info("Resetting historical voltage state snapshot as requested...")
@@ -165,16 +189,40 @@ def execute_voltage_tracker(
 
     analyzer = VoltageAnalyzer()
 
+    # Zone selection alias resolution
+    zone_alias_map = {
+        "cv_raman_nagar": "CV Raman Nagar",
+        "cv_raman": "CV Raman Nagar",
+        "cvr": "CV Raman Nagar",
+        "shanthi_nagar": "Shanthi Nagar",
+        "shanthi": "Shanthi Nagar",
+        "sntr": "Shanthi Nagar",
+        "shivaji_nagar": "Shivaji Nagar",
+        "shivaji": "Shivaji Nagar",
+        "svjr": "Shivaji Nagar",
+        "sarvagna_nagar": "Sarvagna Nagar",
+        "sarvagna": "Sarvagna Nagar",
+        "srvr": "Sarvagna Nagar",
+        "hebbal": "Hebbal",
+        "hbl": "Hebbal",
+        "pulakesi_nagar": "Pulakesi Nagar",
+        "pulakesi": "Pulakesi Nagar",
+        "pulakeshi_nagar": "Pulakesi Nagar",
+        "pulakeshi": "Pulakesi Nagar",
+    }
+
     target_str = str(zone_target).strip().lower().replace(" ", "_")
     if target_str in ("all", "*", ""):
-        selected_zones = CENTRAL_ZONES
+        selected_zones = base_zones
+    elif target_str in zone_alias_map:
+        selected_zones = [zone_alias_map[target_str]]
     else:
-        selected_zones = [z for z in CENTRAL_ZONES if target_str in z.lower().replace(" ", "_")]
+        selected_zones = [z for z in (CENTRAL_ZONES + NORTH_ZONES) if target_str in z.lower().replace(" ", "_")]
         if not selected_zones:
-            selected_zones = CENTRAL_ZONES
+            selected_zones = base_zones
 
     logger.info("Connecting to ThingsBoard API for live real-time query...")
-    tb_client = ZonesThingsBoardClient()
+    tb_client = NorthZonesThingsBoardClient() if any(z in NORTH_ZONES for z in selected_zones) else ZonesThingsBoardClient()
     if not tb_client.login():
         logger.error("Failed to authenticate with ThingsBoard API.")
         return {}
@@ -195,10 +243,11 @@ def execute_voltage_tracker(
     )
 
     delta_results = results["delta_analysis"]
+    delta_results["region_name"] = region_title
     new_snapshot = results["new_state_snapshot"]
 
     # Print summary
-    print_console_summary(delta_results)
+    print_console_summary(delta_results, region_name=region_title)
 
     # Save updated snapshot
     state_mgr.save_current_state(new_snapshot)
@@ -212,8 +261,8 @@ def execute_voltage_tracker(
         should_send = False
 
     if should_send:
-        logger.info("Dispatching Voltage anomaly interval alert to Google Chat...")
-        notifier = VoltageNotifier(webhook_url=webhook_url_override)
+        logger.info(f"Dispatching Voltage anomaly interval alert for {region_title} to Google Chat...")
+        notifier = VoltageNotifier(webhook_url=webhook_url_override, region=reg_clean)
         success = notifier.send_voltage_report(delta_results)
         if success:
             logger.info("Voltage alert successfully dispatched to Google Chat.")
@@ -225,12 +274,18 @@ def execute_voltage_tracker(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="BBMP Central Zone Voltage Anomaly Interval Tracker (Tracks Low and High Voltage Issues)"
+        description="BBMP Voltage Anomaly Interval Tracker (Supports Central and North Zones)"
+    )
+    parser.add_argument(
+        "--region",
+        choices=["central", "north", "all"],
+        default="central",
+        help="Target Region ('central' [CV Raman, Shanthi, Shivaji], 'north' [Sarvagna, Hebbal, Pulakesi], 'all')",
     )
     parser.add_argument(
         "--zone",
         default="all",
-        help="Target Zone ('all', 'cv_raman_nagar', 'sarvagna_nagar', 'shanthi_nagar', 'shivaji_nagar')",
+        help="Target Zone ('all', 'cv_raman_nagar', 'shanthi_nagar', 'shivaji_nagar', 'sarvagna_nagar', 'hebbal', 'pulakesi_nagar')",
     )
     parser.add_argument(
         "--send",
@@ -252,7 +307,7 @@ def main():
         "--state-file",
         type=str,
         default=None,
-        help="Path to custom voltage_state.json file",
+        help="Path to custom voltage state JSON file",
     )
     parser.add_argument(
         "--reset-state",
@@ -263,6 +318,7 @@ def main():
     args = parser.parse_args()
 
     execute_voltage_tracker(
+        region=args.region,
         zone_target=args.zone,
         send_to_chat=args.send,
         send_only_on_change=args.send_only_on_change,

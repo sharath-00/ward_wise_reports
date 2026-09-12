@@ -26,6 +26,7 @@ if parent_dir not in sys.path:
 from mcb_analyzer import MCBAnalyzer
 from mcb_state_manager import MCBStateManager
 from mcb_notifier import MCBNotifier
+from north_zone_report.north_client import NorthZonesThingsBoardClient
 from zones_report.zones_client import ZonesThingsBoardClient
 
 load_dotenv()
@@ -40,13 +41,18 @@ logger = logging.getLogger("MCB_Interval_Tracker")
 
 CENTRAL_ZONES = [
     "CV Raman Nagar",
-    "Sarvagna Nagar",
     "Shanthi Nagar",
     "Shivaji Nagar",
 ]
 
+NORTH_ZONES = [
+    "Sarvagna Nagar",
+    "Hebbal",
+    "Pulakesi Nagar",
+]
 
-def print_console_summary(delta_results: Dict[str, Any]):
+
+def print_console_summary(delta_results: Dict[str, Any], region_name: str = "Central Zone"):
     """Print formatted console tables showing interval delta changes."""
     eval_time = delta_results.get("evaluated_at_ist", "")
     prev_time = delta_results.get("previous_run_ist", "Initial Baseline")
@@ -54,7 +60,7 @@ def print_console_summary(delta_results: Dict[str, Any]):
     is_initial = delta_results.get("is_initial_run", False)
 
     print("\n" + "=" * 78)
-    print(f"⚡  BBMP CENTRAL ZONES — MCB TRIP INTERVAL TRACKER")
+    print(f"⚡  BBMP {region_name.upper()} — MCB TRIP INTERVAL TRACKER")
     print(f"🕒 Current Scan: {eval_time}")
     if not is_initial and interval:
         print(f"⏱️  Interval: Last {interval} minutes (Since {prev_time})")
@@ -105,7 +111,7 @@ def print_console_summary(delta_results: Dict[str, Any]):
                 p.get("ward") or "-",
                 map_url,
                 v_str,
-                p.get("location")[:30] + "..." if len(p.get("location", "")) > 30 else p.get("location"),
+                (p.get("location") or "")[:30] + "..." if len(p.get("location") or "") > 30 else (p.get("location") or "-"),
             ])
 
     if all_new:
@@ -122,6 +128,7 @@ def print_console_summary(delta_results: Dict[str, Any]):
 
 
 def execute_mcb_tracker(
+    region: str = "central",
     zone_target: str = "all",
     send_to_chat: bool = False,
     send_only_on_change: bool = False,
@@ -130,9 +137,25 @@ def execute_mcb_tracker(
     reset_state: bool = False,
 ) -> Dict[str, Any]:
     """
-    Execute real-time MCB trip discovery and interval delta tracking for Central Zones.
+    Execute real-time MCB trip discovery and interval delta tracking for Central / North Zones.
     """
-    state_mgr = MCBStateManager(state_file_path=state_file)
+    reg_clean = region.strip().lower()
+
+    if reg_clean == "north":
+        region_title = "North Zone"
+        base_zones = NORTH_ZONES
+        default_state_file = os.path.join(curr_dir, "mcb_state_north.json")
+    elif reg_clean in ("all", "both"):
+        region_title = "Central & North Zones"
+        base_zones = CENTRAL_ZONES + NORTH_ZONES
+        default_state_file = os.path.join(curr_dir, "mcb_state_all.json")
+    else:
+        region_title = "Central Zone"
+        base_zones = CENTRAL_ZONES
+        default_state_file = os.path.join(curr_dir, "mcb_state_central.json")
+
+    actual_state_file = state_file or default_state_file
+    state_mgr = MCBStateManager(state_file_path=actual_state_file)
 
     if reset_state:
         logger.info("Resetting MCB state baseline...")
@@ -141,17 +164,40 @@ def execute_mcb_tracker(
     previous_state = state_mgr.load_previous_state()
     analyzer = MCBAnalyzer()
 
-    # Determine zones to scan
+    # Zone selection alias resolution
+    zone_alias_map = {
+        "cv_raman_nagar": "CV Raman Nagar",
+        "cv_raman": "CV Raman Nagar",
+        "cvr": "CV Raman Nagar",
+        "shanthi_nagar": "Shanthi Nagar",
+        "shanthi": "Shanthi Nagar",
+        "sntr": "Shanthi Nagar",
+        "shivaji_nagar": "Shivaji Nagar",
+        "shivaji": "Shivaji Nagar",
+        "svjr": "Shivaji Nagar",
+        "sarvagna_nagar": "Sarvagna Nagar",
+        "sarvagna": "Sarvagna Nagar",
+        "srvr": "Sarvagna Nagar",
+        "hebbal": "Hebbal",
+        "hbl": "Hebbal",
+        "pulakesi_nagar": "Pulakesi Nagar",
+        "pulakesi": "Pulakesi Nagar",
+        "pulakeshi_nagar": "Pulakesi Nagar",
+        "pulakeshi": "Pulakesi Nagar",
+    }
+
     target_str = str(zone_target).strip().lower().replace(" ", "_")
     if target_str in ("all", "*", ""):
-        selected_zones = CENTRAL_ZONES
+        selected_zones = base_zones
+    elif target_str in zone_alias_map:
+        selected_zones = [zone_alias_map[target_str]]
     else:
-        selected_zones = [z for z in CENTRAL_ZONES if target_str in z.lower().replace(" ", "_")]
+        selected_zones = [z for z in (CENTRAL_ZONES + NORTH_ZONES) if target_str in z.lower().replace(" ", "_")]
         if not selected_zones:
-            selected_zones = CENTRAL_ZONES
+            selected_zones = base_zones
 
     logger.info("Connecting to ThingsBoard API for live real-time query...")
-    tb_client = ZonesThingsBoardClient()
+    tb_client = NorthZonesThingsBoardClient() if any(z in NORTH_ZONES for z in selected_zones) else ZonesThingsBoardClient()
     if not tb_client.login():
         logger.error("Failed to authenticate with ThingsBoard API.")
         return {}
@@ -163,7 +209,7 @@ def execute_mcb_tracker(
         live_panels = tb_client.fetch_panels_for_zone_realtime(z_name)
         tripped_panels = analyzer.filter_tripped_panels(live_panels)
         current_zone_trips[z_name] = tripped_panels
-        logger.info(f"[{z_name}] Found {len(tripped_panels)} currently MCB tripped panels out of {len(live_panels)} live panels.")
+        logger.info(f"[{z_name}] Found {len(tripped_panels)} tripped panels out of {len(live_panels)} live panels.")
 
     # Compute delta vs previous run
     results = state_mgr.compute_interval_deltas(
@@ -172,10 +218,11 @@ def execute_mcb_tracker(
     )
 
     delta_results = results["delta_analysis"]
+    delta_results["region_name"] = region_title
     new_snapshot = results["new_state_snapshot"]
 
     # Print summary
-    print_console_summary(delta_results)
+    print_console_summary(delta_results, region_name=region_title)
 
     # Save updated snapshot
     state_mgr.save_current_state(new_snapshot)
@@ -189,25 +236,31 @@ def execute_mcb_tracker(
         should_send = False
 
     if should_send:
-        logger.info("Dispatching MCB interval alert to Google Chat...")
-        notifier = MCBNotifier(webhook_url=webhook_url_override)
+        logger.info(f"Dispatching MCB interval alert for {region_title} to Google Chat...")
+        notifier = MCBNotifier(webhook_url=webhook_url_override, region=reg_clean)
         success = notifier.send_mcb_report(delta_results)
         if success:
-            logger.info("MCB alert successfully dispatched to Google Chat.")
+            logger.info("Alert successfully dispatched to Google Chat.")
         else:
-            logger.error("Failed to dispatch MCB alert to Google Chat.")
+            logger.error("Failed to dispatch alert to Google Chat.")
 
     return delta_results
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="BBMP Central Zone MCB Trip Interval Tracker (Tracks Newly Occurred Trips & Recoveries)"
+        description="BBMP MCB Trip Interval Tracker (Supports Central and North Zones)"
+    )
+    parser.add_argument(
+        "--region",
+        choices=["central", "north", "all"],
+        default="central",
+        help="Target Region ('central' [CV Raman, Shanthi, Shivaji], 'north' [Sarvagna, Hebbal, Pulakesi], 'all')",
     )
     parser.add_argument(
         "--zone",
         default="all",
-        help="Target Zone ('all', 'cv_raman_nagar', 'sarvagna_nagar', 'shanthi_nagar', 'shivaji_nagar')",
+        help="Target Zone ('all', 'cv_raman_nagar', 'shanthi_nagar', 'shivaji_nagar', 'sarvagna_nagar', 'hebbal', 'pulakesi_nagar')",
     )
     parser.add_argument(
         "--send",
@@ -229,7 +282,7 @@ def main():
         "--state-file",
         type=str,
         default=None,
-        help="Path to custom mcb_state.json file",
+        help="Path to custom mcb state JSON file",
     )
     parser.add_argument(
         "--reset-state",
@@ -240,6 +293,7 @@ def main():
     args = parser.parse_args()
 
     execute_mcb_tracker(
+        region=args.region,
         zone_target=args.zone,
         send_to_chat=args.send,
         send_only_on_change=args.send_only_on_change,

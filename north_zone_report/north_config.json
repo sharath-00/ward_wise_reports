@@ -1,0 +1,50 @@
+{
+  "project_name": "BBMP North Zone Telemetry Monitor",
+  "customer_id": "e2119df0-45c3-11f0-94dc-77130b2f47e9",
+  "zones": {
+    "sarvagna_nagar": {
+      "key": "Sarvagna Nagar",
+      "display_name": "BBMP Sarvagna Nagar",
+      "aliases": ["sarvagna", "sarvagna_nagar", "srvr", "sarvagnanagar"]
+    },
+    "hebbal": {
+      "key": "Hebbal",
+      "display_name": "BBMP Hebbal",
+      "aliases": ["hebbal", "hbl", "hebbal_zone", "hebbala"]
+    },
+    "pulakesi_nagar": {
+      "key": "Pulakeshi Nagar",
+      "display_name": "BBMP Pulakesi Nagar",
+      "aliases": [
+        "pulakesi",
+        "pulakesi_nagar",
+        "pulakeshi",
+        "pulakeshi_nagar",
+        "pulikeshi",
+        "plkr",
+        "pulakeshinagar",
+        "pulakesinagar"
+      ]
+    }
+  },
+  "alert_thresholds": {
+    "min_voltage_v": 180.0,
+    "max_voltage_v": 265.0,
+    "inactivity_threshold_mins": 240.0
+  },
+  "telemetry_keys": {
+    "voltage_r": "rv",
+    "voltage_y": "yv",
+    "voltage_b": "bv",
+    "current_r": "ri",
+    "current_y": "yi",
+    "current_b": "bi",
+    "relay_status": "rly",
+    "fault": "fault",
+    "fault_long": "faultLong",
+    "power_fail_count": "powerFailCount",
+    "frequency": "freq",
+    "packet_type": "pkt",
+    "system_time": "systime"
+  }
+}

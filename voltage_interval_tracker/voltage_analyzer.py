@@ -130,7 +130,7 @@ class VoltageAnalyzer:
 
         fault_str = self.decode_fault_string(fault_int)
 
-        # 4. Exact ThingsBoard "Input Issues" Classification:
+        # 4. Exact ThingsBoard "Input Issues" Classification (Matching ThingsBoard Dashboard):
         # Low Voltage: RVL (bit 0), YVL (bit 2), BVL (bit 4)
         is_low_voltage = bool(
             (fault_int & (1 << 0)) or (fault_int & (1 << 2)) or (fault_int & (1 << 4))
@@ -143,7 +143,7 @@ class VoltageAnalyzer:
         is_power_failure = (pkt == "8") or (rv < 30.0 if phase == 1 else all(v < 30.0 for v in [rv, yv, bv]))
 
         # Valid voltage anomaly flag from ThingsBoard Input Issues
-        is_voltage_anomaly = (is_low_voltage or is_high_voltage) and is_installed and is_active_within_window
+        is_voltage_anomaly = (is_low_voltage or is_high_voltage) and is_installed
 
         anomaly_type = "NONE"
         if is_voltage_anomaly:
@@ -175,8 +175,8 @@ class VoltageAnalyzer:
             "mode": mode,
             "relay_status": rly,
             "is_power_failure": is_power_failure,
-            "is_low_voltage": is_low_voltage and is_installed and is_active_within_window,
-            "is_high_voltage": is_high_voltage and is_installed and is_active_within_window,
+            "is_low_voltage": is_low_voltage and is_installed,
+            "is_high_voltage": is_high_voltage and is_installed,
             "is_voltage_anomaly": is_voltage_anomaly,
             "anomaly_type": anomaly_type,
             "voltages": {"r": rv, "y": yv, "b": bv},

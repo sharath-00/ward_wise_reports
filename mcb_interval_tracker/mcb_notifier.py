@@ -19,13 +19,25 @@ class MCBNotifier:
     - 📊 Zone Summary Breakdown
     """
 
-    def __init__(self, webhook_url: Optional[str] = None):
-        raw_url = (
-            webhook_url
-            or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
-        )
+    def __init__(self, webhook_url: Optional[str] = None, region: str = "central"):
+        self.region = region.lower()
+        if self.region == "north":
+            raw_url = (
+                webhook_url
+                or os.getenv("NORTH_MCB_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+            )
+        else:
+            raw_url = (
+                webhook_url
+                or os.getenv("CENTRAL_MCB_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("CENTRAL_ZONE_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
+                or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
+            )
         self.webhook_url = str(raw_url).strip() if raw_url else None
 
     def build_mcb_delta_report(self, delta_results: Dict[str, Any]) -> str:
@@ -34,6 +46,7 @@ class MCBNotifier:
         prev_time = delta_results.get("previous_run_ist", "Initial Run")
         interval_mins = delta_results.get("interval_mins")
         is_initial = delta_results.get("is_initial_run", False)
+        region_title = delta_results.get("region_name", "North Zone" if self.region == "north" else "Central Zone")
 
         total_new = delta_results.get("total_newly_tripped", 0)
         total_rec = delta_results.get("total_recovered", 0)
@@ -41,7 +54,7 @@ class MCBNotifier:
         total_curr = delta_results.get("total_current_tripped", 0)
 
         lines = [
-            "⚡ *BBMP Central Zone — MCB Trip Interval Tracker*",
+            f"⚡ *BBMP {region_title} — MCB Trip Interval Tracker*",
             f"🕒 *Current Scan:* {eval_time}",
         ]
 
@@ -59,7 +72,7 @@ class MCBNotifier:
         elif total_rec > 0:
             lines.append(f"✅ *No New Trips*  |  🟢 *Recovered:* *{total_rec}*  |  🟡 *Ongoing:* *{total_ongoing}*")
         elif total_curr == 0:
-            lines.append("✨ *ALL CLEAR:* No MCB Trips active across all 4 Central Zones!")
+            lines.append(f"✨ *ALL CLEAR:* No MCB Trips active across all {region_title} zones!")
         else:
             lines.append(f"ℹ️ *Total Active MCB Trips:* *{total_curr}* (No status changes in this interval)")
 
@@ -100,11 +113,12 @@ class MCBNotifier:
                 lines.append(f"     📍 *Zone:* {zone}  |  🏛️ *Ward:* {ward}")
                 lines.append(f"     🗺️ *Lat, Long:* {maps_link}")
                 lines.append(f"     🏠 *Location:* {loc}")
-                lines.append(f"     ⚡ *Voltages:* {v_str}  |  ⚠️ *Fault:* `{fault_str}`")
+                lines.append(f"     ⚡ *Voltages:* `{v_str}`")
+                lines.append(f"     ⚠️ *Trip Cause:* `{fault_str}`")
                 lines.append(f"     📡 *Status:* {comm_status}  |  🕒 *Last Comm:* {last_comm}")
                 lines.append("")
         elif not is_initial:
-            lines.append("🟢 *New Trips:* 0 new MCB trips occurred in this interval.")
+            lines.append("🟢 *New Trips:* 0 new MCB trips detected in this interval.")
             lines.append("")
 
         # 2. SECTION: ZONE BREAKDOWN SUMMARY
@@ -117,7 +131,7 @@ class MCBNotifier:
             lines.append(f"  {badge} *{z_name}:* Active: *{c_cnt}* | New: *{n_cnt}* | Recovered: *{r_cnt}*")
 
         lines.append("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-        lines.append("_⚡ *Schnell IoT BBMP Central Zone MCB Trip Monitoring*_")
+        lines.append(f"_⚡ *Schnell IoT BBMP {region_title} Smart Lighting Monitoring*_")
         return "\n".join(lines)
 
     def send_mcb_report(
@@ -125,30 +139,24 @@ class MCBNotifier:
         delta_results: Dict[str, Any],
         webhook_url_override: Optional[str] = None,
     ) -> bool:
-        """Send the formatted MCB interval alert to Google Chat."""
-        url = (
-            webhook_url_override
-            or self.webhook_url
-            or os.getenv("MCB_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
-            or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
-        )
-        if not url:
-            logger.error("No Google Chat Webhook URL configured for MCB tracker.")
+        """Post the formatted delta report directly to Google Chat."""
+        target_url = webhook_url_override or self.webhook_url
+        if not target_url:
+            logger.error("No Google Chat Webhook URL configured.")
             return False
 
-        headers = {"Content-Type": "application/json; charset=UTF-8"}
-        text_message = self.build_mcb_delta_report(delta_results)
-        payload = {"text": text_message}
+        message_text = self.build_mcb_delta_report(delta_results)
+        payload = {"text": message_text}
 
         max_retries = 3
         backoff_delays = [2, 4, 8]
 
         for attempt in range(max_retries):
             try:
-                resp = requests.post(url, json=payload, headers=headers, timeout=20)
+                logger.info("Sending MCB interval alert to Google Chat...")
+                resp = requests.post(target_url, json=payload, timeout=15)
                 if resp.status_code == 200:
-                    logger.info("Successfully dispatched MCB delta report to Google Chat.")
+                    logger.info("Alert posted successfully to Google Chat.")
                     return True
                 elif resp.status_code in (429, 500, 502, 503, 504):
                     wait_time = backoff_delays[attempt]
@@ -158,11 +166,11 @@ class MCBNotifier:
                     import time
                     time.sleep(wait_time)
                 else:
-                    logger.error(f"Failed to send MCB report ({resp.status_code}): {resp.text}")
+                    logger.error(f"Failed to post to Google Chat: {resp.status_code} - {resp.text}")
                     return False
             except Exception as e:
                 wait_time = backoff_delays[attempt]
-                logger.warning(f"Error posting MCB report to Google Chat: {e}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})...")
+                logger.warning(f"Error posting alert to Google Chat webhook: {e}. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})...")
                 import time
                 time.sleep(wait_time)
 
