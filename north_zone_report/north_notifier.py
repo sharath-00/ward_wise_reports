@@ -18,6 +18,7 @@ class NorthZonesNotifier:
     def __init__(self, webhook_url: Optional[str] = None):
         raw_url = (
             webhook_url
+            or os.getenv("NORTH_ZONE_TELEMETRY_CHAT_WEBHOOK_URL")
             or os.getenv("NORTH_ZONE_GOOGLE_CHAT_WEBHOOK_URL")
             or os.getenv("ZONES_GOOGLE_CHAT_WEBHOOK_URL")
             or os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
